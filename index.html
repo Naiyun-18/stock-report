@@ -151,7 +151,7 @@
 <div class="container">
 
 <div class="header">
-  <h1>📊 七只跟踪标的收盘分析报告</h1>
+  <h1>收盘分析报告</h1>
   <p>数据日期：2026-07-03（周五）</p>
   <div class="meta">
     <span>🕐 生成时间：2026-07-04 12:30</span>
@@ -173,8 +173,7 @@
   <div class="card-header">
     <div>
       <span class="stock-name">兆易创新 <span class="stock-code">603986 · 沪主板</span></span>
-      <span class="stock-tag tag-mid" style="margin-left:8px;">仓位 10%</span>
-      <span class="stock-tag tag-short" style="margin-left:4px;">成本 690.40</span>
+
     </div>
     <span class="dir dir-down">⚠️ 震荡偏弱</span>
   </div>
@@ -236,7 +235,6 @@
   <div class="card-header">
     <div>
       <span class="stock-name">天通股份 <span class="stock-code">600330 · 沪主板</span></span>
-      <span class="stock-tag tag-mid" style="margin-left:8px;">仓位 5%</span>
     </div>
     <span class="dir dir-down">🔴 延续弱势</span>
   </div>
@@ -287,7 +285,6 @@
   <div class="card-header">
     <div>
       <span class="stock-name">鼎龙股份 <span class="stock-code">300054 · 创业板</span></span>
-      <span class="stock-tag tag-mid" style="margin-left:8px;">仓位 5%</span>
     </div>
     <span class="dir dir-down">⚠️ 偏弱震荡</span>
   </div>
@@ -551,69 +548,82 @@
     <thead>
       <tr>
         <th>股票</th>
-        <th>方向</th>
+        <th>预期</th>
         <th>支撑位</th>
         <th>压力位</th>
-        <th>关键量能信号</th>
+        <th>量能信号</th>
+        <th>核心逻辑</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="tl">德明利</td>
-        <td><span class="dir dir-up">🟢 偏多</span></td>
-        <td>788 / 864</td>
-        <td>892 / 900</td>
-        <td>超大单+8.57亿回补+放量+8.74%🔥</td>
+        <td class="tl"><strong>德明利</strong></td>
+        <td style="color:var(--red);">📈 偏强反弹</td>
+        <td>864 / 788</td>
+        <td>900 / 892</td>
+        <td>量比1.17 放量</td>
+        <td>主力+7.88亿强势回补</td>
       </tr>
       <tr>
-        <td class="tl">江波龙</td>
-        <td><span class="dir dir-up">🟢 偏多</span></td>
-        <td>574 / 589</td>
-        <td>647 / 650</td>
-        <td>业绩预告+主力锐减-1.3亿+深V🔥</td>
+        <td class="tl"><strong>江波龙</strong></td>
+        <td style="color:var(--red);">📈 止跌反弹</td>
+        <td>574 / 618</td>
+        <td>662 / 647</td>
+        <td>量比0.96 正常</td>
+        <td>深V反转+主力骤降</td>
       </tr>
       <tr>
-        <td class="tl">摩尔线程</td>
-        <td><span class="dir dir-hold">➡️ 企稳</span></td>
-        <td>633 / 644</td>
-        <td>664 / 676</td>
-        <td>地量+超大单大单同步转正</td>
-      </tr>
-      <tr>
-        <td class="tl">澜起科技</td>
-        <td><span class="dir dir-hold">⚠️ 整固</span></td>
+        <td class="tl"><strong>澜起科技</strong></td>
+        <td style="color:var(--green);">📊 止跌震荡</td>
         <td>256 / 260</td>
-        <td>281 / 292</td>
-        <td>恐慌消退+大单转正</td>
+        <td>280 / 292</td>
+        <td>量比0.80 缩量</td>
+        <td>暴跌次日缩量止跌</td>
       </tr>
       <tr>
-        <td class="tl">鼎龙股份</td>
-        <td><span class="dir dir-down">⚠️ 偏弱</span></td>
-        <td>88.2 / 87.3</td>
-        <td>93.7 / 96.3</td>
-        <td>缩量+振幅收窄，变盘临近</td>
+        <td class="tl"><strong>摩尔线程</strong></td>
+        <td style="color:var(--green);">📊 震荡企稳</td>
+        <td>633 / 620</td>
+        <td>664 / 676</td>
+        <td>量比0.63 缩量</td>
+        <td>主力转正但量不足</td>
       </tr>
       <tr>
-        <td class="tl">兆易创新</td>
-        <td><span class="dir dir-down">⚠️ 偏弱</span></td>
+        <td class="tl"><strong>兆易创新</strong></td>
+        <td style="color:#0984e3;">📉 偏空震荡</td>
         <td>642 / 628</td>
-        <td>718 / 738</td>
-        <td>放量下跌，需缩量止跌确认</td>
+        <td>738 / 760</td>
+        <td>量比1.26 放量</td>
+        <td>三连阴-17%未止跌</td>
       </tr>
       <tr>
-        <td class="tl">天通股份</td>
-        <td><span class="dir dir-down">🔴 弱势</span></td>
+        <td class="tl"><strong>鼎龙股份</strong></td>
+        <td style="color:#0984e3;">📉 短线偏弱</td>
+        <td>87 / 85</td>
+        <td>94 / 96</td>
+        <td>量比0.72 缩量</td>
+        <td>三连阴+散户接盘</td>
+      </tr>
+      <tr>
+        <td class="tl"><strong>天通股份</strong></td>
+        <td style="color:#0984e3;">📉 偏弱下行</td>
         <td>26.3 / 25.5</td>
-        <td>28.0 / 29.0</td>
-        <td>极度缩量无人抄底，最弱</td>
+        <td>28.3 / 29.0</td>
+        <td>量比0.64 缩量</td>
+        <td>均线空头抛压未尽</td>
       </tr>
     </tbody>
   </table>
   </div>
-  <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;">
-    <p><strong>整体强弱排序：</strong>德明利 > 江波龙 > 摩尔线程 > 澜起科技 > 鼎龙股份 > 兆易创新 > 天通股份</p>
-    <p style="margin-top:6px;"><strong>资金面亮点：</strong>德明利超大单+8.57亿 / 摩尔线程超大单大单同步转正 / 江波龙流出锐减-1.3亿 / 澜起大单转正+5079万</p>
-    <p style="margin-top:6px;"><strong>减仓优先级：</strong>天通 > 兆易 > 鼎龙 > 澜起 > 摩尔 > 江波龙/德明利</p>
+  <div class="judge-box" style="margin-top:14px;">
+    <p><strong>横向对比</strong><br>
+    <strong>最强</strong>：德明利（+8.74%+主力7.88亿+量比1.17）＞ 江波龙（深V+3.14%+主力骤降）<br>
+    <strong>中等</strong>：澜起科技（暴跌次日缩量止跌）、摩尔线程（主力转正）<br>
+    <strong>最弱</strong>：兆易创新（三连阴-17%）、鼎龙（三连阴+散户接盘）、天通（均线空头+最低价收盘）<br><br>
+    <strong>下周一（7/6）关键观察</strong><br>
+    ① 德明利能否突破900关口；<br>
+    ② 兆易在620-642区间能否缩量企稳；<br>
+    ③ 天通是否出现恐慌放量杀跌。</p>
   </div>
 </div>
 
