@@ -202,6 +202,7 @@
   <button class="filter-btn" data-filter="warn">⚠️ 震荡 / 偏弱</button>
   <button class="filter-btn" data-filter="down">🔴 弱势</button>
   <button class="filter-btn" data-filter="summary">📋 走势研判汇总表</button>
+  <button class="filter-btn" data-filter="daily-summary">📄 每日总结</button>
 </div>
 
 <div class="filter-bar2">
@@ -1687,7 +1688,7 @@
 
 
 <!-- ════════════ 汇总表 ════════════ -->
-<div class="card" data-direction="summary" id="summary">
+<div class="card" data-direction="summary" id="summary" style="margin-bottom:6px;">
   <div class="card-header">
     <span class="stock-name">📋 走势研判汇总表</span>
   </div>
@@ -1818,6 +1819,575 @@
   </div>
 </div>
 
+</div>
+
+<!-- ════════════ 每日总结 ════════════ -->
+<div class="card" data-direction="daily-summary" id="daily-summary">
+  <div class="card-header">
+    <span class="stock-name">📄 每日总结报告</span>
+    <span style="font-size:12px;color:var(--muted);">生成时间 2026-07-10 16:30</span>
+  </div>
+
+  <!-- 大盘概览 -->
+  <div class="section-title"><span class="icon">🏛️</span> 大盘概览</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指数</th><th>收盘</th><th>涨跌</th><th>成交额</th></tr>
+    
+    <tr><td>上证指数</td><td>3,996.16</td><td class="hl-green">-1.00%</td><td>1,563亿</td></tr>
+    
+    <tr><td>深证成指</td><td>15,046.67</td><td class="hl-green">-2.29%</td><td>1,825亿</td></tr>
+    
+    <tr><td>创业板指</td><td>3,842.73</td><td class="hl-green">-4.37%</td><td>858亿</td></tr>
+    
+    <tr><td>科创50</td><td>2,064.98</td><td class="hl-green">-5.53%</td><td>235亿</td></tr>
+    
+  </table>
+  </div>
+
+  <!-- 今日关键词卡片 -->
+  <div style="background:#f8f9fb;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:13px;line-height:1.8;">
+    <strong style="font-size:14px;">🔑 今日关键词</strong>
+    <div style="margin-top:6px;">
+    
+    <div>• <strong>半导体板块全面暴跌</strong> —— 兆易创新天量593亿成交，主力净流出近100亿</div>
+    
+    <div>• <strong>资金面极端分化</strong> —— 海光信息是唯一主力净流入的半导体股，其余8只全面流出</div>
+    
+    <div>• <strong>散户恐慌vs接盘</strong> —— 摩尔线程-1232（恐慌卖），鼎龙+491（狂热接），兆易+11（几乎未参与）</div>
+    
+    <div>• <strong>关键均线保卫战</strong> —— 澜起MA20=268、德明利MA20=813、多氟多MA30=40.8，下周一关键</div>
+    
+    <div>• <strong>北向分化明显</strong> —— 多氟多+203%、鼎龙+42%、海光+14% vs 江波龙-44%、德明利-12.9%</div>
+    
+    </div>
+  </div>
+
+  <!-- 总排名表 -->
+  <div class="section-title"><span class="icon">📈</span> 股票表现总排名（按跌幅↑排序）</div>
+  <div class="table-wrap">
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>排名</th><th>股票</th><th>收盘</th><th>涨跌幅</th><th>主力净额</th><th>散户指数</th><th>换手率</th><th>资金评价</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>🥇 最佳</strong></td>
+        <td class="tl">海光信息</td>
+        <td>353.00</td>
+        <td class="hl-red">-2.88%</td>
+        <td class="hl-green">+2.98亿</td>
+        <td>-168.7 🟢</td>
+        <td>2.21%</td>
+        <td>唯一净流入 ✅</td>
+      </tr>
+      
+      <tr>
+        <td><strong>2</strong></td>
+        <td class="tl">天通股份</td>
+        <td>23.90</td>
+        <td class="hl-red">-4.86%</td>
+        <td class="hl-red">-2.40亿</td>
+        <td>+101</td>
+        <td>8.14%</td>
+        <td>亏损中</td>
+      </tr>
+      
+      <tr>
+        <td><strong>3</strong></td>
+        <td class="tl">江波龙</td>
+        <td>587.60</td>
+        <td class="hl-red">-5.23%</td>
+        <td class="hl-red">-12.74亿</td>
+        <td>+613 🔴</td>
+        <td>6.83%</td>
+        <td>缩量下跌</td>
+      </tr>
+      
+      <tr>
+        <td><strong>4</strong></td>
+        <td class="tl">多氟多</td>
+        <td>41.10</td>
+        <td class="hl-red">-5.84%</td>
+        <td class="hl-red">-5.74亿</td>
+        <td>+211</td>
+        <td>18.37%</td>
+        <td>高换手分歧</td>
+      </tr>
+      
+      <tr>
+        <td><strong>5</strong></td>
+        <td class="tl">澜起科技</td>
+        <td>268.06</td>
+        <td class="hl-red">-6.21%</td>
+        <td class="hl-red">-13.16亿</td>
+        <td>-99 🟢</td>
+        <td>7.26%</td>
+        <td>MA20保卫</td>
+      </tr>
+      
+      <tr>
+        <td><strong>6</strong></td>
+        <td class="tl">德明利</td>
+        <td>799.98</td>
+        <td class="hl-red">-7.03%</td>
+        <td class="hl-red">-7.46亿</td>
+        <td>+374</td>
+        <td>9.14%</td>
+        <td>缩量</td>
+      </tr>
+      
+      <tr>
+        <td><strong>7</strong></td>
+        <td class="tl">摩尔线程</td>
+        <td>701.01</td>
+        <td class="hl-red">-7.64%</td>
+        <td class="hl-red">-2.80亿</td>
+        <td>-1232 🟢🟢</td>
+        <td>15.88%</td>
+        <td>资金面最优</td>
+      </tr>
+      
+      <tr>
+        <td><strong>8</strong></td>
+        <td class="tl">兆易创新</td>
+        <td>612.00</td>
+        <td class="hl-red">-7.76%</td>
+        <td class="hl-red">-99.64亿</td>
+        <td>+11</td>
+        <td>13.28%</td>
+        <td>天量593亿</td>
+      </tr>
+      
+      <tr>
+        <td><strong>🥉 最差</strong></td>
+        <td class="tl">鼎龙股份</td>
+        <td>83.10</td>
+        <td class="hl-red">-13.43%</td>
+        <td class="hl-red">-10.33亿</td>
+        <td>+491 🔴</td>
+        <td>13.19%</td>
+        <td>爆量暴跌</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 逐只总结 -->
+  <div class="section-title"><span class="icon">📋</span> 逐只深度总结</div>
+
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>🥇</strong> <span style="font-weight:600;font-size:14px;">海光信息</span>
+      <span style="font-size:12px;color:var(--muted);">688041</span>
+      <span class="dir dir-mid" style="margin-left:8px;font-size:11px;">🟡 偏稳</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">收盘/涨跌</div>
+      <div class="value hl-red">-2.88%</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">成交额</div>
+      <div class="value ">192.8亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value hl-green">+2.98亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">换手率</div>
+      <div class="value ">2.21%</div>
+    </div>
+    
+  </div>
+  <div class="judge-box ok" style="margin-bottom:12px;font-size:13px;">
+    <strong>💎 抗跌王：</strong>今日9只中跌幅最小（-2.88%）且<strong>唯一主力净流入</strong>（特大单+7.72亿+DDE+10.13亿）。机构持股72%超高度锁定，低换手2.2%筹码稳定。MA5(348)和今日低点(352.5)构成双重支撑。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong></strong> <span style="font-weight:600;font-size:14px;">天通股份</span>
+      <span style="font-size:12px;color:var(--muted);">600330</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">🔴 弱势</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">收盘/涨跌</div>
+      <div class="value hl-red">-4.86%</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">成交额</div>
+      <div class="value ">25.1亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value hl-red">-2.40亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">均线形态</div>
+      <div class="value hl-red">全面空头</div>
+    </div>
+    
+  </div>
+  <div class="judge-box r" style="margin-bottom:12px;font-size:13px;">
+    <strong>📉 弱势股：</strong>缩量-4.86%，股价远低于所有均线。Q1亏损中。股东数-13.52%（筹码集中）和北向小幅增持3.4%是亮点，但缺乏催化剂短期不宜。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong></strong> <span style="font-weight:600;font-size:14px;">江波龙</span>
+      <span style="font-size:12px;color:var(--muted);">301308</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">🔴 偏弱</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">收盘/涨跌</div>
+      <div class="value hl-red">-5.23%</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">成交额</div>
+      <div class="value ">119.2亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value hl-red">-12.74亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">动态PE</div>
+      <div class="value hl-green">16.09倍</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    <strong>📉 缩量下跌：</strong>缩量至119亿（-27%）非恐慌抛售。主力-12.74亿+散户+613接盘+北向-43.6%需警惕。前瞻PE仅16倍安全垫极厚。MA30(585)中期强撑。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong></strong> <span style="font-weight:600;font-size:14px;">多氟多</span>
+      <span style="font-size:12px;color:var(--muted);">002407</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">🔴 偏弱</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">收盘/涨跌</div>
+      <div class="value hl-red">-5.84%</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">换手率</div>
+      <div class="value hl-yellow">18.37%</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value hl-red">-5.74亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">北向Q2</div>
+      <div class="value hl-green">+203%</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    <strong>📊 高换手多空分歧：</strong>18.37%换手说明多空激战。主力-5.74亿+散户+211接盘，但筹码集中（股东-13.84%）+北向Q2+203%是大亮点。Q1净利+480%。MA30(40.82)支撑。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong></strong> <span style="font-weight:600;font-size:14px;">澜起科技</span>
+      <span style="font-size:12px;color:var(--muted);">688008</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">🔴 偏弱</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">收盘/涨跌</div>
+      <div class="value hl-red">-6.21%</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">成交额</div>
+      <div class="value hl-yellow">237.1亿(+75%)</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">特大单</div>
+      <div class="value hl-red">-21.31亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">机构持股</div>
+      <div class="value hl-green">51.82%</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    <strong>📏 MA20多空分水岭：</strong>收盘268.06紧贴MA20(268.39)。机构本周流出80亿+但散户也在卖(-99)筹码集中。北向持平。机构51.82%锁定良好。若守住MA20存在反弹窗口。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong></strong> <span style="font-weight:600;font-size:14px;">德明利</span>
+      <span style="font-size:12px;color:var(--muted);">001309</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">🔴 偏弱</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">收盘/涨跌</div>
+      <div class="value hl-red">-7.03%</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">成交额</div>
+      <div class="value ">127.2亿(-10%)</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">特大单</div>
+      <div class="value hl-red">-10.41亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">动态PE</div>
+      <div class="value hl-green">13.56倍</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    <strong>💰 低估值+高安全垫：</strong>逼近跌停但前瞻PE仅13.6倍极低。Q1净利+4943%增速惊人。北向Q2减持-12.9%需留意。MA20(813)短期关键。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong></strong> <span style="font-weight:600;font-size:14px;">摩尔线程-U</span>
+      <span style="font-size:12px;color:var(--muted);">688795</span>
+      <span class="dir dir-mid" style="margin-left:8px;font-size:11px;">🟡 震荡偏弱</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">收盘/涨跌</div>
+      <div class="value hl-red">-7.64%</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户指数</div>
+      <div class="value hl-green">-1232 🟢🟢</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">均线形态</div>
+      <div class="value hl-green">多头排列</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value hl-yellow">-2.80亿(轻)</div>
+    </div>
+    
+  </div>
+  <div class="judge-box ok" style="margin-bottom:12px;font-size:13px;">
+    <strong>🧠 结构性机会：</strong>跌-7.64%但均线多头+散户极度恐慌卖出(-1232)筹码集中。主力-2.80亿流出相比跌幅不大。700+MA5(685)强支撑，是中长线布局机会。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>⚠️</strong> <span style="font-weight:600;font-size:14px;">兆易创新</span>
+      <span style="font-size:12px;color:var(--muted);">603986</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">🔴🔴 极弱</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">收盘/涨跌</div>
+      <div class="value hl-red">-7.76%</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">成交额</div>
+      <div class="value hl-yellow">593.8亿(+167%)</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value hl-red">-99.64亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">融资余额</div>
+      <div class="value hl-red">229亿</div>
+    </div>
+    
+  </div>
+  <div class="judge-box r" style="margin-bottom:12px;font-size:13px;">
+    <strong>⚠️ 全市场焦点：</strong>天量593亿成交，主力净流出近100亿。散户几乎未参与(+11)，机构互砍。主动特大单净卖-86亿(卖172亿>>买86亿)，中单被动净买+75亿说明低位有承接。融资+7.82亿逆势加杠杆存爆仓风险。H1预增69亿是基本面底。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>⚠️</strong> <span style="font-weight:600;font-size:14px;">鼎龙股份</span>
+      <span style="font-size:12px;color:var(--muted);">300054</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">🔴🔴 极弱</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">收盘/涨跌</div>
+      <div class="value hl-red">-13.43%</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">成交额</div>
+      <div class="value hl-yellow">88.9亿(+70%)</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户指数</div>
+      <div class="value hl-red">+491 🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">北向Q2</div>
+      <div class="value hl-green">+41.9% 🚀</div>
+    </div>
+    
+  </div>
+  <div class="judge-box r" style="margin-bottom:12px;font-size:13px;">
+    <strong>⚠️ 最大跌幅：</strong>-13.43%爆量跌破所有短期均线，散户+491狂热接盘（大跌中散户买入是典型错误）。北向Q2+41.9%是中长期强信号。距MA60(72.71)仅14%，可能是主力洗盘，但短期坚决回避。
+  </div>
+  
+
+  <!-- 关键位置表 -->
+  <div class="section-title"><span class="icon">🎯</span> 关键位置一览 · 下周一（7/13）关注</div>
+  <div class="table-wrap">
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>股票</th><th>支撑位</th><th>压力位</th><th>关键均线</th><th>若破位</th><th>若守位</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td class="tl">海光信息</td>
+        <td class="hl-green">348(MA5)/352.5</td>
+        <td>366/395</td>
+        <td>MA5=348 ✅站上</td>
+        <td>→330</td>
+        <td>→395</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">天通股份</td>
+        <td class="hl-green">23.9/23</td>
+        <td>24.7(MA5)/26.8</td>
+        <td>全面空头</td>
+        <td>→22</td>
+        <td>→25</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">江波龙</td>
+        <td class="hl-green">585(MA30)/588</td>
+        <td>617(MA20)/642</td>
+        <td>MA30=585 ✅</td>
+        <td>→530</td>
+        <td>→617</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">多氟多</td>
+        <td class="hl-green">40.8(MA30)/41</td>
+        <td>43.6(MA5)/44.2</td>
+        <td>MA30=40.8 ✅</td>
+        <td>→37.8</td>
+        <td>→43.6</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">澜起科技</td>
+        <td class="hl-yellow">268(MA20)/248</td>
+        <td>278(MA10)/298</td>
+        <td>MA20=268.39 ⚠️</td>
+        <td>→248</td>
+        <td>→278</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">德明利</td>
+        <td class="hl-yellow">800/813(MA20)</td>
+        <td>854(MA5)/877</td>
+        <td>MA20=812.56 ⚠️</td>
+        <td>→750</td>
+        <td>→854</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">摩尔线程</td>
+        <td class="hl-green">700/685(MA5)</td>
+        <td>744/766</td>
+        <td>MA5=685 ✅站上</td>
+        <td>→672</td>
+        <td>→744</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">兆易创新</td>
+        <td class="hl-yellow">607/600</td>
+        <td>630(MA5)/664</td>
+        <td>跌破全部 ❌</td>
+        <td>→550</td>
+        <td>→630</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">鼎龙股份</td>
+        <td class="hl-yellow">82.9/80</td>
+        <td>90(MA5)/92</td>
+        <td>跌破全部 ❌</td>
+        <td>→73</td>
+        <td>→90</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 综合策略 -->
+  <div class="section-title"><span class="icon">💡</span> 综合策略建议</div>
+  <div style="font-size:13px;line-height:1.9;padding:8px 12px;">
+    <strong>🟢 相对积极（可关注）：</strong><br>
+&nbsp;&nbsp;· <strong>海光信息</strong> — 今日最抗跌+唯一主力净流入+机构72%锁定，395波段目标<br>
+&nbsp;&nbsp;· <strong>摩尔线程</strong> — 均线多头+散户恐慌卖-1232筹码集中，700附近中长线机会<br><br>
+<strong>🟡 观望（等信号）：</strong><br>
+&nbsp;&nbsp;· <strong>澜起科技</strong> — 下周一MA20保卫战，守住则反弹<br>
+&nbsp;&nbsp;· <strong>德明利</strong> — 前瞻PE仅13.6倍，等MA20附近企稳<br>
+&nbsp;&nbsp;· <strong>多氟多</strong> — 北向+203%强信号+筹码集中，等MA30确认<br><br>
+<strong>🔴 短期回避：</strong><br>
+&nbsp;&nbsp;· <strong>兆易创新</strong> — 天量机构互砍+融资229亿爆仓风险，不宜抄底<br>
+&nbsp;&nbsp;· <strong>鼎龙股份</strong> — 散户狂热接盘+爆量-13%，明日可能继续杀跌。北向+42%中长期信号<br><br>
+<strong>⚠️ 核心判断：</strong><br>
+今日暴跌更可能是获利了结+板块轮动而非基本面反转。存储涨价周期+兆易H1净利69亿+江波龙百亿级预增均未改变。下周一走势决定短期方向。
+  </div>
+
+  <div style="font-size:11px;color:var(--muted);margin-top:16px;padding-top:12px;border-top:1px solid var(--border);text-align:center;">
+    免责声明：本总结基于公开行情数据生成，不构成投资建议 · 数据来源：同花顺问财 Level-2
+  </div>
+</div>
+
 <div class="footer">
   <p>📊 本报告由 小艺 Claw 自动生成 · 数据来源：同花顺问财 · 仅供参考，不构成投资建议</p>
   <p style="margin-top:4px;">分析框架：6模块（行情含均线系统/主力资金/两融含融资态度/机构吸筹含股东人数+机构日期/动态估值/走势研判双视角+事件日历）</p>
@@ -1836,6 +2406,8 @@ document.querySelectorAll('.filter-btn').forEach(function(btn) {
         card.classList.remove('hidden');
       } else if (filter === 'summary') {
         card.classList.toggle('hidden', card.dataset.direction !== 'summary');
+      } else if (filter === 'daily-summary') {
+        card.classList.toggle('hidden', card.dataset.direction !== 'daily-summary');
       } else {
         card.classList.toggle('hidden', card.dataset.direction !== filter);
       }
