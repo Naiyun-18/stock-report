@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资金面分析 2026-07-31（周五）</title>
+<style>
+  :root {
+    --bg: #f5f6f8; --card: #ffffff; --text: #1a1a2e; --muted: #6b7280;
+    --border: #e5e7eb; --green: #10b981; --red: #ef4444; --yellow: #f59e0b;
+    --blue: #3b82f6; --orange: #f97316; --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6; padding: 24px 16px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  .header {
+    text-align: center; padding: 32px 20px 24px;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-radius: var(--radius); color: #fff; margin-bottom: 24px;
+  }
+  .header h1 { font-size: 24px; font-weight: 700; letter-spacing: 0.5px; }
+  .header .meta { display: flex; justify-content: center; gap: 24px; margin-top: 10px; font-size: 13px; opacity: 0.7; flex-wrap: wrap; }
+
+  .card {
+    background: var(--card); border-radius: var(--radius); padding: 24px;
+    margin-bottom: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .card-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 16px; flex-wrap: wrap; gap: 8px;
+  }
+  .stock-name { font-size: 18px; font-weight: 700; }
+  .stock-code { font-size: 13px; color: var(--muted); }
+  .tag {
+    display: inline-block; padding: 2px 10px; border-radius: 12px;
+    font-size: 12px; font-weight: 600;
+  }
+  .tag-green { background: #d1fae5; color: #065f46; }
+  .tag-red { background: #fee2e2; color: #991b1b; }
+  .tag-yellow { background: #fef3c7; color: #92400e; }
+  .tag-gray { background: #f3f4f6; color: #6b7280; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  th, td { padding: 10px 12px; text-align: center; border-bottom: 1px solid var(--border); font-size: 14px; }
+  th { background: #f8f9fa; font-weight: 600; color: var(--muted); font-size: 12px; white-space: nowrap; }
+  td:first-child, th:first-child { text-align: left; font-weight: 600; }
+  .hl-green { color: var(--green) !important; }
+  .hl-red { color: var(--red) !important; }
+  .hl-yellow { color: var(--orange) !important; }
+  .hl-bold { font-weight: 700; }
+
+  .judge-box {
+    border-left: 4px solid var(--blue); padding: 14px 18px;
+    background: #f0f7ff; border-radius: 0 8px 8px 0; margin-top: 16px;
+  }
+  .judge-box h4 { font-size: 14px; margin-bottom: 6px; color: var(--blue); }
+  .judge-box p { font-size: 13px; color: #374151; line-height: 1.7; }
+
+  .flow-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 12px 0; }
+  .flow-item {
+    padding: 12px; border-radius: 8px; font-size: 13px;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .flow-item .label { color: var(--muted); font-size: 11px; }
+  .flow-item .value { font-size: 15px; font-weight: 700; }
+  .flow-active { background: #fef2f2; }
+  .flow-passive { background: #ecfdf5; }
+  .flow-item.small { grid-column: span 1; }
+
+  .meta-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 8px 0; font-size: 13px; }
+  .meta-row span { color: var(--muted); }
+  .meta-row strong { color: var(--text); }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin: 12px 0; }
+  .summary-item { padding: 10px 14px; background: #f9fafb; border-radius: 8px; }
+  .summary-item .label { font-size: 11px; color: var(--muted); }
+  .summary-item .value { font-size: 15px; font-weight: 700; margin-top: 2px; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+
+  .chip-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+  .chip { padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .chip-green { background: #d1fae5; color: #065f46; }
+  .chip-red { background: #fee2e2; color: #991b1b; }
+
+  .section-title { font-size: 16px; font-weight: 700; margin: 20px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--blue); }
+
+  .tag-status { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; }
+  .tag-status.healthy { background: #d1fae5; color: #065f46; }
+  .tag-status.warning { background: #fef3c7; color: #92400e; }
+  .tag-status.danger { background: #fee2e2; color: #991b1b; }
+
+  @media (max-width: 600px) {
+    .flow-grid { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .card { padding: 16px; }
+    th, td { padding: 6px 8px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>📊 资金面分析 2026-07-31（周五）</h1>
+  <div class="meta">鼎龙股份 · 澜起科技 · 兆易创新 · 德明利</div>
+  <div class="meta">数据来源：同花顺问财 Level-2</div>
+</div>
+
+<!-- ============ 汇总表 ============ -->
+<div class="card">
+  <h3 style="margin-bottom:12px;">📌 四股资金面汇总对比</h3>
+  <table>
+    <tr>
+      <th>指标</th>
+      <th>鼎龙股份</th>
+      <th>澜起科技</th>
+      <th>兆易创新</th>
+      <th>德明利</th>
+    </tr>
+    <tr>
+      <td>收盘价 / 涨跌幅</td>
+      <td><span class="hl-red hl-bold">73.29 / +11.72%</span></td>
+      <td><span class="hl-red hl-bold">220.79 / +12.21%</span></td>
+      <td><span class="hl-red hl-bold">396.26 / +6.65%</span></td>
+      <td><span class="hl-red hl-bold">413.39 / +5.99%</span></td>
+    </tr>
+    <tr>
+      <td>成交额</td>
+      <td>14.14 亿</td>
+      <td>64.86 亿</td>
+      <td>163.77 亿</td>
+      <td>76.66 亿</td>
+    </tr>
+    <tr>
+      <td>量比 / 换手率</td>
+      <td>3.83 / 2.66%</td>
+      <td>4.04 / 2.58%</td>
+      <td>2.43 / 6.06%</td>
+      <td>2.71 / <span class="hl-red hl-bold">10.97%</span></td>
+    </tr>
+    <tr>
+      <td>特大单总净买入</td>
+      <td class="hl-green hl-bold">+1.37 亿</td>
+      <td class="hl-green hl-bold">+7.38 亿</td>
+      <td class="hl-green hl-bold">+38.80 亿</td>
+      <td class="hl-green hl-bold">+16.83 亿</td>
+    </tr>
+    <tr>
+      <td>主力资金流向（主动）</td>
+      <td class="hl-green hl-bold">+1.33 亿</td>
+      <td class="hl-green hl-bold">+6.14 亿</td>
+      <td class="hl-red hl-bold">-52.79 亿</td>
+      <td class="hl-red hl-bold">-25.72 亿</td>
+    </tr>
+    <tr>
+      <td>主力增仓占比</td>
+      <td class="hl-green hl-bold">+9.65%</td>
+      <td class="hl-green hl-bold">+9.50%</td>
+      <td class="hl-red hl-bold">-32.67%</td>
+      <td class="hl-red hl-bold">-33.65%</td>
+    </tr>
+    <tr>
+      <td>散户指数</td>
+      <td class="hl-green">-82.40 ✅</td>
+      <td class="hl-yellow">+397.66 ⚠️</td>
+      <td class="hl-red hl-bold">+892.86 🚩</td>
+      <td class="hl-red hl-bold">+1,867 🚨</td>
+    </tr>
+    <tr>
+      <td>融资净买入</td>
+      <td class="hl-green">+1388 万</td>
+      <td class="hl-red">-2.37 亿</td>
+      <td class="hl-green">+2.07 亿</td>
+      <td class="hl-red">-4351 万</td>
+    </tr>
+    <tr>
+      <td>主力控盘比例</td>
+      <td>48.36%</td>
+      <td>69.56%</td>
+      <td>75.11%</td>
+      <td>72.23%</td>
+    </tr>
+    <tr>
+      <td>主力持仓成本</td>
+      <td>78.94 元</td>
+      <td>235.25 元</td>
+      <td>524.31 元</td>
+      <td>607.38 元</td>
+    </tr>
+    <tr>
+      <td>获利比例</td>
+      <td>36.5%</td>
+      <td>37.0%</td>
+      <td>24.9%</td>
+      <td>46.5%</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============ 主动 vs 被动拆解汇总 ============ -->
+<div class="card">
+  <h3 style="margin-bottom:12px;">🔍 主动 vs 被动资金对比</h3>
+  <table>
+    <tr>
+      <th>档次</th>
+      <th>维度</th>
+      <th>鼎龙股份</th>
+      <th>澜起科技</th>
+      <th>兆易创新</th>
+      <th>德明利</th>
+    </tr>
+    <tr>
+      <td rowspan="2"><strong>特大单</strong></td>
+      <td>主动净额</td>
+      <td class="hl-green">+8725 万</td>
+      <td class="hl-green hl-bold">+7.32 亿</td>
+      <td class="hl-red hl-bold">-38.65 亿 🚩</td>
+      <td class="hl-red hl-bold">-18.60 亿 🚩</td>
+    </tr>
+    <tr>
+      <td>被动净额(推)</td>
+      <td class="hl-green">+4975 万</td>
+      <td class="hl-green">+604 万</td>
+      <td class="hl-green hl-bold">+77.45 亿</td>
+      <td class="hl-green hl-bold">+35.43 亿</td>
+    </tr>
+    <tr>
+      <td rowspan="2"><strong>大单</strong></td>
+      <td>主动净额</td>
+      <td class="hl-green">+4399 万</td>
+      <td class="hl-red hl-bold">-1.25 亿</td>
+      <td class="hl-red hl-bold">-14.86 亿</td>
+      <td class="hl-red hl-bold">-7.07 亿</td>
+    </tr>
+    <tr>
+      <td>被动净额(推)</td>
+      <td class="hl-green">+1.10 亿</td>
+      <td class="hl-green hl-bold">+4.01 亿</td>
+      <td class="hl-green hl-bold">+43.18 亿</td>
+      <td class="hl-green hl-bold">+17.30 亿</td>
+    </tr>
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>主动净额</td>
+      <td class="hl-green">+4902 万</td>
+      <td class="hl-green">+6214 万</td>
+      <td class="hl-red hl-bold">-21.68 亿 🚩</td>
+      <td class="hl-red hl-bold">-7.71 亿 🚩</td>
+    </tr>
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>主动净额</td>
+      <td class="hl-green">-505 万</td>
+      <td class="hl-green">-1775 万</td>
+      <td class="hl-red hl-bold">-12.04 亿 🚩</td>
+      <td class="hl-red hl-bold">-3.47 亿 🚩</td>
+    </tr>
+    <tr style="background:#f8f9fa; font-weight:700;">
+      <td colspan="2"><strong>合计主动净额</strong></td>
+      <td class="hl-green hl-bold">+1.80 亿 ✅</td>
+      <td class="hl-green hl-bold">+6.43 亿 ⚠️</td>
+      <td class="hl-red hl-bold">-87.22 亿 🚩</td>
+      <td class="hl-red hl-bold">-36.85 亿 🚩</td>
+    </tr>
+  </table>
+  <div style="margin-top:8px; font-size:12px; color:var(--muted);">
+    💡 主动净额 = 主动买入 − 主动卖出（资金真实意愿）<br>
+    💡 被动净额(推) = 总净买入额 − 主动净额（挂单承接力量）
+  </div>
+</div>
+
+<!-- ============ 鼎龙股份 ============ -->
+<div class="card">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">鼎龙股份</span>
+      <span class="stock-code">300054.SZ</span>
+    </div>
+    <span class="tag-status healthy">✅ 资金健康</span>
+  </div>
+  <div class="summary-grid">
+    <div class="summary-item"><div class="label">收盘 / 涨幅</div><div class="value hl-red">73.29 / +11.72%</div></div>
+    <div class="summary-item"><div class="label">成交额 / 量比</div><div class="value">14.14 亿 / 3.83</div></div>
+    <div class="summary-item"><div class="label">换手率</div><div class="value">2.66%</div></div>
+    <div class="summary-item"><div class="label">主力增仓占比</div><div class="value hl-green">+9.65%</div></div>
+    <div class="summary-item"><div class="label">散户指数</div><div class="value hl-green">-82.40 ✅</div></div>
+    <div class="summary-item"><div class="label">融资净买入</div><div class="value hl-green">+1388 万</div></div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <div class="flow-item flow-active">
+      <span class="label">特大单主动净额</span>
+      <span class="value hl-green">+8725 万</span>
+    </div>
+    <div class="flow-item flow-passive">
+      <span class="label">特大单被动承接(推)</span>
+      <span class="value hl-green">+4975 万</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">大单主动净额</span>
+      <span class="value hl-green">+4399 万</span>
+    </div>
+    <div class="flow-item flow-passive">
+      <span class="label">大单被动承接(推)</span>
+      <span class="value hl-green">+1.10 亿</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">中单主动净额</span>
+      <span class="value hl-green">+4902 万</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">小单主动净额</span>
+      <span class="value hl-green">-505 万</span>
+    </div>
+  </div>
+  <div class="judge-box" style="border-left-color:var(--green); background:#ecfdf5;">
+    <h4 style="color:var(--green);">✅ 资金结构健康</h4>
+    <p>特大单、大单、中单全线主动买入，小单（散户）主动卖出。典型的"主力吸筹、散户交筹"结构。主力增仓 +9.65%，筹码向主力集中。量比 3.83 放量大涨，量价配合良好。</p>
+  </div>
+</div>
+
+<!-- ============ 澜起科技 ============ -->
+<div class="card">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">澜起科技</span>
+      <span class="stock-code">688008.SH</span>
+    </div>
+    <span class="tag-status warning">⚠️ 结构分化</span>
+  </div>
+  <div class="summary-grid">
+    <div class="summary-item"><div class="label">收盘 / 涨幅</div><div class="value hl-red">220.79 / +12.21%</div></div>
+    <div class="summary-item"><div class="label">成交额 / 量比</div><div class="value">64.86 亿 / 4.04</div></div>
+    <div class="summary-item"><div class="label">换手率</div><div class="value">2.58%</div></div>
+    <div class="summary-item"><div class="label">主力增仓占比</div><div class="value hl-green">+9.50%</div></div>
+    <div class="summary-item"><div class="label">散户指数</div><div class="value hl-yellow">+397.66 ⚠️</div></div>
+    <div class="summary-item"><div class="label">融资净买入</div><div class="value hl-red">-2.37 亿（偿还）</div></div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <div class="flow-item flow-active">
+      <span class="label">特大单主动净额</span>
+      <span class="value hl-green hl-bold">+7.32 亿</span>
+    </div>
+    <div class="flow-item flow-passive">
+      <span class="label">特大单被动承接(推)</span>
+      <span class="value hl-green">+604 万</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">大单主动净额</span>
+      <span class="value hl-red hl-bold">-1.25 亿</span>
+    </div>
+    <div class="flow-item flow-passive">
+      <span class="label">大单被动承接(推)</span>
+      <span class="value hl-green hl-bold">+4.01 亿</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">中单主动净额</span>
+      <span class="value hl-green">+6214 万</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">小单主动净额</span>
+      <span class="value hl-green">-1775 万</span>
+    </div>
+  </div>
+  <div class="judge-box" style="border-left-color:var(--yellow); background:#fffbeb;">
+    <h4 style="color:#92400e;">⚠️ 强弱分化</h4>
+    <p>特大单主动买入 +7.32 亿极其强劲，顶级资金扫货坚决。但大单主动卖出 -1.25 亿，部分机构借涨兑现。散户指数 +398 偏高，融资净偿还 2.37 亿。主力控盘 69.56%（高度控盘），主力成本 235 元，当前 220 元仍倒挂 6%。</p>
+  </div>
+</div>
+
+<!-- ============ 兆易创新 ============ -->
+<div class="card">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">兆易创新</span>
+      <span class="stock-code">603986.SH</span>
+    </div>
+    <span class="tag-status danger">🚩 高度警惕</span>
+  </div>
+  <div class="summary-grid">
+    <div class="summary-item"><div class="label">收盘 / 涨幅</div><div class="value hl-red">396.26 / +6.65%</div></div>
+    <div class="summary-item"><div class="label">成交额 / 量比</div><div class="value hl-bold">163.77 亿 / 2.43</div></div>
+    <div class="summary-item"><div class="label">换手率</div><div class="value hl-bold">6.06%</div></div>
+    <div class="summary-item"><div class="label">主力增仓占比</div><div class="value hl-red hl-bold">-32.67%</div></div>
+    <div class="summary-item"><div class="label">散户指数</div><div class="value hl-red hl-bold">+892.86 🚩</div></div>
+    <div class="summary-item"><div class="label">融资净买入</div><div class="value hl-green">+2.07 亿</div></div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <div class="flow-item flow-active">
+      <span class="label">特大单主动净额</span>
+      <span class="value hl-red hl-bold">-38.65 亿 🚩</span>
+    </div>
+    <div class="flow-item flow-passive">
+      <span class="label">特大单被动承接(推)</span>
+      <span class="value hl-green hl-bold">+77.45 亿</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">大单主动净额</span>
+      <span class="value hl-red hl-bold">-14.86 亿 🚩</span>
+    </div>
+    <div class="flow-item flow-passive">
+      <span class="label">大单被动承接(推)</span>
+      <span class="value hl-green hl-bold">+43.18 亿</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">中单主动净额</span>
+      <span class="value hl-red hl-bold">-21.68 亿 🚩</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">小单主动净额</span>
+      <span class="value hl-red hl-bold">-12.04 亿 🚩</span>
+    </div>
+  </div>
+  <div class="judge-box" style="border-left-color:var(--red); background:#fef2f2;">
+    <h4 style="color:var(--red);">🚩 四档全面主动卖出</h4>
+    <p>主动净额合计 -87.22 亿，所有档次均在主动卖出。虽然特大单总净买入 +38.80 亿，但这完全来自被动承接（约 77.45 亿）。散户指数 +893 极高，散户疯狂追涨接盘。主力增仓 -32.67%，主力成本 524 元（当前 396，倒挂 24.5%），股东人数季度暴增 29%，筹码在快速分散。</p>
+  </div>
+</div>
+
+<!-- ============ 德明利 ============ -->
+<div class="card">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">德明利</span>
+      <span class="stock-code">001309.SZ</span>
+    </div>
+    <span class="tag-status danger">🚩 高度警惕</span>
+  </div>
+  <div class="summary-grid">
+    <div class="summary-item"><div class="label">收盘 / 涨幅</div><div class="value hl-red">413.39 / +5.99%</div></div>
+    <div class="summary-item"><div class="label">成交额 / 量比</div><div class="value hl-bold">76.66 亿 / 2.71</div></div>
+    <div class="summary-item"><div class="label">换手率</div><div class="value hl-red hl-bold">10.97% 🔥</div></div>
+    <div class="summary-item"><div class="label">主力增仓占比</div><div class="value hl-red hl-bold">-33.65%</div></div>
+    <div class="summary-item"><div class="label">散户指数</div><div class="value hl-red hl-bold">+1,867 🚨</div></div>
+    <div class="summary-item"><div class="label">融资净买入</div><div class="value hl-red">-4351 万</div></div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <div class="flow-item flow-active">
+      <span class="label">特大单主动净额</span>
+      <span class="value hl-red hl-bold">-18.60 亿 🚩</span>
+    </div>
+    <div class="flow-item flow-passive">
+      <span class="label">特大单被动承接(推)</span>
+      <span class="value hl-green hl-bold">+35.43 亿</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">大单主动净额</span>
+      <span class="value hl-red hl-bold">-7.07 亿 🚩</span>
+    </div>
+    <div class="flow-item flow-passive">
+      <span class="label">大单被动承接(推)</span>
+      <span class="value hl-green hl-bold">+17.30 亿</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">中单主动净额</span>
+      <span class="value hl-red hl-bold">-7.71 亿 🚩</span>
+    </div>
+    <div class="flow-item flow-active">
+      <span class="label">小单主动净额</span>
+      <span class="value hl-red hl-bold">-3.47 亿 🚩</span>
+    </div>
+  </div>
+  <div class="judge-box" style="border-left-color:var(--red); background:#fef2f2;">
+    <h4 style="color:var(--red);">🚩 四档全面主动卖出 + 散户极端追涨</h4>
+    <p>和兆易创新完全相同的模式：主动四档全面卖出 36.85 亿，被动承接 52.73 亿支撑股价。但风险信号更强烈——散户指数 1867 冠绝四股，换手率 10.97% 极高，主力增仓 -33.65%。当前股价 413 元刚好在平均成本 414 元附近，获利 46.5% vs 套牢 43.4%，处于筹码平衡敏感位。主力成本 607 元（深套 32%），利用反弹回血减仓逻辑清晰。</p>
+  </div>
+</div>
+
+<!-- ============ 筹码对比 ============ -->
+<div class="card">
+  <h3 style="margin-bottom:12px;">🧩 筹码结构对比</h3>
+  <table>
+    <tr>
+      <th>指标</th>
+      <th>鼎龙股份</th>
+      <th>澜起科技</th>
+      <th>兆易创新</th>
+      <th>德明利</th>
+    </tr>
+    <tr>
+      <td>主力控盘比例</td>
+      <td>48.36%</td>
+      <td class="hl-bold">69.56%</td>
+      <td class="hl-bold">75.11%</td>
+      <td class="hl-bold">72.23%</td>
+    </tr>
+    <tr>
+      <td>主力持仓成本</td>
+      <td>78.94 元</td>
+      <td>235.25 元</td>
+      <td>524.31 元</td>
+      <td>607.38 元</td>
+    </tr>
+    <tr>
+      <td>倒挂幅度</td>
+      <td class="hl-green">-7.2%</td>
+      <td class="hl-yellow">-6.1%</td>
+      <td class="hl-red hl-bold">-24.5%</td>
+      <td class="hl-red hl-bold">-32.0%</td>
+    </tr>
+    <tr>
+      <td>平均成本</td>
+      <td>75.27 元</td>
+      <td>228.60 元</td>
+      <td>449.40 元</td>
+      <td>414.26 元</td>
+    </tr>
+    <tr>
+      <td>获利比例</td>
+      <td>36.5%</td>
+      <td>37.0%</td>
+      <td>24.9%</td>
+      <td>46.5%</td>
+    </tr>
+    <tr>
+      <td>套牢盘</td>
+      <td>63.5%</td>
+      <td>63.0%</td>
+      <td>71.4%</td>
+      <td>43.4%</td>
+    </tr>
+    <tr>
+      <td>集中度 90</td>
+      <td>—</td>
+      <td>—</td>
+      <td>32.5%</td>
+      <td class="hl-red hl-bold">43.4%</td>
+    </tr>
+    <tr>
+      <td>股东数变化</td>
+      <td>—</td>
+      <td>—</td>
+      <td class="hl-red hl-bold">+29.27% 🚩</td>
+      <td class="hl-yellow">+3.02%</td>
+    </tr>
+  </table>
+  <div style="margin-top:10px; font-size:12px; color:var(--muted);">
+    💡 倒挂幅度 = (主力成本 − 当前价) / 主力成本 × 100%
+  </div>
+</div>
+
+<!-- ============ 综合研判 ============ -->
+<div class="card">
+  <h3 style="margin-bottom:12px;">🔮 综合研判</h3>
+  <table>
+    <tr>
+      <th>股票</th>
+      <th>资金评级</th>
+      <th>核心逻辑</th>
+    </tr>
+    <tr>
+      <td><strong>鼎龙股份</strong></td>
+      <td><span class="tag-status healthy">✅ 健康</span></td>
+      <td style="text-align:left;">主力全线主动买入 + 散户卖出，量价健康。主力增仓 +9.65%，筹码集中。放量突破，支撑良好。</td>
+    </tr>
+    <tr>
+      <td><strong>澜起科技</strong></td>
+      <td><span class="tag-status warning">⚠️ 分化</span></td>
+      <td style="text-align:left;">特大单主动买入 +7.32 亿极强，但大单主动卖出 + 散户追涨。主力高度控盘（69.56%），但融资偿还。短线注意散户获利了结抛压。</td>
+    </tr>
+    <tr>
+      <td><strong>兆易创新</strong></td>
+      <td><span class="tag-status danger">🚩 警惕</span></td>
+      <td style="text-align:left;">四档全面主动卖出 87 亿，散户疯狂追涨 +893。股东人数暴增 29%，筹码快速分散。主力深套 24.5% 仍在卖，属于借反弹减仓。</td>
+    </tr>
+    <tr>
+      <td><strong>德明利</strong></td>
+      <td><span class="tag-status danger">🚩 警惕</span></td>
+      <td style="text-align:left;">四档全面主动卖出 37 亿，散户追涨极疯狂 +1867。换手率 10.97% 筹码松动，主力深套 32% 借涨减仓。唯一利好是被动承接 53 亿资金在接盘。</td>
+    </tr>
+  </table>
+</div>
+
+</div>
+</body>
+</html>
