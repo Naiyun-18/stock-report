@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>股票技术指标分析 — 2026-08-27（周四）</title>
+<style>
+body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background:#f0f4f8; color:#1f2d3d; margin:0; padding:20px; }
+.wrap { max-width:1280px; margin:0 auto; }
+h1 { font-size:1.5rem; border-left:5px solid #3498db; padding-left:12px; }
+h2 { font-size:1.2rem; margin-top:28px; color:#2c3e50; border-bottom:2px solid #dfe6ed; padding-bottom:6px; }
+.meta { color:#7f8c8d; font-size:.85rem; margin-bottom:8px; }
+.summary-cards { display:flex; flex-wrap:wrap; gap:12px; margin:16px 0; }
+.card { background:#fff; border-radius:10px; padding:14px 18px; box-shadow:0 1px 4px rgba(0,0,0,.06); flex:1; min-width:120px; text-align:center; }
+.card .num { font-size:1.6rem; font-weight:bold; color:#2c3e50; }
+.card .lbl { font-size:.82rem; color:#7f8c8d; margin-top:4px; }
+table { border-collapse:collapse; width:100%; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.06); font-size:.88rem; }
+th { background:#2c3e50; color:#fff; padding:9px 8px; text-align:center; white-space:nowrap; }
+td { border-bottom:1px solid #eef2f6; padding:8px 8px; text-align:center; }
+tr:hover { background:#f5f9ff; }
+tr.name td { text-align:left; font-weight:600; }
+.pos { color:#e74c3c; font-weight:600; }   /* A股红涨 */
+.neg { color:#27ae60; font-weight:600; }   /* 绿跌 */
+.flat { color:#95a5a6; }
+.strong { color:#e74c3c; font-weight:700; }
+.weak { color:#27ae60; font-weight:700; }
+.warn { color:#8e44ad; font-weight:700; }
+.note { background:#fff; border-radius:10px; padding:14px 18px; margin-top:18px; box-shadow:0 1px 4px rgba(0,0,0,.06); font-size:.9rem; line-height:1.7; }
+.note b { color:#c0392b; }
+.footer { margin-top:24px; color:#95a5a6; font-size:.78rem; text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>📈 股票技术指标分析 — 2026-08-27（周四）</h1>
+<div class="meta">数据来源：同花顺问财API · 日线收盘数据（MA5偏离度 · MA10 · BOLL布林带）</div>
+
+<div class="summary-cards">
+  <div class="card"><div class="num">13</div><div class="lbl">分析标的</div></div>
+  <div class="card"><div class="num" style="color:#e74c3c;">2</div><div class="lbl">MA5在MA10上方(偏多)</div></div>
+  <div class="card"><div class="num" style="color:#27ae60;">4</div><div class="lbl">跌破MA10(偏弱)</div></div>
+  <div class="card"><div class="num" style="color:#e74c3c;">9</div><div class="lbl">BOLL中轨上方(偏强)</div></div>
+  <div class="card"><div class="num" style="color:#8e44ad;">0</div><div class="lbl">🚨突破型预警</div></div>
+  <div class="card"><div class="num" style="color:#8e44ad;">2</div><div class="lbl">⚠️逼近轨道</div></div>
+</div>
+
+<h2>一、技术指标明细（按MA5偏离度降序）</h2>
+<table>
+<thead><tr><th>股票</th><th>收盘价</th><th>MA5</th><th>与MA5偏离度</th><th>MA10</th><th>跌破MA10?</th><th>MA5在MA10上?</th><th>区间偏差(MA5/MA10)</th><th>BOLL上轨</th><th>BOLL中轨</th><th>BOLL下轨</th><th>轨道位置/预警</th></tr></thead>
+<tbody>
+<tr class='name'><td>澜起科技(688008)</td><td>221.22</td><td>201.80</td><td><span class='pos'>+9.62%</span> <span class='warn'>⚠️超买</span></td><td>206.24</td><td class="pos">否</td><td class="neg">否</td><td>—</td><td>225.79</td><td>206.78</td><td>187.78</td><td><span class='strong'>偏强</span> ⚠️逼近上轨</td></tr>
+<tr class='name'><td>德明利(001309)</td><td>429.76</td><td>406.59</td><td><span class='pos'>+5.70%</span></td><td>410.38</td><td class="pos">否</td><td class="neg">否</td><td>—</td><td>441.49</td><td>399.37</td><td>357.25</td><td><span class='strong'>偏强</span> ⚠️逼近上轨</td></tr>
+<tr class='name'><td>海光信息(688041)</td><td>245.97</td><td>237.20</td><td><span class='pos'>+3.70%</span></td><td>254.19</td><td class="neg">是</td><td class="neg">否</td><td>—</td><td>314.44</td><td>269.10</td><td>223.77</td><td><span class='weak'>偏弱</span> </td></tr>
+<tr class='name'><td>江波龙(301308)</td><td>386.25</td><td>373.13</td><td><span class='pos'>+3.52%</span></td><td>386.15</td><td class="pos">否</td><td class="neg">否</td><td>—</td><td>437.20</td><td>381.18</td><td>325.16</td><td><span class='strong'>偏强</span> </td></tr>
+<tr class='name'><td>兆易创新A(603986)</td><td>411.20</td><td>397.99</td><td><span class='pos'>+3.32%</span></td><td>409.54</td><td class="pos">否</td><td class="neg">否</td><td>—</td><td>447.31</td><td>399.06</td><td>350.81</td><td><span class='strong'>偏强</span> </td></tr>
+<tr class='name'><td>佰维(688525)</td><td>238.44</td><td>230.83</td><td><span class='pos'>+3.30%</span></td><td>237.25</td><td class="pos">否</td><td class="neg">否</td><td>—</td><td>258.51</td><td>234.88</td><td>211.26</td><td><span class='strong'>偏强</span> </td></tr>
+<tr class='name'><td>长鑫(688825)</td><td>59.12</td><td>57.26</td><td><span class='pos'>+3.24%</span></td><td>57.76</td><td class="pos">否</td><td class="neg">否</td><td>—</td><td>61.30</td><td>55.42</td><td>49.54</td><td><span class='strong'>偏强</span> </td></tr>
+<tr class='name'><td>鼎龙股份(300054)</td><td>75.00</td><td>73.37</td><td><span class='pos'>+2.22%</span></td><td>75.48</td><td class="neg">是</td><td class="neg">否</td><td>—</td><td>83.15</td><td>74.63</td><td>66.11</td><td><span class='strong'>偏强</span> </td></tr>
+<tr class='name'><td>摩尔线程(688795)</td><td>544.02</td><td>534.81</td><td><span class='pos'>+1.72%</span></td><td>551.49</td><td class="neg">是</td><td class="neg">否</td><td>—</td><td>609.83</td><td>565.24</td><td>520.65</td><td><span class='weak'>偏弱</span> </td></tr>
+<tr class='name'><td>军工ETF 512660</td><td>1.12</td><td>1.10</td><td><span class='pos'>+1.63%</span></td><td>1.12</td><td class="pos">否</td><td class="neg">否</td><td>—</td><td>1.19</td><td>1.13</td><td>1.07</td><td><span class='weak'>偏弱</span> </td></tr>
+<tr class='name'><td>有色ETF 512400</td><td>1.97</td><td>1.94</td><td><span class='pos'>+1.39%</span></td><td>1.92</td><td class="pos">否</td><td class="pos">是</td><td>—</td><td>2.03</td><td>1.91</td><td>1.78</td><td><span class='strong'>偏强</span> </td></tr>
+<tr class='name'><td>呈和科技(688625)</td><td>54.80</td><td>54.29</td><td><span class='pos'>+0.95%</span></td><td>57.01</td><td class="neg">是</td><td class="neg">否</td><td>—</td><td>63.45</td><td>55.68</td><td>47.90</td><td><span class='weak'>偏弱</span> </td></tr>
+<tr class='name'><td>大为(002213)</td><td>31.09</td><td>31.26</td><td><span class='neg'>-0.54%</span></td><td>30.65</td><td class="pos">否</td><td class="pos">是</td><td>-0.5% / +1.4%</td><td>33.44</td><td>29.57</td><td>25.70</td><td><span class='strong'>偏强</span> </td></tr>
+</tbody>
+</table>
+<div class="meta" style="margin-top:6px;">注：偏离度｜绝对值≥8% 标"⚠️超买超卖"。轨道位置"偏强/偏弱"按收盘价相对BOLL中轨判断。</div>
+
+<h2>二、走势研判汇总（按MA5偏离度降序）</h2>
+<table>
+<thead><tr><th>股票</th><th>MA5偏离度(降序)</th><th>轨内强弱</th><th>关键研判</th></tr></thead>
+<tbody>
+<tr class='name'><td>澜起科技(688008)</td><td class='pos'>+9.62%</td><td class='strong'>偏强</td><td>超买/超卖预警,偏离+9.6%、站上MA10、空头/纠缠、BOLL上方·偏强</td></tr>
+<tr class='name'><td>德明利(001309)</td><td class='pos'>+5.70%</td><td class='strong'>偏强</td><td>站上MA10、空头/纠缠、BOLL上方·偏强</td></tr>
+<tr class='name'><td>海光信息(688041)</td><td class='pos'>+3.70%</td><td class='weak'>偏弱</td><td>已跌破MA10、空头/纠缠、BOLL下方·偏弱</td></tr>
+<tr class='name'><td>江波龙(301308)</td><td class='pos'>+3.52%</td><td class='strong'>偏强</td><td>站上MA10、空头/纠缠、BOLL上方·偏强</td></tr>
+<tr class='name'><td>兆易创新A(603986)</td><td class='pos'>+3.32%</td><td class='strong'>偏强</td><td>站上MA10、空头/纠缠、BOLL上方·偏强</td></tr>
+<tr class='name'><td>佰维(688525)</td><td class='pos'>+3.30%</td><td class='strong'>偏强</td><td>站上MA10、空头/纠缠、BOLL上方·偏强</td></tr>
+<tr class='name'><td>长鑫(688825)</td><td class='pos'>+3.24%</td><td class='strong'>偏强</td><td>站上MA10、空头/纠缠、BOLL上方·偏强</td></tr>
+<tr class='name'><td>鼎龙股份(300054)</td><td class='pos'>+2.22%</td><td class='strong'>偏强</td><td>已跌破MA10、空头/纠缠、BOLL上方·偏强</td></tr>
+<tr class='name'><td>摩尔线程(688795)</td><td class='pos'>+1.72%</td><td class='weak'>偏弱</td><td>已跌破MA10、空头/纠缠、BOLL下方·偏弱</td></tr>
+<tr class='name'><td>军工ETF 512660</td><td class='pos'>+1.63%</td><td class='weak'>偏弱</td><td>站上MA10、空头/纠缠、BOLL下方·偏弱</td></tr>
+<tr class='name'><td>有色ETF 512400</td><td class='pos'>+1.39%</td><td class='strong'>偏强</td><td>站上MA10、多头排列、BOLL上方·偏强</td></tr>
+<tr class='name'><td>呈和科技(688625)</td><td class='pos'>+0.95%</td><td class='weak'>偏弱</td><td>已跌破MA10、空头/纠缠、BOLL下方·偏弱</td></tr>
+<tr class='name'><td>大为(002213)</td><td class='neg'>-0.54%</td><td class='strong'>偏强</td><td>站上MA10、多头排列、BOLL上方·偏强、于MA5-MA10区间内(-0.5% / +1.4%)</td></tr>
+</tbody>
+</table>
+
+<h2>三、组合研判要点</h2>
+<div class="note">
+<p><b>整体格局：</b>今日（8/27）技术面呈<b>反弹修复</b>：13个标的中 9 只运行至BOLL中轨上方（偏强）、9只站上/收复MA10，仅 4 只仍跌破MA10；但 MA5＞MA10 的多头排列仅 2 只，多数仍为空头/纠缠态，属<b>超跌反弹、均线尚未转多</b>。澜起偏离+9.62%超买并逼近BOLL上轨，短线防过热回调；德明利同样逼近上轨。</p>
+<p><b>相对偏强（MA5偏离度为正、站上MA10）：</b>澜起科技(688008), 德明利(001309), 江波龙(301308), 兆易创新A(603986), 佰维(688525), 长鑫(688825), 军工ETF 512660, 有色ETF 512400 —— 短线仍处均线上方，回调动能为多头承接。</p>
+<p><b>相对偏弱（MA5偏离度为负、跌破MA10）：</b>大为(002213) —— 短线跌破MA10且收盘价位于MA5下方，反弹乏力，需防均线系统进一步向下发散。</p>
+<p><b>BOLL预警提示：</b>0 条🚨突破预警、2 条⚠️逼近轨道预警，需结合量能确认方向。</p>
+</div>
+
+<div class="footer">本报告基于收盘数据的技术面量化分析，不构成投资建议 · 生成于 2026-08-27（周四）</div>
+</div>
+</body>
+</html>
