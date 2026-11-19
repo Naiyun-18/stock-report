@@ -1,0 +1,2994 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>收盘分析报告 2026-11-19（周四）</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --green: #10b981;
+    --red: #ef4444;
+    --yellow: #f59e0b;
+    --blue: #3b82f6;
+    --orange: #f97316;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 24px 16px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  .header {
+    text-align: center;
+    padding: 32px 20px 24px;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-radius: var(--radius);
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  .header h1 { font-size: 24px; font-weight: 700; letter-spacing: 0.5px; }
+  .header p { font-size: 14px; opacity: 0.7; margin-top: 6px; }
+  .header .meta { display: flex; justify-content: center; gap: 24px; margin-top: 14px; font-size: 13px; opacity: 0.65; flex-wrap: wrap; }
+
+  .header .tech-link {
+    display: inline-block; margin-top: 16px; padding: 10px 20px;
+    border-radius: 8px; background: rgba(59,130,246,0.25); color: #fff;
+    text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 0.3px;
+    border: 1px solid rgba(255,255,255,0.4); transition: all .2s;
+  }
+  .header .tech-link:hover { background: rgba(59,130,246,0.45); transform: translateY(-1px); }
+
+  .filter-bar {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;
+  }
+  .filter-btn {
+    padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border);
+    background: var(--card); font-size: 12px; cursor: pointer;
+    transition: all 0.2s; color: var(--muted); white-space: nowrap;
+  }
+  .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .filter-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+  .filter-bar2 { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+  .filter-btn-sm {
+    padding: 4px 12px; border-radius: 6px; border: 1px solid #d1d5db;
+    background: #f3f4f6; font-size: 12px; font-weight: 700; cursor: pointer;
+    transition: all 0.2s; color: #374151; white-space: nowrap;
+  }
+  .filter-btn-sm:hover { border-color: var(--blue); color: var(--blue); background: #eff6ff; }
+  .filter-btn-sm.active { background: #1e293b; color: #fff; border-color: #1e293b; }
+
+  .card { display: block; }
+  .card.hidden, .hr-sep.hidden { display: none !important; }
+
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+
+  .card-header {
+    display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;
+  }
+  .stock-name { font-size: 18px; font-weight: 700; }
+  .stock-code { font-size: 13px; color: var(--muted); font-weight: 400; }
+  .stock-tag {
+    display: inline-block; font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 600;
+  }
+  .tag-long { background: #dbeafe; color: #1d4ed8; }
+
+  .price-row {
+    display: flex; gap: 16px; flex-wrap: wrap; padding: 14px 0; border-bottom: 1px solid var(--border); margin-bottom: 14px;
+  }
+  .price-item { text-align: center; min-width: 80px; }
+  .price-item .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .price-item .value { font-size: 18px; font-weight: 700; margin-top: 2px; }
+  .price-item .value.up { color: var(--red); }
+  .price-item .value.down { color: var(--green); }
+
+  .section-title {
+    font-size: 14px; font-weight: 600; color: var(--muted); margin: 14px 0 8px; display: flex; align-items: center; gap: 6px;
+  }
+  .section-title .icon { font-size: 16px; }
+
+  .data-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-bottom: 10px;
+  }
+  .data-item {
+    background: #f8f9fb; border-radius: 8px; padding: 8px 12px;
+  }
+  .data-item .label { font-size: 11px; color: var(--muted); }
+  .data-item .value { font-size: 14px; font-weight: 600; margin-top: 1px; }
+
+  .sig { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+  .sig-r { background: var(--red); }
+  .sig-y { background: var(--yellow); }
+  .sig-g { background: var(--green); }
+
+  .dir { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .dir-up { background: #d1fae5; color: #047857; }
+  .dir-mid { background: #fef3c7; color: #b45309; }
+  .dir-down { background: #fee2e2; color: #b91c1c; }
+  .dir-hold { background: #dbeafe; color: #1d4ed8; }
+
+  .summary-table {
+    width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px;
+  }
+  .summary-table th {
+    background: #f1f5f9; padding: 10px 8px; text-align: left; font-weight: 600; font-size: 13px; color: var(--muted); white-space: nowrap;
+  }
+  .summary-table td { padding: 10px 8px; border-bottom: 1px solid var(--border); }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table .tl { font-weight: 600; }
+
+  .flow-bar { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+  .flow-bar .bar { height: 8px; border-radius: 4px; transition: width 0.6s ease; }
+  .flow-bar .bar.g { background: var(--green); }
+  .flow-bar .bar.r { background: var(--red); }
+  .flow-bar .lbl { font-size: 11px; color: var(--muted); min-width: 60px; }
+
+  .judge-box {
+    background: #f8fafc; border-radius: 8px; padding: 14px; margin-top: 10px; border-left: 3px solid var(--blue);
+  }
+  .judge-box.g { border-left-color: var(--green); }
+  .judge-box.r { border-left-color: var(--red); }
+  .judge-box p { font-size: 13px; line-height: 1.7; }
+  .judge-box p strong, .judge-box p span, .judge-box p b, .judge-box p em { font-size: 13px; }
+  .judge-box p *, .judge-box p *:before, .judge-box p *:after { font-size: 13px !important; box-sizing: border-box; }
+
+  .kuailan-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; margin-bottom: 12px;
+  }
+  .kuailan-item {
+    background: #f8f9fb; border-radius: 8px; padding: 10px 14px; font-size: 13px; line-height: 1.6;
+  }
+  .kuailan-item strong { font-weight: 600; }
+  .kuailan-ma { grid-column: 1 / -1; }
+
+  .table-wrap { overflow-x: auto; margin-top: 8px; }
+  .detail-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .detail-table th {
+    background: #f1f5f9; padding: 8px 10px; text-align: left; font-weight: 600; font-size: 12px; color: var(--muted);
+  }
+  .detail-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  .detail-table tr:last-child td { border-bottom: none; }
+
+  .checklist { list-style: none; padding: 0; font-size: 13px; }
+  .checklist li { padding: 4px 0; line-height: 1.6; }
+
+  .sep { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+  .footer { text-align: center; font-size: 12px; color: var(--muted); padding: 24px 0 8px; }
+
+  .hl-green { color: var(--green); font-weight: 600; }
+  .hl-red { color: var(--red); font-weight: 600; }
+  .hl-yellow { color: var(--yellow); font-weight: 600; }
+  .hl-orange { color: var(--orange); font-weight: 600; }
+  .hl-blue { color: var(--blue); font-weight: 600; }
+
+  @media (max-width: 640px) {
+    body { padding: 12px 8px; }
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 20px; }
+    .card { padding: 16px; }
+    .data-grid { grid-template-columns: repeat(2, 1fr); }
+    .price-row { gap: 10px; }
+    .summary-table { font-size: 11px; }
+    .summary-table th, .summary-table td { padding: 6px 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>📊 收盘分析报告 — 2026-11-19（周四）</h1>
+  <p>作者：小艺 Claw</p>
+  <div class="meta">
+    <span>🕐 数据日期：2026-11-19</span>
+    <span>📌 生成时间：2026-11-19 15:53</span>
+    <span>🏷️ 中长线视角 + 短线技术</span>
+  </div>
+  <a class="tech-link" href="https://naiyun-18.github.io/stock-tech-report/" target="_blank" rel="noopener">📈 查看「股票技术分析报告」→</a>
+  <a class="tech-link" href="https://naiyun-18.github.io/treasury-yield-tracker/" target="_blank" rel="noopener" style="margin-left:10px;">📊 美债利率跟踪报告 →</a>
+  <a class="tech-link" href="https://naiyun-18.github.io/market-sentiment-radar/" target="_blank" rel="noopener" style="margin-left:10px;">📊 市场情绪估值雷达报告 →</a>
+  <a class="tech-link" href="https://naiyun-18.github.io/financial-report/" target="_blank" rel="noopener" style="margin-left:10px;">📚 Financial Reports ｜ 财报分析报告库 →</a>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">全部</button>
+  <button class="filter-btn" data-filter="up">🟢 偏多 / 企稳</button>
+  <button class="filter-btn" data-filter="warn">⚠️ 震荡 / 偏弱</button>
+  <button class="filter-btn" data-filter="down">🔴 弱势</button>
+  <button class="filter-btn" data-filter="summary">📋 走势研判汇总表</button>
+  <button class="filter-btn" data-filter="daily-summary">📄 每日总结</button>
+</div>
+
+<div class="filter-bar2">
+
+  <button class="filter-btn-sm" data-stock="dinglong">鼎龙股份</button>
+
+  <button class="filter-btn-sm" data-stock="lanqi">澜起科技</button>
+
+  <button class="filter-btn-sm" data-stock="zhaoyi">兆易创新</button>
+
+  <button class="filter-btn-sm" data-stock="zhaoyi-h">兆易H股</button>
+
+  <button class="filter-btn-sm" data-stock="dawei">大为股份</button>
+
+  <button class="filter-btn-sm" data-stock="zhongwei">中微公司</button>
+
+  <button class="filter-btn-sm" data-stock="huayang">华阳国际</button>
+
+  <button class="filter-btn-sm" data-stock="huike">惠科股份</button>
+
+  <button class="filter-btn-sm" data-stock="kema">珂玛科技</button>
+
+  <button class="filter-btn-sm" data-stock="changxin">长鑫科技</button>
+
+</div>
+
+
+<!-- ════════════════ 1️⃣ 鼎龙股份 300054 ════════════════ -->
+<div class="card" data-direction="up" id="dinglong">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">鼎龙股份 <span class="stock-code">300054 · 创业板</span></span>
+      
+      <span class="stock-tag tag-long" style="margin-left:8px;">半导体材料</span>
+      
+    </div>
+    <span class="dir dir-up">📈 反弹转强（站上MA5/MA20/MA30，关注59.68压力）</span>
+  </div>
+
+  <div class="section-title"><span class="icon">⚡</span> 快览（行情数据）</div>
+  <div class="kuailan-grid">
+    <div class="kuailan-item"><strong>📊 收盘</strong><br> <span class="hl-red">59.52元 <strong>+2.29%</strong></span> 📈</div>
+    <div class="kuailan-item"><strong>📌 开盘</strong><br> （前收58.19）</div>
+    <div class="kuailan-item"><strong>📈 盘中</strong><br> 收盘59.52 +2.29%上涨，探57.72冲61.23收59.52（量比1.03平量、成交14.31亿），主力资金流向+0.52亿+特大+0.11/大单+0.32亿净流入+主力增仓+3.62%+散户-36.50流出，站上MA5/MA20/MA30但仍低于MA10/MA60</div>
+    <div class="kuailan-item"><strong>💥 振幅</strong><br> 6.03%</div>
+    <div class="kuailan-item"><strong>💰 成交额</strong><br> <strong>14.31亿</strong></div>
+    <div class="kuailan-item"><strong>📏 量比</strong><br> <span class="hl-yellow"><strong>1.03 平量</strong></span></div>
+    <div class="kuailan-item"><strong>🔄 换手率</strong><br> 3.23%<br><span style="font-size:11px;color:var(--muted);">—</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>📐 均线系统</strong><br> MA60 64.40 > MA10 59.68 > MA30 58.90 > MA20 58.69 > 收59.52 > MA5 58.03<br><span class="hl-red">收盘59.52 +2.29%上涨，探57.72冲61.23收59.52，站上MA5(58.03)/MA20(58.69)/MA30(58.90)但仍低于MA10(59.68)/MA60(64.40)，主力资金流向+0.52亿+特大/大单净流入+主力增仓+3.62%+散户-36.50流出</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>⚙️ 技术指标（MA5偏离+BOLL）</strong><br> <strong>MA10偏离 <span class="hl-green">-0.28%</span></strong>（收于MA10下方）<br>BOLL 中轨≈MA20 58.69<br><span class="hl-red">今日收59.52 +2.29%上涨，探57.72冲61.23，站上MA5/MA20/MA30但仍低于MA10/MA60，主力资金流向+0.52亿+特大+0.11/大单+0.32亿净流入+增仓+3.62%，散户-36.50流出，反弹转强</span></div>
+  </div>
+
+  <div class="section-title"><span class="icon">💰</span> 主力资金</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>维度（Level-2）</th><th>金额</th><th>信号</th><th>解读</th></tr>
+    
+    <tr><td>特大单净买入额</td><td><span class="hl-red"><strong>+0.11亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>特大单净买入额净流入0.11亿</td></tr>
+    
+    <tr><td>大单净买入额</td><td><span class="hl-red"><strong>+0.32亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>大单净买入额净流入0.32亿</td></tr>
+    
+    <tr><td>主力资金流向</td><td><span class="hl-red"><strong>+0.52亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>主力资金流向净流入0.52亿</td></tr>
+    
+    <tr><td>主力增仓占比</td><td><span class="hl-red"><strong>+3.62% ✅</strong></span></td><td><span class="hl-red">✅ 增仓</span></td><td>主力增仓</td></tr>
+    
+    <tr><td>散户指数</td><td><span class="hl-green"><strong>-36.50</strong></span></td><td><span class="hl-green">流出</span></td><td>散户流出</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🔍</span> 资金流向主动/被动逐档拆解</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>档位</th><th>主动买入</th><th>主动卖出</th><th>主动净额</th><th>被动买入</th><th>被动卖出</th><th>被动净额</th><th>单档合计</th><th>意图</th></tr>
+    
+    <tr>
+      <td><strong>特大单</strong></td>
+      <td>+1.46亿</td>
+      <td>-1.15亿</td>
+      <td class="hl-red">+0.31亿</td>
+      <td>+1.23亿</td>
+      <td>-1.44亿</td>
+      <td class="hl-green">-0.20亿</td>
+      <td class="hl-red">+0.11亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>大单</strong></td>
+      <td>+1.17亿</td>
+      <td>-0.96亿</td>
+      <td class="hl-red">+0.21亿</td>
+      <td>+0.85亿</td>
+      <td>-0.85亿</td>
+      <td class="">+0.00亿</td>
+      <td class="hl-red">+0.21亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>+2.20亿</td>
+      <td>-2.04亿</td>
+      <td class="hl-red">+0.16亿</td>
+      <td>+1.88亿</td>
+      <td>-2.15亿</td>
+      <td class="hl-green">-0.26亿</td>
+      <td class="hl-green">-0.10亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>+2.95亿</td>
+      <td>-2.37亿</td>
+      <td class="hl-red">+0.57亿</td>
+      <td>+2.56亿</td>
+      <td>-3.35亿</td>
+      <td class="hl-green">-0.79亿</td>
+      <td class="hl-green">-0.22亿</td>
+      <td style="font-size:12px;">主动买入为主，进攻意图明显</td>
+    </tr>
+    
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px;">主动净合计: <strong><span class="hl-red">1.25亿</span></strong> | 被动净合计: <strong><span class="hl-green">-1.25亿</span></strong> | 主动买入+被动卖出对冲，有资金主动做多</p>
+
+  <div class="section-title"><span class="icon">🧩</span> 筹码分布</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th></tr>
+    
+    <tr><td>主力控盘比例</td><td><strong>32.95%</strong>（中度控盘）</td></tr>
+    
+    <tr><td>平均成本</td><td>58.83元</td></tr>
+    
+    <tr><td>集中度90</td><td>16.1（相对分散）</td></tr>
+    
+    <tr><td>70%成本区间</td><td>57.12~72.48（现价59.52位于区间下缘）</td></tr>
+    
+    <tr><td>获利比例</td><td>36.0%（套牢64.0%）</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">💳</span> 融资融券</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th><th>态度</th></tr>
+    
+    <tr><td>融资余额</td><td>16.21亿</td><td>高</td></tr>
+    
+    <tr><td>融资余额/流通市值</td><td><span class="hl-red"><strong>3.66%</strong></span></td><td>适度（<4%）</td></tr>
+    
+    <tr><td>融资净买入</td><td><span class="hl-green">-0.32亿</span></td><td>偿还</td></tr>
+    
+    <tr><td>融券余额</td><td>0.24亿</td><td>低</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🏢</span> 机构吸筹判断</div>
+  <ul class="checklist">
+    
+    <li>📈 <strong>+2.29%上涨</strong>，振幅6.03%，探57.72冲61.23收59.52（站上MA5/MA20/MA30）</li>
+    
+    <li>✅ 主力资金流向口径+0.52亿净流入+主力增仓+3.62%</li>
+    
+    <li>✅ 特大+0.11/大单+0.32亿净买入额口径净流入</li>
+    
+    <li>📉 散户-36.50流出（离场）</li>
+    
+    <li>💰 杠杆3.66%适度，融资-0.32亿偿还</li>
+    
+    <li>🏢 股东113,033户(较上期-3.39%集中) | 公告2026-10-28</li>
+    
+    <li>🏦 深股通持股53,730,510(占流通7.22%)，外资中高</li>
+    
+    <li><strong>解读：</strong>今日+2.29%上涨，探57.72冲61.23收59.52，站上MA5(58.03)/MA20(58.69)/MA30(58.90)但仍低于MA10(59.68)/MA60(64.40)，反弹转强。主力资金流向口径+0.52亿净流入+主力增仓+3.62%，特大+0.11/大单+0.32亿净流入，散户-36.50流出（离场）。杠杆3.66%适度但融资-0.32亿偿还。获利盘36.0%套牢64.0%。平量上涨（量比1.03），观察MA10(59.68)/MA60(64.40)压力，站稳看反抽MA10，反弹转强，回踩不破57.72(今低)可关注。</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">📐</span> 动态估值</div>
+  <ul class="checklist">
+    
+    <li><strong>PE（TTM）：</strong>53.99倍</li>
+    
+    <li><strong>动态PE：</strong>50.03倍</li>
+    
+    <li><strong>机构控盘：</strong>32.95%</li>
+    
+    <li><strong>流通市值：</strong>443.18亿</li>
+    
+    <li><strong>中报净利：</strong>+70.21%↑（同比），营收+11.15%</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">🔮</span> 走势研判</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong>中长线：</strong>半导体材料/光刻胶国产替代龙头，中报净利+70.21%高增。</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;"><strong>短线：</strong><span class="hl-red"><strong>反弹转强（+2.29%上涨，主力+0.52亿净流入+增仓+3.62%+特大+0.11/大单+0.32亿净流入，散户-36.50流出，站上MA5/MA20/MA30）</strong></span> +2.29%（收涨），平量(量比1.03)，收59.52探57.72冲61.23，站上MA5(58.03)/MA20(58.69)/MA30(58.90)但仍低于MA10(59.68)/MA60(64.40)。主力资金流向口径+0.52亿净流入+增仓+3.62%，特大+0.11/大单+0.32亿净流入，散户-36.50流出。杠杆3.66%适度，融资-0.32亿偿还。观察MA10(59.68)/MA60(64.40)压力，短期反弹转强，回踩不破57.72(今低)可关注。</p>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>方向</th><th>价位</th><th>依据</th></tr>
+    
+    <tr><td ><span class="hl-red">支撑位</span></td><td><strong>57.72</strong></td><td>今日低点</td></tr>
+    
+    <tr><td ><span class="hl-red">中支撑</span></td><td>57.50</td><td>整数</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">压力位</span></td><td><strong>59.68</strong></td><td>MA10</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">关键压力</span></td><td>64.40</td><td>MA60</td></tr>
+    
+  </table>
+  </div>
+  <div class="judge-box">
+    <p><strong>核心判断：</strong>📈 <strong>反弹转强（+2.29%上涨，主力+0.52亿净流入+增仓+3.62%+特大+0.11/大单+0.32亿净流入，散户-36.50流出，站上MA5/MA20/MA30）。</strong>+2.29%收59.52探57.72冲61.23平量。主力资金流向口径+0.52亿净流入+增仓+3.62%，特大/大单净流入，散户-36.50流出。杠杆3.66%适度。观察MA10(59.68)/MA60(64.40)压力，站稳看反抽MA10，反弹转强，回踩不破57.72可关注。</p>
+  </div>
+</div>
+
+<hr class="sep hr-sep">
+
+
+<!-- ════════════════ 2️⃣ 澜起科技 688008 ════════════════ -->
+<div class="card" data-direction="down" id="lanqi">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">澜起科技 <span class="stock-code">688008 · 科创板</span></span>
+      
+      <span class="stock-tag tag-long" style="margin-left:8px;">半导体</span>
+      
+    </div>
+    <span class="dir dir-down">📉 冲高回落整理（仍处均线下方，关注139.35压力）</span>
+  </div>
+
+  <div class="section-title"><span class="icon">⚡</span> 快览（行情数据）</div>
+  <div class="kuailan-grid">
+    <div class="kuailan-item"><strong>📊 收盘</strong><br> <span class="hl-green">137.60元 <strong>-0.14%</strong></span> 📉</div>
+    <div class="kuailan-item"><strong>📌 开盘</strong><br> （前收137.79）</div>
+    <div class="kuailan-item"><strong>📈 盘中</strong><br> 收盘137.60 -0.14%微跌（昨大涨后回落），探131.50冲138.66收137.60（量比0.82平量、成交41.74亿），主力资金流向+2.65亿+大单+2.24亿净流入但特大-0.64亿净流出+主力增仓+6.34%+散户-296.11大幅离场，仍收于全部均线下方</div>
+    <div class="kuailan-item"><strong>💥 振幅</strong><br> 5.20%</div>
+    <div class="kuailan-item"><strong>💰 成交额</strong><br> <strong>41.74亿</strong></div>
+    <div class="kuailan-item"><strong>📏 量比</strong><br> <span class="hl-yellow"><strong>0.82 平量</strong></span></div>
+    <div class="kuailan-item"><strong>🔄 换手率</strong><br> 2.70%<br><span style="font-size:11px;color:var(--muted);">—</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>📐 均线系统</strong><br> MA60 182.11 > MA30 163.38 > MA20 156.75 > MA10 147.71 > MA5 139.35 > 收137.60<br><span class="hl-green">收盘137.60 -0.14%微跌（昨大涨后回落），探131.50冲138.66收137.60，仍收于全部均线下方(MA5 139.35/MA10 147.71/MA20 156.75)，主力资金流向+2.65亿+大单+2.24亿净流入但特大-0.64亿净流出+主力增仓+6.34%+散户-296.11大幅离场</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>⚙️ 技术指标（MA5偏离+BOLL）</strong><br> <strong>MA5偏离 <span class="hl-green">-1.26%</span></strong>（收于MA5下方）<br>BOLL 中轨≈MA20 156.75<br><span class="hl-green">今日收137.60 -0.14%微跌（昨+5.51%大涨后回落），探131.50冲138.66，仍处全部均线下方，主力资金流向+2.65亿净流入但特大-0.64亿净流出+增仓+6.34%，散户-296.11大幅离场，冲高回落整理</span></div>
+  </div>
+
+  <div class="section-title"><span class="icon">💰</span> 主力资金</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>维度（Level-2）</th><th>金额</th><th>信号</th><th>解读</th></tr>
+    
+    <tr><td>特大单净买入额</td><td><span class="hl-green"><strong>-0.64亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>特大单净买入额净流出0.64亿</td></tr>
+    
+    <tr><td>大单净买入额</td><td><span class="hl-red"><strong>+2.24亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>大单净买入额净流入2.24亿</td></tr>
+    
+    <tr><td>主力资金流向</td><td><span class="hl-red"><strong>+2.65亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>主力资金流向净流入2.65亿</td></tr>
+    
+    <tr><td>主力增仓占比</td><td><span class="hl-red"><strong>+6.34% ✅</strong></span></td><td><span class="hl-red">✅ 增仓</span></td><td>主力增仓</td></tr>
+    
+    <tr><td>散户指数</td><td><span class="hl-green"><strong>-296.11</strong></span></td><td><span class="hl-green">大幅离场</span></td><td>散户大幅离场</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🔍</span> 资金流向主动/被动逐档拆解</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>档位</th><th>主动买入</th><th>主动卖出</th><th>主动净额</th><th>被动买入</th><th>被动卖出</th><th>被动净额</th><th>单档合计</th><th>意图</th></tr>
+    
+    <tr>
+      <td><strong>特大单</strong></td>
+      <td>+4.23亿</td>
+      <td>-4.79亿</td>
+      <td class="hl-green">-0.55亿</td>
+      <td>+4.40亿</td>
+      <td>-4.49亿</td>
+      <td class="hl-green">-0.08亿</td>
+      <td class="hl-green">-0.64亿</td>
+      <td style="font-size:12px;">主动卖出为主，撤退意图明显</td>
+    </tr>
+    
+    <tr>
+      <td><strong>大单</strong></td>
+      <td>+7.12亿</td>
+      <td>-3.92亿</td>
+      <td class="hl-red">+3.20亿</td>
+      <td>+3.63亿</td>
+      <td>-3.95亿</td>
+      <td class="hl-green">-0.32亿</td>
+      <td class="hl-red">+2.88亿</td>
+      <td style="font-size:12px;">主动买入为主，进攻意图明显</td>
+    </tr>
+    
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>+6.61亿</td>
+      <td>-6.50亿</td>
+      <td class="hl-red">+0.11亿</td>
+      <td>+5.44亿</td>
+      <td>-7.51亿</td>
+      <td class="hl-green">-2.07亿</td>
+      <td class="hl-green">-1.96亿</td>
+      <td style="font-size:12px;">被动派发为主，挂单卖出</td>
+    </tr>
+    
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>+4.58亿</td>
+      <td>-4.00亿</td>
+      <td class="hl-red">+0.57亿</td>
+      <td>+5.73亿</td>
+      <td>-6.58亿</td>
+      <td class="hl-green">-0.85亿</td>
+      <td class="hl-green">-0.28亿</td>
+      <td style="font-size:12px;">主动买入为主，进攻意图明显</td>
+    </tr>
+    
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px;">主动净合计: <strong><span class="hl-red">3.33亿</span></strong> | 被动净合计: <strong><span class="hl-green">-3.32亿</span></strong> | 主动买入+被动卖出对冲，有资金主动做多</p>
+
+  <div class="section-title"><span class="icon">🧩</span> 筹码分布</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th></tr>
+    
+    <tr><td>主力控盘比例</td><td><strong>46.45%</strong>（中度控盘）</td></tr>
+    
+    <tr><td>平均成本</td><td>159.04元</td></tr>
+    
+    <tr><td>集中度90</td><td>24.5（相对分散）</td></tr>
+    
+    <tr><td>70%成本区间</td><td>148.33~209.30（现价137.60位于区间下方）</td></tr>
+    
+    <tr><td>获利比例</td><td>9.7%（套牢90.3%）</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">💳</span> 融资融券</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th><th>态度</th></tr>
+    
+    <tr><td>融资余额</td><td>87.07亿</td><td>高</td></tr>
+    
+    <tr><td>融资余额/流通市值</td><td><span class="hl-red"><strong>5.53%</strong></span></td><td>偏高（>5%）</td></tr>
+    
+    <tr><td>融资净买入</td><td><span class="hl-green">-1.96亿</span></td><td>偿还</td></tr>
+    
+    <tr><td>融券余额</td><td>0.38亿</td><td>低</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🏢</span> 机构吸筹判断</div>
+  <ul class="checklist">
+    
+    <li>📉 <strong>-0.14%微跌</strong>（昨+5.51%大涨后回落），振幅5.20%，探131.50冲138.66收137.60（仍处全部均线下方）</li>
+    
+    <li>✅ 主力资金流向口径+2.65亿净流入+主力增仓+6.34%</li>
+    
+    <li>⚠️ 但特大-0.64亿净流出（大单+2.24亿净流入）</li>
+    
+    <li>✅ 散户-296.11大幅离场（筹码趋健康）</li>
+    
+    <li>💰 杠杆5.53%偏高，融资-1.96亿偿还</li>
+    
+    <li>🏢 股东202,406户(较上期-22.41%集中) | 公告2026-10-30</li>
+    
+    <li>🏦 沪股通持股156,059,409(占流通13.63%)，外资高</li>
+    
+    <li><strong>解读：</strong>今日-0.14%微跌（昨+5.51%大涨后小幅回落整理），探131.50冲138.66收137.60，仍收于全部均线下方。主力资金流向口径+2.65亿净流入+主力增仓+6.34%，大单+2.24亿净流入但特大-0.64亿净流出（口径分歧），散户-296.11大幅离场（筹码趋健康）。杠杆5.53%偏高但融资-1.96亿偿还。获利盘9.7%套牢90.3%。平量（量比0.82），观察MA5(139.35)/MA10(147.71)压力，站稳看反抽MA10，冲高回落整理，回踩不破131.50(今低)可关注。</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">📐</span> 动态估值</div>
+  <ul class="checklist">
+    
+    <li><strong>PE（TTM）：</strong>43.73倍</li>
+    
+    <li><strong>动态PE：</strong>38.91倍</li>
+    
+    <li><strong>机构控盘：</strong>46.45%</li>
+    
+    <li><strong>流通市值：</strong>1575.20亿</li>
+    
+    <li><strong>AI服务器需求高景气，内存接口龙头</strong></li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">🔮</span> 走势研判</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong>中长线：</strong>内存接口与模组厂商，AI服务器需求高景气。</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;"><strong>短线：</strong><span class="hl-green"><strong>冲高回落整理（-0.14%微跌，主力+2.65亿净流入+增仓+6.34%但特大-0.64亿净流出，散户-296.11大幅离场，仍收于全部均线下方）</strong></span> -0.14%（收跌，昨+5.51%大涨后回落），平量(量比0.82)，收137.60探131.50冲138.66，仍处全部均线下方。主力资金流向口径+2.65亿净流入+增仓+6.34%，但特大-0.64亿净流出、大单+2.24亿净流入，散户-296.11大幅离场。杠杆5.53%偏高，融资-1.96亿偿还。观察MA5(139.35)/MA10(147.71)压力，站稳看反抽MA10，短期冲高回落整理，回踩不破131.50(今低)可关注。</p>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>方向</th><th>价位</th><th>依据</th></tr>
+    
+    <tr><td ><span class="hl-red">支撑位</span></td><td><strong>131.50</strong></td><td>今日低点</td></tr>
+    
+    <tr><td ><span class="hl-red">中支撑</span></td><td>131.00</td><td>整数</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">压力位</span></td><td><strong>139.35</strong></td><td>MA5</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">关键压力</span></td><td>147.71</td><td>MA10</td></tr>
+    
+  </table>
+  </div>
+  <div class="judge-box">
+    <p><strong>核心判断：</strong>📉 <strong>冲高回落整理（-0.14%微跌，主力+2.65亿净流入+增仓+6.34%但特大-0.64亿净流出，散户-296.11大幅离场，仍收于全部均线下方）。</strong>-0.14%收137.60（昨大涨后回落）探131.50冲138.66平量。主力资金流向口径+2.65亿净流入+增仓+6.34%，但特大-0.64亿净流出，散户-296.11大幅离场。杠杆5.53%偏高。观察MA5(139.35)/MA10(147.71)压力，站稳看反抽MA10，冲高回落整理，回踩不破131.50可关注。</p>
+  </div>
+</div>
+
+<hr class="sep hr-sep">
+
+
+<!-- ════════════════ 3️⃣ 兆易创新 603986 ════════════════ -->
+<div class="card" data-direction="down" id="zhaoyi">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">兆易创新 <span class="stock-code">603986 · 沪主板</span></span>
+      
+      <span class="stock-tag tag-long" style="margin-left:8px;">存储芯片</span>
+      
+    </div>
+    <span class="dir dir-down">📉 反弹遇阻回落（仍处均线下方，关注224.43压力）</span>
+  </div>
+
+  <div class="section-title"><span class="icon">⚡</span> 快览（行情数据）</div>
+  <div class="kuailan-grid">
+    <div class="kuailan-item"><strong>📊 收盘</strong><br> <span class="hl-green">218.81元 <strong>-0.34%</strong></span> 📉</div>
+    <div class="kuailan-item"><strong>📌 开盘</strong><br> （前收219.56）</div>
+    <div class="kuailan-item"><strong>📈 盘中</strong><br> 收盘218.81 -0.34%回落，开215.01探212.59冲220.88收218.81（量比0.61缩量、成交47.85亿），主力资金流向-0.71亿+特大-0.23/大单-1.77亿净流出+主力增仓-1.49%+散户+86.95流入，仍收于全部均线下方</div>
+    <div class="kuailan-item"><strong>💥 振幅</strong><br> 3.78%</div>
+    <div class="kuailan-item"><strong>💰 成交额</strong><br> <strong>47.85亿</strong></div>
+    <div class="kuailan-item"><strong>📏 量比</strong><br> <span class="hl-yellow"><strong>0.61 缩量</strong></span></div>
+    <div class="kuailan-item"><strong>🔄 换手率</strong><br> 3.30%<br><span style="font-size:11px;color:var(--muted);">—</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>📐 均线系统</strong><br> MA60 324.68 > MA30 266.68 > MA20 253.73 > MA10 236.31 > MA5 224.43 > 收218.81<br><span class="hl-green">收盘218.81 -0.34%回落，开215.01探212.59冲220.88收218.81，仍收于全部均线下方(MA5 224.43/MA10 236.31/MA20 253.73)，主力资金流向-0.71亿+特大/大单净流出+主力增仓-1.49%+散户+86.95流入</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>⚙️ 技术指标（MA5偏离+BOLL）</strong><br> <strong>MA5偏离 <span class="hl-green">-2.51%</span></strong>（收于MA5下方）<br>BOLL 中轨≈MA20 253.73<br><span class="hl-green">今日收218.81 -0.34%回落，开215.01探212.59冲220.88，仍处全部均线下方，主力资金流向-0.71亿+特大/大单净流出+减仓-1.49%，散户+86.95流入，反弹遇阻回落</span></div>
+  </div>
+
+  <div class="section-title"><span class="icon">💰</span> 主力资金</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>维度（Level-2）</th><th>金额</th><th>信号</th><th>解读</th></tr>
+    
+    <tr><td>特大单净买入额</td><td><span class="hl-green"><strong>-0.23亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>特大单净买入额净流出0.23亿</td></tr>
+    
+    <tr><td>大单净买入额</td><td><span class="hl-green"><strong>-1.77亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>大单净买入额净流出1.77亿</td></tr>
+    
+    <tr><td>主力资金流向</td><td><span class="hl-green"><strong>-0.71亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>主力资金流向净流出0.71亿</td></tr>
+    
+    <tr><td>主力增仓占比</td><td><span class="hl-green"><strong>-1.49% ❌</strong></span></td><td><span class="hl-green">❌ 减仓</span></td><td>主力减仓</td></tr>
+    
+    <tr><td>散户指数</td><td><span class="hl-red"><strong>+86.95</strong></span></td><td><span class="hl-red">流入</span></td><td>散户流入</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🔍</span> 资金流向主动/被动逐档拆解</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>档位</th><th>主动买入</th><th>主动卖出</th><th>主动净额</th><th>被动买入</th><th>被动卖出</th><th>被动净额</th><th>单档合计</th><th>意图</th></tr>
+    
+    <tr>
+      <td><strong>特大单</strong></td>
+      <td>+4.19亿</td>
+      <td>-4.48亿</td>
+      <td class="hl-green">-0.29亿</td>
+      <td>+3.98亿</td>
+      <td>-3.92亿</td>
+      <td class="hl-red">+0.06亿</td>
+      <td class="hl-green">-0.23亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>大单</strong></td>
+      <td>+4.55亿</td>
+      <td>-4.98亿</td>
+      <td class="hl-green">-0.42亿</td>
+      <td>+3.14亿</td>
+      <td>-4.26亿</td>
+      <td class="hl-green">-1.12亿</td>
+      <td class="hl-green">-1.54亿</td>
+      <td style="font-size:12px;">被动派发为主，挂单卖出</td>
+    </tr>
+    
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>+7.50亿</td>
+      <td>-7.67亿</td>
+      <td class="hl-green">-0.18亿</td>
+      <td>+7.19亿</td>
+      <td>-7.51亿</td>
+      <td class="hl-green">-0.32亿</td>
+      <td class="hl-green">-0.50亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>+8.00亿</td>
+      <td>-6.48亿</td>
+      <td class="hl-red">+1.52亿</td>
+      <td>+9.30亿</td>
+      <td>-8.55亿</td>
+      <td class="hl-red">+0.75亿</td>
+      <td class="hl-red">+2.27亿</td>
+      <td style="font-size:12px;">主动+被动双买，积极进攻</td>
+    </tr>
+    
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px;">主动净合计: <strong><span class="hl-red">0.63亿</span></strong> | 被动净合计: <strong><span class="hl-green">-0.63亿</span></strong> | 主动买入+被动卖出对冲，有资金主动做多</p>
+
+  <div class="section-title"><span class="icon">🧩</span> 筹码分布</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th></tr>
+    
+    <tr><td>主力控盘比例</td><td><strong>36.85%</strong>（中度控盘）</td></tr>
+    
+    <tr><td>平均成本</td><td>257.89元</td></tr>
+    
+    <tr><td>集中度90</td><td>29.0（相对分散）</td></tr>
+    
+    <tr><td>70%成本区间</td><td>230.46~359.05（现价218.81位于区间下方）</td></tr>
+    
+    <tr><td>获利比例</td><td>9.6%（套牢90.5%）</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">💳</span> 融资融券</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th><th>态度</th></tr>
+    
+    <tr><td>融资余额</td><td>127.96亿</td><td>高</td></tr>
+    
+    <tr><td>融资余额/流通市值</td><td><span class="hl-red"><strong>8.72%</strong></span></td><td>极高危（>8%）</td></tr>
+    
+    <tr><td>融资净买入</td><td><span class="hl-green">-0.22亿</span></td><td>偿还</td></tr>
+    
+    <tr><td>融券余额</td><td>0.28亿</td><td>低</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🏢</span> 机构吸筹判断</div>
+  <ul class="checklist">
+    
+    <li>📉 <strong>-0.34%回落</strong>（昨+2.33%反弹后回落），振幅3.78%，开215.01探212.59冲220.88收218.81（仍处全部均线下方）</li>
+    
+    <li>❌ 主力资金流向口径-0.71亿净流出+主力增仓-1.49%</li>
+    
+    <li>❌ 特大-0.23/大单-1.77亿净买入额口径净流出</li>
+    
+    <li>⚠️ 散户+86.95流入（承接）</li>
+    
+    <li>💰 杠杆8.72%极高危，融资-0.22亿偿还</li>
+    
+    <li>🏢 股东428,827户(较上期+19.03%分散) | 公告2026-10-30</li>
+    
+    <li>🏦 沪股通持股33,168,680(占流通4.95%)，外资中低</li>
+    
+    <li><strong>解读：</strong>今日-0.34%回落，开215.01探212.59冲220.88收218.81，仍收于全部均线下方，反弹遇阻回落。主力资金流向口径-0.71亿净流出+主力增仓-1.49%，特大-0.23/大单-1.77亿净流入口径净流出，散户+86.95流入（承接）。杠杆8.72%极高危但融资-0.22亿偿还（去杠杆）。获利盘9.6%套牢90.5%。缩量回落（量比0.61），观察MA5(224.43)/MA10(236.31)压力，反弹遇阻回落，回踩212.59(今低)不破可关注。</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">📐</span> 动态估值</div>
+  <ul class="checklist">
+    
+    <li><strong>PE（TTM）：</strong>13.24倍</li>
+    
+    <li><strong>动态PE：</strong>10.44倍</li>
+    
+    <li><strong>机构控盘：</strong>36.85%</li>
+    
+    <li><strong>流通市值：</strong>1467.60亿</li>
+    
+    <li><strong>存储周期反转受益</strong></li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">🔮</span> 走势研判</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong>中长线：</strong>存储芯片（NOR/DRAM）与MCU龙头，周期反转受益。</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;"><strong>短线：</strong><span class="hl-green"><strong>反弹遇阻回落（-0.34%回落，主力-0.71亿净流出+减仓-1.49%+特大-0.23/大单-1.77亿净流出，散户+86.95流入，仍收于全部均线下方）</strong></span> -0.34%（收跌），缩量(量比0.61)，收218.81开215.01探212.59冲220.88，仍处全部均线下方。主力资金流向口径-0.71亿净流出+减仓-1.49%，特大-0.23/大单-1.77亿净流出，散户+86.95流入。杠杆8.72%极高危，融资-0.22亿偿还。观察MA5(224.43)/MA10(236.31)压力，短期反弹遇阻回落，回踩212.59(今低)不破可关注。</p>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>方向</th><th>价位</th><th>依据</th></tr>
+    
+    <tr><td ><span class="hl-red">支撑位</span></td><td><strong>212.59</strong></td><td>今日低点</td></tr>
+    
+    <tr><td ><span class="hl-red">中支撑</span></td><td>212.50</td><td>整数</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">压力位</span></td><td><strong>224.43</strong></td><td>MA5</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">关键压力</span></td><td>236.31</td><td>MA10</td></tr>
+    
+  </table>
+  </div>
+  <div class="judge-box">
+    <p><strong>核心判断：</strong>📉 <strong>反弹遇阻回落（-0.34%回落，主力-0.71亿净流出+减仓-1.49%+特大-0.23/大单-1.77亿净流出，散户+86.95流入，仍收于全部均线下方）。</strong>-0.34%收218.81开215.01探212.59冲220.88缩量。主力资金流向口径-0.71亿净流出+减仓-1.49%，特大/大单净流出，散户+86.95流入。杠杆8.72%极高危。观察MA5(224.43)/MA10(236.31)压力，反弹遇阻回落，回踩212.59(今低)不破可关注。</p>
+  </div>
+</div>
+
+<hr class="sep hr-sep">
+
+
+<!-- ════════════════ 4️⃣ 兆易H股 3986.HK ════════════════ -->
+<div class="card" data-direction="down" id="zhaoyi-h">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">兆易H股 <span class="stock-code">3986.HK · 港股</span></span>
+      
+      <span class="stock-tag tag-long" style="margin-left:8px;">存储芯片</span>
+      
+    </div>
+    <span class="dir dir-down">📉 参考A股反弹遇阻回落（仍处均线下方，关注224.43压力）</span>
+  </div>
+
+  <div class="section-title"><span class="icon">⚡</span> 快览（行情数据）</div>
+  <div class="kuailan-grid">
+    <div class="kuailan-item"><strong>📊 收盘</strong><br> <span class="hl-green">218.81元 <strong>-0.34%</strong></span> 📉（参考A股）</div>
+    <div class="kuailan-item"><strong>📌 开盘</strong><br> （参考A股前收219.56）</div>
+    <div class="kuailan-item"><strong>📈 盘中</strong><br> 未取到独立H股行情（参考A股收盘218.81 -0.34%回落，主力资金流向-0.71亿+特大-0.23/大单-1.77亿净流出+主力增仓-1.49%+散户+86.95流入，仍收于全部均线下方）</div>
+    <div class="kuailan-item"><strong>💥 振幅</strong><br> —</div>
+    <div class="kuailan-item"><strong>💰 成交额</strong><br> <strong>—</strong></div>
+    <div class="kuailan-item"><strong>📏 量比</strong><br> <span style="color:var(--muted);"><strong>—</strong></span></div>
+    <div class="kuailan-item"><strong>🔄 换手率</strong><br> —<br><span style="font-size:11px;color:var(--muted);">参考A股3.30%</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>📐 均线系统</strong><br> 参考A股：MA60 324.68 > MA30 266.68 > MA20 253.73 > MA10 236.31 > MA5 224.43 > 收218.81<br><span class="hl-green">未取到独立港股快照，参考A股收盘218.81 -0.34%回落，仍收于全部均线下方，主力-0.71亿净流出+减仓-1.49%+散户+86.95流入</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>⚙️ 技术指标（MA5偏离+BOLL）</strong><br> 参考A股：<strong>MA5偏离 <span class="hl-green">-2.51%</span></strong>（收于MA5下方）<br>参考A股 BOLL 中轨≈MA20 253.73<br><span class="hl-green">今日问财返回H股行情与A股一致（未取到独立港股快照），参考A股反弹遇阻回落，主力资金流向-0.71亿+特大/大单净流出+散户+86.95流入，仍处均线下方</span></div>
+  </div>
+
+  <div class="section-title"><span class="icon">💰</span> 主力资金</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>维度（Level-2）</th><th>金额</th><th>信号</th><th>解读</th></tr>
+    
+    <tr><td>特大单净买入额（参考A股）</td><td><span class="hl-green"><strong>-0.23亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>参考A股特大单净流出0.23亿</td></tr>
+    
+    <tr><td>大单净买入额（参考A股）</td><td><span class="hl-green"><strong>-1.77亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>参考A股大单净流出1.77亿</td></tr>
+    
+    <tr><td>主力资金流向（参考A股）</td><td><span class="hl-green"><strong>-0.71亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>参考A股主力资金流向-0.71亿</td></tr>
+    
+    <tr><td>主力增仓占比（参考A股）</td><td><span class="hl-green"><strong>-1.49% ❌</strong></span></td><td><span class="hl-green">❌ 减仓</span></td><td>参考A股主力减仓</td></tr>
+    
+    <tr><td>散户指数（参考A股）</td><td><span class="hl-red"><strong>+86.95</strong></span></td><td><span class="hl-red">流入</span></td><td>参考A股散户流入</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🔍</span> 资金流向主动/被动逐档拆解</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>档位</th><th>主动买入</th><th>主动卖出</th><th>主动净额</th><th>被动买入</th><th>被动卖出</th><th>被动净额</th><th>单档合计</th><th>意图</th></tr>
+    
+    <tr>
+      <td><strong>特大单</strong></td>
+      <td>参考A股</td>
+      <td>—</td>
+      <td class="">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td class="">—</td>
+      <td class="">—</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>大单</strong></td>
+      <td>参考A股</td>
+      <td>—</td>
+      <td class="">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td class="">—</td>
+      <td class="">—</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>参考A股</td>
+      <td>—</td>
+      <td class="">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td class="">—</td>
+      <td class="">—</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>参考A股</td>
+      <td>—</td>
+      <td class="">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td class="">—</td>
+      <td class="">—</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px;">主动净合计: <strong><span class="hl-green">0.00亿</span></strong> | 被动净合计: <strong><span class="hl-green">0.00亿</span></strong> | 多空平衡</p>
+
+  <div class="section-title"><span class="icon">🧩</span> 筹码分布</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th></tr>
+    
+    <tr><td>主力控盘比例（参考A股）</td><td><strong>36.85%</strong>（中度控盘）</td></tr>
+    
+    <tr><td>平均成本（参考A股）</td><td>257.89元</td></tr>
+    
+    <tr><td>集中度90</td><td>29.0（相对分散）</td></tr>
+    
+    <tr><td>70%成本区间</td><td>230.46~359.05（参考A股现价218.81位于区间下方）</td></tr>
+    
+    <tr><td>获利比例</td><td>9.6%（套牢90.5%）</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">💳</span> 融资融券</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th><th>态度</th></tr>
+    
+    <tr><td>参考A股融资余额</td><td>127.96亿</td><td>高</td></tr>
+    
+    <tr><td>参考A股融资占比</td><td><span class="hl-red"><strong>8.72%</strong></span></td><td>极高危（>8%）</td></tr>
+    
+    <tr><td>参考A股融资净买</td><td><span class="hl-green">-0.22亿</span></td><td>偿还</td></tr>
+    
+    <tr><td>融券余额</td><td>—</td><td>—</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🏢</span> 机构吸筹判断</div>
+  <ul class="checklist">
+    
+    <li>⚠️ 今日问财返回H股行情与A股一致，未取到独立港股快照</li>
+    
+    <li>❌ 参考A股主力资金流向口径-0.71亿净流出+主力增仓-1.49%</li>
+    
+    <li>❌ 参考A股特大-0.23/大单-1.77亿净买入额口径净流出</li>
+    
+    <li>⚠️ 参考A股散户+86.95流入（承接）</li>
+    
+    <li>💰 参考A股杠杆8.72%极高危，融资-0.22亿偿还</li>
+    
+    <li>📉 参考A股收盘218.81 -0.34%回落，仍处全部均线下方</li>
+    
+    <li>🏦 港A两地上市，参考A股走势</li>
+    
+    <li><strong>解读：</strong>今日问财返回H股行情与A股一致（218.81 -0.34%），未取到独立港股快照。参考A股主力资金流向口径-0.71亿净流出+主力增仓-1.49%，特大-0.23/大单-1.77亿净流出，散户+86.95流入。参考A股杠杆8.72%极高危但融资-0.22亿偿还。参考A股反弹遇阻回落仍处均线下方，观察212.59(今低)支撑，反弹看收复MA5(224.43)，反弹遇阻回落，回踩212.59不破可关注。</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">📐</span> 动态估值</div>
+  <ul class="checklist">
+    
+    <li><strong>PE（TTM，参考A股）：</strong>13.24倍</li>
+    
+    <li><strong>动态PE（参考A股）：</strong>10.44倍</li>
+    
+    <li><strong>机构控盘（参考A股）：</strong>36.85%</li>
+    
+    <li><strong>流通市值（参考A股）：</strong>1467.60亿</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">🔮</span> 走势研判</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong>中长线：</strong>存储芯片龙头，A/H两地上市。</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;"><strong>短线：</strong><span class="hl-green"><strong>参考A股反弹遇阻回落（-0.34%回落，主力-0.71亿净流出+减仓-1.49%+散户+86.95流入）</strong></span> 未取到独立H股行情，参考A股-0.34%（收跌），收218.81仍处全部均线下方。参考A股主力资金流向口径-0.71亿净流出+减仓-1.49%，特大-0.23/大单-1.77亿净流出，散户+86.95流入。参考A股杠杆8.72%极高危，融资-0.22亿偿还。观察212.59(今低)支撑，反弹看收复MA5(224.43)，反弹遇阻回落，回踩212.59不破可关注。</p>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>方向</th><th>价位</th><th>依据</th></tr>
+    
+    <tr><td ><span class="hl-red">支撑位（参考A股）</span></td><td><strong>212.59</strong></td><td>今日低点</td></tr>
+    
+    <tr><td ><span class="hl-red">中支撑</span></td><td>212.50</td><td>整数</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">压力位（参考A股）</span></td><td><strong>224.43</strong></td><td>MA5</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">关键压力</span></td><td>236.31</td><td>MA10</td></tr>
+    
+  </table>
+  </div>
+  <div class="judge-box">
+    <p><strong>核心判断：</strong>📉 <strong>参考A股反弹遇阻回落（-0.34%回落，主力-0.71亿净流出+减仓-1.49%+散户+86.95流入）。</strong>未取到独立港股快照，参考A股-0.34%收218.81仍处均线下方。参考A股主力资金流向口径-0.71亿净流出+减仓-1.49%，特大/大单净流出，散户+86.95流入。杠杆8.72%极高危。观察212.59(今低)支撑，反弹看收复MA5(224.43)，反弹遇阻回落，回踩212.59不破可关注。</p>
+  </div>
+</div>
+
+<hr class="sep hr-sep">
+
+
+<!-- ════════════════ 5️⃣ 大为股份 002213 ════════════════ -->
+<div class="card" data-direction="up" id="dawei">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">大为股份 <span class="stock-code">002213 · 深主板</span></span>
+      
+      <span class="stock-tag tag-long" style="margin-left:8px;">汽车零部件</span>
+      
+    </div>
+    <span class="dir dir-up">📈 放量反弹（站上MA5，关注20.79压力）</span>
+  </div>
+
+  <div class="section-title"><span class="icon">⚡</span> 快览（行情数据）</div>
+  <div class="kuailan-grid">
+    <div class="kuailan-item"><strong>📊 收盘</strong><br> <span class="hl-red">20.49元 <strong>+2.45%</strong></span> 📈</div>
+    <div class="kuailan-item"><strong>📌 开盘</strong><br> （前收20.00）</div>
+    <div class="kuailan-item"><strong>📈 盘中</strong><br> 收盘20.49 +2.45%反弹，放量探19.75冲21.87收20.49（量比1.80放量、成交2.74亿），主力资金流向+0.02亿+大单+0.10亿净流入+主力增仓+0.76%+散户-9.96流出，站上MA5但仍低于MA10/MA20</div>
+    <div class="kuailan-item"><strong>💥 振幅</strong><br> 10.60%</div>
+    <div class="kuailan-item"><strong>💰 成交额</strong><br> <strong>2.74亿</strong></div>
+    <div class="kuailan-item"><strong>📏 量比</strong><br> <span class="hl-red"><strong>1.80 放量</strong></span></div>
+    <div class="kuailan-item"><strong>🔄 换手率</strong><br> 6.40%<br><span style="font-size:11px;color:var(--muted);">—</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>📐 均线系统</strong><br> MA60 25.59 > MA30 22.21 > MA20 21.17 > MA10 20.79 > 收20.49 > MA5 20.20<br><span class="hl-red">收盘20.49 +2.45%反弹，放量探19.75冲21.87收20.49，站上MA5(20.20)但仍低于MA10(20.79)/MA20(21.17)，主力资金流向+0.02亿+大单+0.10亿净流入但中/小单净流出+主力增仓+0.76%+散户-9.96流出</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>⚙️ 技术指标（MA5偏离+BOLL）</strong><br> <strong>MA10偏离 <span class="hl-green">-1.45%</span></strong>（收于MA10下方）<br>BOLL 中轨≈MA20 21.17<br><span class="hl-red">今日收20.49 +2.45%反弹，放量探19.75冲21.87，站上MA5但仍低于MA10/MA20，主力资金流向+0.02亿+大单+0.10亿净流入但中/小单大幅流出+增仓+0.76%，散户-9.96流出，放量反弹</span></div>
+  </div>
+
+  <div class="section-title"><span class="icon">💰</span> 主力资金</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>维度（Level-2）</th><th>金额</th><th>信号</th><th>解读</th></tr>
+    
+    <tr><td>特大单净买入额</td><td><span class="hl-red"><strong>+0.04亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>特大单净买入额净流入0.04亿</td></tr>
+    
+    <tr><td>大单净买入额</td><td><span class="hl-red"><strong>+0.10亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>大单净买入额净流入0.10亿</td></tr>
+    
+    <tr><td>主力资金流向</td><td><span class="hl-red"><strong>+0.02亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>主力资金流向净流入0.02亿</td></tr>
+    
+    <tr><td>主力增仓占比</td><td><span class="hl-red"><strong>+0.76% ✅</strong></span></td><td><span class="hl-red">✅ 增仓</span></td><td>主力增仓</td></tr>
+    
+    <tr><td>散户指数</td><td><span class="hl-green"><strong>-9.96</strong></span></td><td><span class="hl-green">流出</span></td><td>散户流出</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🔍</span> 资金流向主动/被动逐档拆解</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>档位</th><th>主动买入</th><th>主动卖出</th><th>主动净额</th><th>被动买入</th><th>被动卖出</th><th>被动净额</th><th>单档合计</th><th>意图</th></tr>
+    
+    <tr>
+      <td><strong>特大单</strong></td>
+      <td>+0.00亿</td>
+      <td>+0.00亿</td>
+      <td class="">+0.00亿</td>
+      <td>+0.06亿</td>
+      <td>-0.01亿</td>
+      <td class="hl-red">+0.04亿</td>
+      <td class="hl-red">+0.04亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>大单</strong></td>
+      <td>+1.46亿</td>
+      <td>-1.25亿</td>
+      <td class="hl-red">+0.21亿</td>
+      <td>+1.07亿</td>
+      <td>-0.72亿</td>
+      <td class="hl-red">+0.35亿</td>
+      <td class="hl-red">+0.56亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>+4.39亿</td>
+      <td>-3.94亿</td>
+      <td class="hl-red">+0.45亿</td>
+      <td>+5.42亿</td>
+      <td>-3.23亿</td>
+      <td class="hl-red">+2.20亿</td>
+      <td class="hl-red">+2.64亿</td>
+      <td style="font-size:12px;">被动承接为主，挂单接盘</td>
+    </tr>
+    
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>+6.71亿</td>
+      <td>-9.67亿</td>
+      <td class="hl-green">-2.96亿</td>
+      <td>+7.81亿</td>
+      <td>-8.49亿</td>
+      <td class="hl-green">-0.67亿</td>
+      <td class="hl-green">-3.64亿</td>
+      <td style="font-size:12px;">主动+被动双卖，坚决出货</td>
+    </tr>
+    
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px;">主动净合计: <strong><span class="hl-green">-2.30亿</span></strong> | 被动净合计: <strong><span class="hl-red">1.92亿</span></strong> | 主动卖出+被动买入对冲，资金博弈激烈</p>
+
+  <div class="section-title"><span class="icon">🧩</span> 筹码分布</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th></tr>
+    
+    <tr><td>主力控盘比例</td><td><strong>11.23%</strong>（低控盘）</td></tr>
+    
+    <tr><td>平均成本</td><td>21.39元</td></tr>
+    
+    <tr><td>集中度90</td><td>19.7（相对分散）</td></tr>
+    
+    <tr><td>70%成本区间</td><td>20.57~29.04（现价20.49位于区间下方）</td></tr>
+    
+    <tr><td>获利比例</td><td>14.9%（套牢85.1%）</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">💳</span> 融资融券</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th><th>态度</th></tr>
+    
+    <tr><td>融资余额</td><td>0.96亿</td><td>低</td></tr>
+    
+    <tr><td>融资余额/流通市值</td><td><span class="hl-red"><strong>2.25%</strong></span></td><td>适度（<4%）</td></tr>
+    
+    <tr><td>融资净买入</td><td><span class="hl-red">+0.01亿</span></td><td>加仓</td></tr>
+    
+    <tr><td>融券余额</td><td>0.00亿</td><td>低</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🏢</span> 机构吸筹判断</div>
+  <ul class="checklist">
+    
+    <li>📈 <strong>+2.45%反弹</strong>，振幅10.60%，探19.75冲21.87收20.49（站上MA5）</li>
+    
+    <li>✅ 主力资金流向口径+0.02亿净流入+主力增仓+0.76%</li>
+    
+    <li>✅ 特大+0.04/大单+0.10亿净流入，但中/小单大幅净流出（冲高回落）</li>
+    
+    <li>📉 散户-9.96流出</li>
+    
+    <li>💰 杠杆2.25%适度，融资+0.01亿加仓</li>
+    
+    <li>🏢 股东67,205户(较上期-9.79%集中) | 公告2026-10-24</li>
+    
+    <li>🏦 深股通持股576,578(占流通0.28%)，外资极低</li>
+    
+    <li><strong>解读：</strong>今日+2.45%反弹，探19.75冲21.87收20.49（冲高21.87后回落），站上MA5(20.20)但仍低于MA10(20.79)/MA20(21.17)。主力资金流向口径+0.02亿净流入+主力增仓+0.76%，特大+0.04/大单+0.10亿净流入但中/小单大幅净流出（冲高回落迹象），散户-9.96流出。杠杆2.25%适度且融资+0.01亿加仓。获利盘14.9%套牢85.1%。高估值779倍。放量反弹（量比1.80），观察MA10(20.79)/MA20(21.17)压力，冲高回落注意追高风险，回踩不破19.75(今低)可关注。</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">📐</span> 动态估值</div>
+  <ul class="checklist">
+    
+    <li><strong>PE（TTM）：</strong>779倍（高估值）</li>
+    
+    <li><strong>动态PE：</strong>256倍</li>
+    
+    <li><strong>机构控盘：</strong>11.23%</li>
+    
+    <li><strong>流通市值：</strong>42.45亿</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">🔮</span> 走势研判</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong>中长线：</strong>汽车零部件/电子元器件，盘子小高波动。</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;"><strong>短线：</strong><span class="hl-red"><strong>放量反弹（+2.45%站上MA5，主力+0.02亿净流入+增仓+0.76%+大单+0.10亿净流入但中/小单大幅流出，散户-9.96流出）</strong></span> +2.45%（收涨），放量(量比1.80)，收20.49探19.75冲21.87，站上MA5(20.20)但仍低于MA10(20.79)/MA20(21.17)。主力资金流向口径+0.02亿净流入+增仓+0.76%，特大+0.04/大单+0.10亿净流入但中/小单大幅净流出，散户-9.96流出。杠杆2.25%适度，融资+0.01亿加仓。观察MA10(20.79)/MA20(21.17)压力，短期放量反弹但冲高回落注意追高风险，回踩不破19.75可关注。</p>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>方向</th><th>价位</th><th>依据</th></tr>
+    
+    <tr><td ><span class="hl-red">支撑位</span></td><td><strong>19.75</strong></td><td>今日低点</td></tr>
+    
+    <tr><td ><span class="hl-red">中支撑</span></td><td>19.70</td><td>整数</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">压力位</span></td><td><strong>20.79</strong></td><td>MA10</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">关键压力</span></td><td>21.17</td><td>MA20</td></tr>
+    
+  </table>
+  </div>
+  <div class="judge-box">
+    <p><strong>核心判断：</strong>📈 <strong>放量反弹（+2.45%站上MA5，主力+0.02亿净流入+增仓+0.76%+大单+0.10亿净流入但中/小单大幅流出，散户-9.96流出）。</strong>+2.45%收20.49探19.75冲21.87放量。主力资金流向口径+0.02亿净流入+增仓+0.76%，大单+0.10亿净流入但中/小单大幅流出。散户-9.96流出。杠杆2.25%适度。观察MA10(20.79)/MA20(21.17)压力，放量反弹但冲高回落注意追高，回踩不破19.75可关注。</p>
+  </div>
+</div>
+
+<hr class="sep hr-sep">
+
+
+<!-- ════════════════ 6️⃣ 中微公司 688012 ════════════════ -->
+<div class="card" data-direction="up" id="zhongwei">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">中微公司 <span class="stock-code">688012 · 科创板</span></span>
+      
+      <span class="stock-tag tag-long" style="margin-left:8px;">半导体设备</span>
+      
+    </div>
+    <span class="dir dir-up">📈 放量大涨强势（站上MA5/MA10/MA20，关注257.79压力）</span>
+  </div>
+
+  <div class="section-title"><span class="icon">⚡</span> 快览（行情数据）</div>
+  <div class="kuailan-grid">
+    <div class="kuailan-item"><strong>📊 收盘</strong><br> <span class="hl-red">256.50元 <strong>+5.05%</strong></span> 📈</div>
+    <div class="kuailan-item"><strong>📌 开盘</strong><br> （前收244.17）</div>
+    <div class="kuailan-item"><strong>📈 盘中</strong><br> 收盘256.50 +5.05%大涨，开246.00探241.50冲259.98收256.50（量比1.23放量、成交67.74亿），主力资金流向+8.22亿+特大+2.87/大单+7.55亿净流入+主力增仓+12.13%+散户-570.16大幅离场，站上MA5/MA10/MA20但仍低于MA30/MA60</div>
+    <div class="kuailan-item"><strong>💥 振幅</strong><br> 7.57%</div>
+    <div class="kuailan-item"><strong>💰 成交额</strong><br> <strong>67.74亿</strong></div>
+    <div class="kuailan-item"><strong>📏 量比</strong><br> <span class="hl-red"><strong>1.23 放量</strong></span></div>
+    <div class="kuailan-item"><strong>🔄 换手率</strong><br> 2.86%<br><span style="font-size:11px;color:var(--muted);">—</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>📐 均线系统</strong><br> MA60 301.42 > MA30 257.79 > 收256.50 > MA10 246.85 > MA5 243.65 > MA20 241.10<br><span class="hl-red">收盘256.50 +5.05%大涨，开246.00探241.50冲259.98收256.50，站上MA5(243.65)/MA10(246.85)/MA20(241.10)但仍低于MA30(257.79)/MA60(301.42)，主力资金流向+8.22亿+特大/大单净流入+主力增仓+12.13%+散户-570.16大幅离场</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>⚙️ 技术指标（MA5偏离+BOLL）</strong><br> <strong>MA30偏离 <span class="hl-green">-0.50%</span></strong>（收于MA30下方）<br>BOLL 中轨≈MA20 241.10<br><span class="hl-red">今日收256.50 +5.05%大涨，开246.00探241.50冲259.98，站上MA5/MA10/MA20但仍低于MA30/MA60，主力资金流向+8.22亿+特大/大单净流入+增仓+12.13%，散户-570.16大幅离场，放量大涨强势</span></div>
+  </div>
+
+  <div class="section-title"><span class="icon">💰</span> 主力资金</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>维度（Level-2）</th><th>金额</th><th>信号</th><th>解读</th></tr>
+    
+    <tr><td>特大单净买入额</td><td><span class="hl-red"><strong>+2.87亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>特大单净买入额净流入2.87亿</td></tr>
+    
+    <tr><td>大单净买入额</td><td><span class="hl-red"><strong>+7.55亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>大单净买入额净流入7.55亿</td></tr>
+    
+    <tr><td>主力资金流向</td><td><span class="hl-red"><strong>+8.22亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>主力资金流向净流入8.22亿</td></tr>
+    
+    <tr><td>主力增仓占比</td><td><span class="hl-red"><strong>+12.13% ✅</strong></span></td><td><span class="hl-red">✅ 增仓</span></td><td>主力大幅增仓</td></tr>
+    
+    <tr><td>散户指数</td><td><span class="hl-green"><strong>-570.16</strong></span></td><td><span class="hl-green">大幅离场</span></td><td>散户大幅离场</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🔍</span> 资金流向主动/被动逐档拆解</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>档位</th><th>主动买入</th><th>主动卖出</th><th>主动净额</th><th>被动买入</th><th>被动卖出</th><th>被动净额</th><th>单档合计</th><th>意图</th></tr>
+    
+    <tr>
+      <td><strong>特大单</strong></td>
+      <td>+10.56亿</td>
+      <td>-7.64亿</td>
+      <td class="hl-red">+2.92亿</td>
+      <td>+7.15亿</td>
+      <td>-7.20亿</td>
+      <td class="hl-green">-0.05亿</td>
+      <td class="hl-red">+2.87亿</td>
+      <td style="font-size:12px;">主动买入为主，进攻意图明显</td>
+    </tr>
+    
+    <tr>
+      <td><strong>大单</strong></td>
+      <td>+12.69亿</td>
+      <td>-7.39亿</td>
+      <td class="hl-red">+5.30亿</td>
+      <td>+7.10亿</td>
+      <td>-7.72亿</td>
+      <td class="hl-green">-0.62亿</td>
+      <td class="hl-red">+4.68亿</td>
+      <td style="font-size:12px;">主动买入为主，进攻意图明显</td>
+    </tr>
+    
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>+13.10亿</td>
+      <td>-10.73亿</td>
+      <td class="hl-red">+2.37亿</td>
+      <td>+11.02亿</td>
+      <td>-17.50亿</td>
+      <td class="hl-green">-6.47亿</td>
+      <td class="hl-green">-4.10亿</td>
+      <td style="font-size:12px;">主动买入为主，进攻意图明显</td>
+    </tr>
+    
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>+2.48亿</td>
+      <td>-3.16亿</td>
+      <td class="hl-green">-0.68亿</td>
+      <td>+3.64亿</td>
+      <td>-6.41亿</td>
+      <td class="hl-green">-2.77亿</td>
+      <td class="hl-green">-3.45亿</td>
+      <td style="font-size:12px;">主动+被动双卖，坚决出货</td>
+    </tr>
+    
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px;">主动净合计: <strong><span class="hl-red">9.91亿</span></strong> | 被动净合计: <strong><span class="hl-green">-9.91亿</span></strong> | 主动买入+被动卖出对冲，有资金主动做多</p>
+
+  <div class="section-title"><span class="icon">🧩</span> 筹码分布</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th></tr>
+    
+    <tr><td>主力控盘比例</td><td><strong>55.36%</strong>（高度控盘）</td></tr>
+    
+    <tr><td>平均成本</td><td>241.77元</td></tr>
+    
+    <tr><td>集中度90</td><td>30.4（相对分散）</td></tr>
+    
+    <tr><td>70%成本区间</td><td>239.04~375.99（现价256.50位于区间下缘）</td></tr>
+    
+    <tr><td>获利比例</td><td>39.1%（套牢60.9%）</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">💳</span> 融资融券</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th><th>态度</th></tr>
+    
+    <tr><td>融资余额</td><td>35.26亿</td><td>中</td></tr>
+    
+    <tr><td>融资余额/流通市值</td><td><span class="hl-red"><strong>1.46%</strong></span></td><td>最安全（<2%）</td></tr>
+    
+    <tr><td>融资净买入</td><td><span class="hl-green">-0.07亿</span></td><td>偿还</td></tr>
+    
+    <tr><td>融券余额</td><td>0.33亿</td><td>低</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🏢</span> 机构吸筹判断</div>
+  <ul class="checklist">
+    
+    <li>📈 <strong>+5.05%大涨</strong>，振幅7.57%，开246.00探241.50冲259.98收256.50（站上MA5/MA10/MA20）</li>
+    
+    <li>✅ 主力资金流向口径+8.22亿大幅净流入+主力增仓+12.13%</li>
+    
+    <li>✅ 特大+2.87/大单+7.55亿净买入额口径大幅净流入</li>
+    
+    <li>✅ 散户-570.16大幅离场（筹码趋健康）</li>
+    
+    <li>💰 杠杆1.46%最安全，融资-0.07亿偿还</li>
+    
+    <li>🏢 股东79,193户(较上期-11.86%集中) | 公告2026-10-31</li>
+    
+    <li>🏦 沪股通持股113,446,920(占流通12.04%)，外资高</li>
+    
+    <li><strong>解读：</strong>今日+5.05%大涨，开246.00探241.50冲259.98收256.50，站上MA5(243.65)/MA10(246.85)/MA20(241.10)但仍低于MA30(257.79)/MA60(301.42)，强势放量大涨。主力资金流向口径+8.22亿大幅净流入+主力增仓+12.13%，特大+2.87/大单+7.55亿大幅净流入，散户-570.16大幅离场，资金面极强。杠杆1.46%最安全但融资-0.07亿偿还。获利盘39.1%套牢60.9%。放量上涨（量比1.23），观察MA30(257.79)/MA60(301.42)压力，站稳看反抽MA30，主力大幅净流入+散户大幅离场为强势信号，回踩241.50(今低)不破可关注。</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">📐</span> 动态估值</div>
+  <ul class="checklist">
+    
+    <li><strong>PE（TTM）：</strong>48.80倍</li>
+    
+    <li><strong>动态PE：</strong>44.57倍</li>
+    
+    <li><strong>机构控盘：</strong>55.36%</li>
+    
+    <li><strong>流通市值：</strong>2416.74亿</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">🔮</span> 走势研判</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong>中长线：</strong>刻蚀/MOCVD高端半导体设备龙头，国产替代核心。</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;"><strong>短线：</strong><span class="hl-red"><strong>放量大涨强势（+5.05%站上MA5/MA10/MA20，主力+8.22亿大幅净流入+增仓+12.13%+特大+2.87/大单+7.55亿净流入，散户-570大幅离场）</strong></span> +5.05%（收涨），放量(量比1.23)，收256.50开246.00探241.50冲259.98，站上MA5/MA10/MA20但仍低于MA30(257.79)/MA60。主力资金流向口径+8.22亿大幅净流入+增仓+12.13%，特大+2.87/大单+7.55亿大幅净流入，散户-570.16大幅离场。杠杆1.46%最安全，融资-0.07亿偿还。观察MA30(257.79)/MA60(301.42)压力，站稳看反抽MA30，短期放量大涨强势，回踩241.50(今低)不破可关注。</p>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>方向</th><th>价位</th><th>依据</th></tr>
+    
+    <tr><td ><span class="hl-red">支撑位</span></td><td><strong>241.50</strong></td><td>今日低点</td></tr>
+    
+    <tr><td ><span class="hl-red">中支撑</span></td><td>241.10</td><td>MA20</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">压力位</span></td><td><strong>257.79</strong></td><td>MA30</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">关键压力</span></td><td>301.42</td><td>MA60</td></tr>
+    
+  </table>
+  </div>
+  <div class="judge-box">
+    <p><strong>核心判断：</strong>📈 <strong>放量大涨强势（+5.05%站上MA5/MA10/MA20，主力+8.22亿大幅净流入+增仓+12.13%+特大+2.87/大单+7.55亿净流入，散户-570大幅离场）。</strong>+5.05%收256.50开246.00探241.50冲259.98放量。主力资金流向口径+8.22亿大幅净流入+增仓+12.13%，特大/大单大幅净流入，散户-570.16大幅离场。杠杆1.46%最安全。观察MA30(257.79)/MA60(301.42)压力，站稳看反抽MA30，放量大涨强势，回踩241.50不破可关注。</p>
+  </div>
+</div>
+
+<hr class="sep hr-sep">
+
+
+<!-- ════════════════ 7️⃣ 华阳国际 002949 ════════════════ -->
+<div class="card" data-direction="down" id="huayang">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">华阳国际 <span class="stock-code">002949 · 深主板</span></span>
+      
+      <span class="stock-tag tag-long" style="margin-left:8px;">建筑设计</span>
+      
+    </div>
+    <span class="dir dir-down">📉 弱势大跌（仍处均线下方，关注10.38支撑）</span>
+  </div>
+
+  <div class="section-title"><span class="icon">⚡</span> 快览（行情数据）</div>
+  <div class="kuailan-grid">
+    <div class="kuailan-item"><strong>📊 收盘</strong><br> <span class="hl-green">10.61元 <strong>-4.07%</strong></span> 📉</div>
+    <div class="kuailan-item"><strong>📌 开盘</strong><br> （前收11.06）</div>
+    <div class="kuailan-item"><strong>📈 盘中</strong><br> 收盘10.61 -4.07%大跌，开10.85探10.38冲11.00收10.61（量比0.65平量、成交0.79亿），主力资金流向+0.01亿+增仓+1.20%但特大-0.01/大单-0.02亿净流出+散户+18.17流入，仍收于全部均线下方</div>
+    <div class="kuailan-item"><strong>💥 振幅</strong><br> 5.61%</div>
+    <div class="kuailan-item"><strong>💰 成交额</strong><br> <strong>0.79亿</strong></div>
+    <div class="kuailan-item"><strong>📏 量比</strong><br> <span class="hl-yellow"><strong>0.65 平量</strong></span></div>
+    <div class="kuailan-item"><strong>🔄 换手率</strong><br> 4.88%<br><span style="font-size:11px;color:var(--muted);">—</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>📐 均线系统</strong><br> MA30 12.92 > MA60 12.88 > MA20 12.75 > MA10 12.41 > MA5 11.68 > 收10.61<br><span class="hl-green">收盘10.61 -4.07%大跌，开10.85探10.38冲11.00收10.61，仍收于全部均线下方(MA5 11.68/MA10 12.41/MA20 12.75)，主力资金流向+0.01亿+特大-0.01/大单-0.02亿净流出+主力增仓+1.20%+散户+18.17流入</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>⚙️ 技术指标（MA5偏离+BOLL）</strong><br> <strong>MA5偏离 <span class="hl-green">-9.16%</span></strong>（收于MA5下方）<br>BOLL 中轨≈MA20 12.75<br><span class="hl-green">今日收10.61 -4.07%大跌，开10.85探10.38冲11.00，仍处全部均线下方，主力资金流向+0.01亿+特大/大单净流出+增仓+1.20%，散户+18.17流入，短期走弱</span></div>
+  </div>
+
+  <div class="section-title"><span class="icon">💰</span> 主力资金</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>维度（Level-2）</th><th>金额</th><th>信号</th><th>解读</th></tr>
+    
+    <tr><td>特大单净买入额</td><td><span class="hl-green"><strong>-0.01亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>特大单净买入额净流出0.01亿</td></tr>
+    
+    <tr><td>大单净买入额</td><td><span class="hl-green"><strong>-0.02亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>大单净买入额净流出0.02亿</td></tr>
+    
+    <tr><td>主力资金流向</td><td><span class="hl-red"><strong>+0.01亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>主力资金流向微幅净流入</td></tr>
+    
+    <tr><td>主力增仓占比</td><td><span class="hl-red"><strong>+1.20% ✅</strong></span></td><td><span class="hl-red">✅ 增仓</span></td><td>主力增仓</td></tr>
+    
+    <tr><td>散户指数</td><td><span class="hl-red"><strong>+18.17</strong></span></td><td><span class="hl-red">流入</span></td><td>散户流入</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🔍</span> 资金流向主动/被动逐档拆解</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>档位</th><th>主动买入</th><th>主动卖出</th><th>主动净额</th><th>被动买入</th><th>被动卖出</th><th>被动净额</th><th>单档合计</th><th>意图</th></tr>
+    
+    <tr>
+      <td><strong>特大单</strong></td>
+      <td>+0.00亿</td>
+      <td>+0.00亿</td>
+      <td class="">+0.00亿</td>
+      <td>+0.00亿</td>
+      <td>-0.01亿</td>
+      <td class="hl-green">-0.01亿</td>
+      <td class="hl-green">-0.01亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>大单</strong></td>
+      <td>+0.05亿</td>
+      <td>-0.04亿</td>
+      <td class="hl-red">+0.01亿</td>
+      <td>+0.04亿</td>
+      <td>-0.06亿</td>
+      <td class="hl-green">-0.02亿</td>
+      <td class="hl-green">-0.01亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>+0.11亿</td>
+      <td>-0.13亿</td>
+      <td class="hl-green">-0.02亿</td>
+      <td>+0.12亿</td>
+      <td>-0.13亿</td>
+      <td class="hl-green">-0.01亿</td>
+      <td class="hl-green">-0.04亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>+0.22亿</td>
+      <td>-0.23亿</td>
+      <td class="hl-green">-0.01亿</td>
+      <td>+0.25亿</td>
+      <td>-0.18亿</td>
+      <td class="hl-red">+0.06亿</td>
+      <td class="hl-red">+0.05亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px;">主动净合计: <strong><span class="hl-green">-0.02亿</span></strong> | 被动净合计: <strong><span class="hl-red">0.02亿</span></strong> | 主动卖出+被动买入对冲，资金博弈激烈</p>
+
+  <div class="section-title"><span class="icon">🧩</span> 筹码分布</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th></tr>
+    
+    <tr><td>主力控盘比例</td><td><strong>13.84%</strong>（低控盘）</td></tr>
+    
+    <tr><td>平均成本</td><td>12.98元</td></tr>
+    
+    <tr><td>集中度90</td><td>11.3（相对集中）</td></tr>
+    
+    <tr><td>70%成本区间</td><td>11.80~13.56（现价10.61位于区间下方）</td></tr>
+    
+    <tr><td>获利比例</td><td>1.8%（套牢98.3%）</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">💳</span> 融资融券</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th><th>态度</th></tr>
+    
+    <tr><td>融资余额</td><td>无数据</td><td>—</td></tr>
+    
+    <tr><td>杠杆</td><td><span style="color:var(--muted);"><strong>无两融</strong></span></td><td>—</td></tr>
+    
+    <tr><td>融资净买入</td><td>无数据</td><td>—</td></tr>
+    
+    <tr><td>融券余额</td><td>无数据</td><td>—</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🏢</span> 机构吸筹判断</div>
+  <ul class="checklist">
+    
+    <li>📉 <strong>-4.07%大跌</strong>，振幅5.61%，开10.85探10.38冲11.00收10.61（仍处全部均线下方）</li>
+    
+    <li>⚠️ 主力资金流向口径+0.01亿微幅净流入+主力增仓+1.20%（口径分歧）</li>
+    
+    <li>⚠️ 但特大-0.01/大单-0.02亿净流出口径净流出</li>
+    
+    <li>⚠️ 散户+18.17流入</li>
+    
+    <li>💼 无两融数据（小盘）</li>
+    
+    <li>🏢 股东13,119户(较上期+13.29%分散) | 公告2026-10-29</li>
+    
+    <li>🏦 无北向数据</li>
+    
+    <li><strong>解读：</strong>今日-4.07%大跌，开10.85探10.38冲11.00收10.61，仍收于全部均线下方，短期走弱。主力资金流向口径+0.01亿微幅净流入+主力增仓+1.20%（但特大-0.01/大单-0.02亿净流出口径分歧），散户+18.17流入。无两融。获利盘1.8%套牢98.3%。平量下跌（量比0.65），观察10.38(今低)支撑，反弹看收复MA5(11.68)，弱势股防继续杀跌，反弹不追待企稳。</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">📐</span> 动态估值</div>
+  <ul class="checklist">
+    
+    <li><strong>PE（TTM）：</strong>25.55倍</li>
+    
+    <li><strong>动态PE：</strong>25.39倍</li>
+    
+    <li><strong>机构控盘：</strong>13.84%</li>
+    
+    <li><strong>流通市值：</strong>16.12亿</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">🔮</span> 走势研判</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong>中长线：</strong>建筑设计民营龙头，受益城市更新。</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;"><strong>短线：</strong><span class="hl-green"><strong>弱势大跌（-4.07%，主力+0.01亿微净流入+增仓+1.20%但特大/大单净流出，散户+18.17流入，仍收于全部均线下方）</strong></span> -4.07%（收跌），平量(量比0.65)，收10.61开10.85探10.38冲11.00，仍处全部均线下方。主力资金流向口径+0.01亿微幅净流入+增仓+1.20%（但特大-0.01/大单-0.02亿净流出），散户+18.17流入。无两融。观察10.38(今低)支撑，反弹看收复MA5(11.68)，弱势股防继续杀跌，反弹不追待企稳。</p>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>方向</th><th>价位</th><th>依据</th></tr>
+    
+    <tr><td ><span class="hl-red">支撑位</span></td><td><strong>10.38</strong></td><td>今日低点</td></tr>
+    
+    <tr><td ><span class="hl-red">中支撑</span></td><td>10.30</td><td>整数</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">压力位</span></td><td><strong>11.68</strong></td><td>MA5</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">关键压力</span></td><td>12.41</td><td>MA10</td></tr>
+    
+  </table>
+  </div>
+  <div class="judge-box">
+    <p><strong>核心判断：</strong>📉 <strong>弱势大跌（-4.07%，主力+0.01亿微净流入+增仓+1.20%但特大/大单净流出，散户+18.17流入，仍收于全部均线下方）。</strong>-4.07%收10.61开10.85探10.38冲11.00平量。主力资金流向口径+0.01亿微幅净流入+增仓+1.20%，但特大-0.01/大单-0.02亿净流出，散户+18.17流入。无两融。观察10.38(今低)支撑，反弹看收复MA5(11.68)，弱势股防继续杀跌，反弹不追待企稳。</p>
+  </div>
+</div>
+
+<hr class="sep hr-sep">
+
+
+<!-- ════════════════ 8️⃣ 惠科股份 001399 ════════════════ -->
+<div class="card" data-direction="up" id="huike">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">惠科股份 <span class="stock-code">001399 · 深主板</span></span>
+      
+      <span class="stock-tag tag-long" style="margin-left:8px;">面板</span>
+      
+    </div>
+    <span class="dir dir-up">📈 低位小幅企稳（仍处均线下方，关注15.51压力）</span>
+  </div>
+
+  <div class="section-title"><span class="icon">⚡</span> 快览（行情数据）</div>
+  <div class="kuailan-grid">
+    <div class="kuailan-item"><strong>📊 收盘</strong><br> <span class="hl-red">15.39元 <strong>+0.26%</strong></span> 📈</div>
+    <div class="kuailan-item"><strong>📌 开盘</strong><br> （前收15.35）</div>
+    <div class="kuailan-item"><strong>📈 盘中</strong><br> 收盘15.39 +0.26%微涨（昨跌后小幅企稳），探15.24冲15.66收15.39（量比0.72平量、成交2.35亿），主力资金流向+0.02亿+增仓+0.66%但特大-0.02/大单-0.06亿净流出+散户+21.01流入，仍收于全部均线下方</div>
+    <div class="kuailan-item"><strong>💥 振幅</strong><br> 2.74%</div>
+    <div class="kuailan-item"><strong>💰 成交额</strong><br> <strong>2.35亿</strong></div>
+    <div class="kuailan-item"><strong>📏 量比</strong><br> <span class="hl-yellow"><strong>0.72 平量</strong></span></div>
+    <div class="kuailan-item"><strong>🔄 换手率</strong><br> 3.53%<br><span style="font-size:11px;color:var(--muted);">—</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>📐 均线系统</strong><br> MA60 19.41 > MA30 16.83 > MA20 16.31 > MA10 15.99 > MA5 15.51 > 收15.39<br><span class="hl-red">收盘15.39 +0.26%微涨，探15.24冲15.66收15.39，仍收于全部均线下方(MA5 15.51/MA10 15.99/MA20 16.31)，主力资金流向+0.02亿+特大-0.02/大单-0.06亿净流出+主力增仓+0.66%+散户+21.01流入</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>⚙️ 技术指标（MA5偏离+BOLL）</strong><br> <strong>MA5偏离 <span class="hl-green">-0.78%</span></strong>（收于MA5下方）<br>BOLL 中轨≈MA20 16.31<br><span class="hl-red">今日收15.39 +0.26%微涨（昨跌后小幅企稳），探15.24冲15.66，仍处全部均线下方，主力资金流向+0.02亿+特大/大单净流出+增仓+0.66%，散户+21.01流入，低位小幅反弹</span></div>
+  </div>
+
+  <div class="section-title"><span class="icon">💰</span> 主力资金</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>维度（Level-2）</th><th>金额</th><th>信号</th><th>解读</th></tr>
+    
+    <tr><td>特大单净买入额</td><td><span class="hl-green"><strong>-0.02亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>特大单净买入额净流出0.02亿</td></tr>
+    
+    <tr><td>大单净买入额</td><td><span class="hl-green"><strong>-0.06亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>大单净买入额净流出0.06亿</td></tr>
+    
+    <tr><td>主力资金流向</td><td><span class="hl-red"><strong>+0.02亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>主力资金流向微幅净流入</td></tr>
+    
+    <tr><td>主力增仓占比</td><td><span class="hl-red"><strong>+0.66% ✅</strong></span></td><td><span class="hl-red">✅ 增仓</span></td><td>主力增仓</td></tr>
+    
+    <tr><td>散户指数</td><td><span class="hl-red"><strong>+21.01</strong></span></td><td><span class="hl-red">流入</span></td><td>散户流入</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🔍</span> 资金流向主动/被动逐档拆解</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>档位</th><th>主动买入</th><th>主动卖出</th><th>主动净额</th><th>被动买入</th><th>被动卖出</th><th>被动净额</th><th>单档合计</th><th>意图</th></tr>
+    
+    <tr>
+      <td><strong>特大单</strong></td>
+      <td>+0.06亿</td>
+      <td>-0.06亿</td>
+      <td class="">+0.00亿</td>
+      <td>+0.05亿</td>
+      <td>-0.07亿</td>
+      <td class="hl-green">-0.02亿</td>
+      <td class="hl-green">-0.02亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>大单</strong></td>
+      <td>+0.19亿</td>
+      <td>-0.18亿</td>
+      <td class="hl-red">+0.01亿</td>
+      <td>+0.10亿</td>
+      <td>-0.15亿</td>
+      <td class="hl-green">-0.06亿</td>
+      <td class="hl-green">-0.04亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>+0.44亿</td>
+      <td>-0.44亿</td>
+      <td class="hl-green">-0.01亿</td>
+      <td>+0.39亿</td>
+      <td>-0.40亿</td>
+      <td class="hl-green">-0.01亿</td>
+      <td class="hl-green">-0.02亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>+0.53亿</td>
+      <td>-0.45亿</td>
+      <td class="hl-red">+0.08亿</td>
+      <td>+0.60亿</td>
+      <td>-0.60亿</td>
+      <td class="">+0.00亿</td>
+      <td class="hl-red">+0.08亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px;">主动净合计: <strong><span class="hl-red">0.08亿</span></strong> | 被动净合计: <strong><span class="hl-green">-0.09亿</span></strong> | 主动买入+被动卖出对冲，有资金主动做多</p>
+
+  <div class="section-title"><span class="icon">🧩</span> 筹码分布</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th></tr>
+    
+    <tr><td>主力控盘比例</td><td><strong>19.59%</strong>（低度控盘）</td></tr>
+    
+    <tr><td>平均成本</td><td>16.46元</td></tr>
+    
+    <tr><td>集中度90</td><td>21.5（相对分散）</td></tr>
+    
+    <tr><td>70%成本区间</td><td>15.84~21.84（现价15.39位于区间下方）</td></tr>
+    
+    <tr><td>获利比例</td><td>6.5%（套牢93.5%）</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">💳</span> 融资融券</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th><th>态度</th></tr>
+    
+    <tr><td>融资余额</td><td>5.59亿</td><td>中</td></tr>
+    
+    <tr><td>融资余额/流通市值</td><td><span class="hl-red"><strong>8.44%</strong></span></td><td>极高危（>8%）</td></tr>
+    
+    <tr><td>融资净买入</td><td><span class="hl-red">+0.01亿</span></td><td>加仓</td></tr>
+    
+    <tr><td>融券余额</td><td>0.00亿</td><td>低</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🏢</span> 机构吸筹判断</div>
+  <ul class="checklist">
+    
+    <li>📈 <strong>+0.26%微涨</strong>（昨跌后小幅企稳），振幅2.74%，探15.24冲15.66收15.39（仍处全部均线下方）</li>
+    
+    <li>✅ 主力资金流向口径+0.02亿微净流入+主力增仓+0.66%</li>
+    
+    <li>⚠️ 但特大-0.02/大单-0.06亿净买入额口径净流出</li>
+    
+    <li>⚠️ 散户+21.01流入</li>
+    
+    <li>💰 杠杆8.44%极高危，融资+0.01亿加仓</li>
+    
+    <li>🏢 股东180,350户(较上期-58.11%集中) | 公告2026-10-27</li>
+    
+    <li>🏦 深股通持股16,045,861(占流通3.73%)，外资中低</li>
+    
+    <li><strong>解读：</strong>今日+0.26%微涨，探15.24冲15.66收15.39，仍收于全部均线下方，低位小幅企稳。主力资金流向口径+0.02亿微净流入+主力增仓+0.66%（但特大-0.02/大单-0.06亿净流出口径分歧），散户+21.01流入。杠杆8.44%极高危且融资+0.01亿小幅加仓。获利盘6.5%套牢93.5%。平量（量比0.72），观察MA5(15.51)/MA10(15.99)压力，杠杆极高危注意波动，弱势股低位企稳待确认，反弹看收复MA5(15.51)。</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">📐</span> 动态估值</div>
+  <ul class="checklist">
+    
+    <li><strong>PE（TTM）：</strong>33.27倍</li>
+    
+    <li><strong>动态PE：</strong>33.01倍</li>
+    
+    <li><strong>机构控盘：</strong>19.59%</li>
+    
+    <li><strong>流通市值：</strong>66.26亿</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">🔮</span> 走势研判</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong>中长线：</strong>LCD/OLED面板及半导体配套，国产面板龙头之一。</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;"><strong>短线：</strong><span class="hl-red"><strong>低位小幅企稳（+0.26%微涨，主力+0.02亿微净流入+增仓+0.66%但特大-0.02/大单-0.06亿净流出，散户+21.01流入，仍收于全部均线下方）</strong></span> +0.26%（收涨，昨跌后企稳），平量(量比0.72)，收15.39探15.24冲15.66，仍处全部均线下方。主力资金流向口径+0.02亿微净流入+增仓+0.66%（但特大-0.02/大单-0.06亿净流出），散户+21.01流入。杠杆8.44%极高危，融资+0.01亿加仓。观察MA5(15.51)/MA10(15.99)压力，杠杆极高危注意波动，弱势股低位企稳待确认，反弹看收复MA5(15.51)。</p>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>方向</th><th>价位</th><th>依据</th></tr>
+    
+    <tr><td ><span class="hl-red">支撑位</span></td><td><strong>15.24</strong></td><td>今日低点</td></tr>
+    
+    <tr><td ><span class="hl-red">中支撑</span></td><td>15.20</td><td>整数</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">压力位</span></td><td><strong>15.51</strong></td><td>MA5</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">关键压力</span></td><td>15.99</td><td>MA10</td></tr>
+    
+  </table>
+  </div>
+  <div class="judge-box">
+    <p><strong>核心判断：</strong>📈 <strong>低位小幅企稳（+0.26%微涨，主力+0.02亿微净流入+增仓+0.66%但特大-0.02/大单-0.06亿净流出，散户+21.01流入，仍收于全部均线下方）。</strong>+0.26%收15.39探15.24冲15.66平量。主力资金流向口径+0.02亿微净流入+增仓+0.66%，但特大/大单净流出，散户+21.01流入。杠杆8.44%极高危。观察MA5(15.51)/MA10(15.99)压力，杠杆极高危注意波动，低位企稳待确认，反弹看收复MA5。</p>
+  </div>
+</div>
+
+<hr class="sep hr-sep">
+
+
+<!-- ════════════════ 9️⃣ 珂玛科技 301611 ════════════════ -->
+<div class="card" data-direction="down" id="kema">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">珂玛科技 <span class="stock-code">301611 · 创业板</span></span>
+      
+      <span class="stock-tag tag-long" style="margin-left:8px;">半导体零部件</span>
+      
+    </div>
+    <span class="dir dir-down">📉 冲高回落走弱（跌破MA5/MA20，关注65.46压力）</span>
+  </div>
+
+  <div class="section-title"><span class="icon">⚡</span> 快览（行情数据）</div>
+  <div class="kuailan-grid">
+    <div class="kuailan-item"><strong>📊 收盘</strong><br> <span class="hl-green">64.86元 <strong>-2.33%</strong></span> 📉</div>
+    <div class="kuailan-item"><strong>📌 开盘</strong><br> （前收66.41）</div>
+    <div class="kuailan-item"><strong>📈 盘中</strong><br> 收盘64.86 -2.33%回吐（昨涨后回落），探64.50冲68.16收64.86（量比0.81平量、成交4.98亿），主力资金流向-0.02亿+特大-0.05/大单-0.06亿净流出+主力增仓-0.45%+散户-2.80流出，跌破MA5/MA20</div>
+    <div class="kuailan-item"><strong>💥 振幅</strong><br> 5.51%</div>
+    <div class="kuailan-item"><strong>💰 成交额</strong><br> <strong>4.98亿</strong></div>
+    <div class="kuailan-item"><strong>📏 量比</strong><br> <span class="hl-yellow"><strong>0.81 平量</strong></span></div>
+    <div class="kuailan-item"><strong>🔄 换手率</strong><br> 5.17%<br><span style="font-size:11px;color:var(--muted);">—</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>📐 均线系统</strong><br> MA60 80.36 > MA30 67.28 > MA10 66.42 > MA5 65.46 > MA20 65.07 > 收64.86<br><span class="hl-green">收盘64.86 -2.33%回吐，探64.50冲68.16收64.86，跌破MA5(65.46)/MA20(65.07)仍低于MA10(66.42)/MA30(67.28)，主力资金流向-0.02亿+特大/大单净流出+主力增仓-0.45%+散户-2.80流出</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>⚙️ 技术指标（MA5偏离+BOLL）</strong><br> <strong>MA20偏离 <span class="hl-green">-0.32%</span></strong>（收于MA20下方）<br>BOLL 中轨≈MA20 65.07<br><span class="hl-green">今日收64.86 -2.33%回吐（昨涨后回落），探64.50冲68.16，跌破MA5/MA20仍低于MA10/MA30，主力资金流向-0.02亿+特大/大单净流出+减仓-0.45%，散户-2.80流出，冲高回落走弱</span></div>
+  </div>
+
+  <div class="section-title"><span class="icon">💰</span> 主力资金</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>维度（Level-2）</th><th>金额</th><th>信号</th><th>解读</th></tr>
+    
+    <tr><td>特大单净买入额</td><td><span class="hl-green"><strong>-0.05亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>特大单净买入额净流出0.05亿</td></tr>
+    
+    <tr><td>大单净买入额</td><td><span class="hl-green"><strong>-0.06亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>大单净买入额净流出0.06亿</td></tr>
+    
+    <tr><td>主力资金流向</td><td><span class="hl-green"><strong>-0.02亿 ❌</strong></span></td><td><span class="hl-green">❌ 净流出</span></td><td>主力资金流向小净流出</td></tr>
+    
+    <tr><td>主力增仓占比</td><td><span class="hl-green"><strong>-0.45% ❌</strong></span></td><td><span class="hl-green">❌ 减仓</span></td><td>主力减仓</td></tr>
+    
+    <tr><td>散户指数</td><td><span class="hl-green"><strong>-2.80</strong></span></td><td><span class="hl-green">流出</span></td><td>散户流出</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🔍</span> 资金流向主动/被动逐档拆解</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>档位</th><th>主动买入</th><th>主动卖出</th><th>主动净额</th><th>被动买入</th><th>被动卖出</th><th>被动净额</th><th>单档合计</th><th>意图</th></tr>
+    
+    <tr>
+      <td><strong>特大单</strong></td>
+      <td>+0.17亿</td>
+      <td>-0.14亿</td>
+      <td class="hl-red">+0.03亿</td>
+      <td>+0.16亿</td>
+      <td>-0.24亿</td>
+      <td class="hl-green">-0.07亿</td>
+      <td class="hl-green">-0.05亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>大单</strong></td>
+      <td>+0.20亿</td>
+      <td>-0.26亿</td>
+      <td class="hl-green">-0.05亿</td>
+      <td>+0.27亿</td>
+      <td>-0.23亿</td>
+      <td class="hl-red">+0.03亿</td>
+      <td class="hl-green">-0.02亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>+0.72亿</td>
+      <td>-0.75亿</td>
+      <td class="hl-green">-0.02亿</td>
+      <td>+0.72亿</td>
+      <td>-0.63亿</td>
+      <td class="hl-red">+0.09亿</td>
+      <td class="hl-red">+0.06亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>+1.33亿</td>
+      <td>-1.40亿</td>
+      <td class="hl-green">-0.07亿</td>
+      <td>+1.40亿</td>
+      <td>-1.33亿</td>
+      <td class="hl-red">+0.07亿</td>
+      <td class="">+0.00亿</td>
+      <td style="font-size:12px;">多空平衡，方向不明确</td>
+    </tr>
+    
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px;">主动净合计: <strong><span class="hl-green">-0.11亿</span></strong> | 被动净合计: <strong><span class="hl-red">0.12亿</span></strong> | 主动卖出+被动买入对冲，资金博弈激烈</p>
+
+  <div class="section-title"><span class="icon">🧩</span> 筹码分布</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th></tr>
+    
+    <tr><td>主力控盘比例</td><td><strong>17.46%</strong>（低度控盘）</td></tr>
+    
+    <tr><td>平均成本</td><td>65.49元</td></tr>
+    
+    <tr><td>集中度90</td><td>23.5（相对分散）</td></tr>
+    
+    <tr><td>70%成本区间</td><td>64.00~85.20（现价64.86位于区间下缘）</td></tr>
+    
+    <tr><td>获利比例</td><td>21.7%（套牢78.3%）</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">💳</span> 融资融券</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th><th>态度</th></tr>
+    
+    <tr><td>融资余额</td><td>3.72亿</td><td>中</td></tr>
+    
+    <tr><td>融资余额/流通市值</td><td><span class="hl-red"><strong>3.91%</strong></span></td><td>适度（<4%）</td></tr>
+    
+    <tr><td>融资净买入</td><td><span class="hl-green">-0.01亿</span></td><td>偿还</td></tr>
+    
+    <tr><td>融券余额</td><td>0.05亿</td><td>低</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🏢</span> 机构吸筹判断</div>
+  <ul class="checklist">
+    
+    <li>📉 <strong>-2.33%回吐</strong>（昨+0.23%后回落），振幅5.51%，探64.50冲68.16收64.86（跌破MA5/MA20）</li>
+    
+    <li>❌ 主力资金流向口径-0.02亿净流出+主力增仓-0.45%</li>
+    
+    <li>❌ 特大-0.05/大单-0.06亿净买入额口径净流出</li>
+    
+    <li>📉 散户-2.80小幅流出</li>
+    
+    <li>💰 杠杆3.91%适度，融资-0.01亿偿还</li>
+    
+    <li>🏢 股东35,587户(较上期+2.99%分散) | 公告2026-10-27</li>
+    
+    <li>🏦 深股通持股4,879,888(占流通3.33%)，外资中低</li>
+    
+    <li><strong>解读：</strong>今日-2.33%回吐，探64.50冲68.16收64.86，跌破MA5(65.46)/MA20(65.07)仍低于MA10(66.42)/MA30(67.28)，冲高回落走弱。主力资金流向口径-0.02亿净流出+主力增仓-0.45%，特大-0.05/大单-0.06亿净流出，散户-2.80流出。杠杆3.91%适度但融资-0.01亿偿还。获利盘21.7%套牢78.3%。高估值144倍。平量回落（量比0.81），观察MA5(65.46)/MA10(66.42)压力，短线走弱，回踩64.50(今低)不破可关注，站稳MA20(65.07)企稳。</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">📐</span> 动态估值</div>
+  <ul class="checklist">
+    
+    <li><strong>PE（TTM）：</strong>144倍（高估值）</li>
+    
+    <li><strong>动态PE：</strong>140倍</li>
+    
+    <li><strong>机构控盘：</strong>17.46%</li>
+    
+    <li><strong>流通市值：</strong>95.07亿</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">🔮</span> 走势研判</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong>中长线：</strong>陶瓷部件/半导体设备核心零部件，国产替代。</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;"><strong>短线：</strong><span class="hl-green"><strong>冲高回落走弱（-2.33%回吐，主力-0.02亿净流出+减仓-0.45%+特大-0.05/大单-0.06亿净流出，散户-2.80流出，跌破MA5/MA20）</strong></span> -2.33%（收跌，昨涨后回落），平量(量比0.81)，收64.86探64.50冲68.16，跌破MA5(65.46)/MA20(65.07)仍低于MA10/MA30。主力资金流向口径-0.02亿净流出+减仓-0.45%，特大-0.05/大单-0.06亿净流出，散户-2.80流出。杠杆3.91%适度，融资-0.01亿偿还。观察MA5(65.46)/MA10(66.42)压力，短线走弱，回踩64.50(今低)不破可关注，站稳MA20(65.07)企稳。</p>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>方向</th><th>价位</th><th>依据</th></tr>
+    
+    <tr><td ><span class="hl-red">支撑位</span></td><td><strong>64.50</strong></td><td>今日低点</td></tr>
+    
+    <tr><td ><span class="hl-red">中支撑</span></td><td>64.00</td><td>整数</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">压力位</span></td><td><strong>65.46</strong></td><td>MA5</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">关键压力</span></td><td>66.42</td><td>MA10</td></tr>
+    
+  </table>
+  </div>
+  <div class="judge-box">
+    <p><strong>核心判断：</strong>📉 <strong>冲高回落走弱（-2.33%回吐，主力-0.02亿净流出+减仓-0.45%+特大-0.05/大单-0.06亿净流出，散户-2.80流出，跌破MA5/MA20）。</strong>-2.33%收64.86探64.50冲68.16平量。主力资金流向口径-0.02亿净流出+减仓-0.45%，特大/大单净流出，散户-2.80流出。杠杆3.91%适度。观察MA5(65.46)/MA10(66.42)压力，短线走弱，回踩64.50不破可关注，站稳MA20(65.07)企稳。</p>
+  </div>
+</div>
+
+<hr class="sep hr-sep">
+
+
+<!-- ════════════════ 🔟 长鑫科技 688825 ════════════════ -->
+<div class="card" data-direction="up" id="changxin">
+  <div class="card-header">
+    <div>
+      <span class="stock-name">长鑫科技 <span class="stock-code">688825 · 科创板</span></span>
+      
+      <span class="stock-tag tag-long" style="margin-left:8px;">存储芯片</span>
+      
+    </div>
+    <span class="dir dir-up">📈 超跌反弹（仍处均线下方，关注37.78压力）</span>
+  </div>
+
+  <div class="section-title"><span class="icon">⚡</span> 快览（行情数据）</div>
+  <div class="kuailan-grid">
+    <div class="kuailan-item"><strong>📊 收盘</strong><br> <span class="hl-red">37.50元 <strong>+1.60%</strong></span> 📈</div>
+    <div class="kuailan-item"><strong>📌 开盘</strong><br> （前收36.91）</div>
+    <div class="kuailan-item"><strong>📈 盘中</strong><br> 收盘37.50 +1.60%反弹，探36.38冲38.00收37.50（量比0.75平量、成交83.83亿），主力资金流向+6.63亿+特大+3.38/大单+3.88亿净流入+主力增仓+7.91%+散户-68.40流出，仍收于全部均线下方</div>
+    <div class="kuailan-item"><strong>💥 振幅</strong><br> 4.39%</div>
+    <div class="kuailan-item"><strong>💰 成交额</strong><br> <strong>83.83亿</strong></div>
+    <div class="kuailan-item"><strong>📏 量比</strong><br> <span class="hl-yellow"><strong>0.75 平量</strong></span></div>
+    <div class="kuailan-item"><strong>🔄 换手率</strong><br> 5.00%<br><span style="font-size:11px;color:var(--muted);">—</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>📐 均线系统</strong><br> MA60 49.12 > MA30 42.03 > MA20 40.88 > MA10 39.28 > MA5 37.78 > 收37.50<br><span class="hl-red">收盘37.50 +1.60%反弹，探36.38冲38.00收37.50，仍收于全部均线下方(MA5 37.78/MA10 39.28/MA20 40.88)，主力资金流向+6.63亿+特大/大单净流入+主力增仓+7.91%+散户-68.40流出</span></div>
+    <div class="kuailan-item kuailan-ma"><strong>⚙️ 技术指标（MA5偏离+BOLL）</strong><br> <strong>MA5偏离 <span class="hl-green">-0.75%</span></strong>（收于MA5下方）<br>BOLL 中轨≈MA20 40.88<br><span class="hl-red">今日收37.50 +1.60%反弹，探36.38冲38.00，仍处全部均线下方，主力资金流向+6.63亿+特大/大单大幅净流入+增仓+7.91%，散户-68.40流出，超跌反弹</span></div>
+  </div>
+
+  <div class="section-title"><span class="icon">💰</span> 主力资金</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>维度（Level-2）</th><th>金额</th><th>信号</th><th>解读</th></tr>
+    
+    <tr><td>特大单净买入额</td><td><span class="hl-red"><strong>+3.38亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>特大单净买入额净流入3.38亿</td></tr>
+    
+    <tr><td>大单净买入额</td><td><span class="hl-red"><strong>+3.88亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>大单净买入额净流入3.88亿</td></tr>
+    
+    <tr><td>主力资金流向</td><td><span class="hl-red"><strong>+6.63亿 ✅</strong></span></td><td><span class="hl-red">✅ 净流入</span></td><td>主力资金流向净流入6.63亿</td></tr>
+    
+    <tr><td>主力增仓占比</td><td><span class="hl-red"><strong>+7.91% ✅</strong></span></td><td><span class="hl-red">✅ 增仓</span></td><td>主力增仓</td></tr>
+    
+    <tr><td>散户指数</td><td><span class="hl-green"><strong>-68.40</strong></span></td><td><span class="hl-green">流出</span></td><td>散户流出</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🔍</span> 资金流向主动/被动逐档拆解</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>档位</th><th>主动买入</th><th>主动卖出</th><th>主动净额</th><th>被动买入</th><th>被动卖出</th><th>被动净额</th><th>单档合计</th><th>意图</th></tr>
+    
+    <tr>
+      <td><strong>特大单</strong></td>
+      <td>+20.28亿</td>
+      <td>-14.52亿</td>
+      <td class="hl-red">+5.76亿</td>
+      <td>+10.49亿</td>
+      <td>-12.86亿</td>
+      <td class="hl-green">-2.37亿</td>
+      <td class="hl-red">+3.38亿</td>
+      <td style="font-size:12px;">主动买入为主，进攻意图明显</td>
+    </tr>
+    
+    <tr>
+      <td><strong>大单</strong></td>
+      <td>+7.37亿</td>
+      <td>-6.49亿</td>
+      <td class="hl-red">+0.88亿</td>
+      <td>+7.72亿</td>
+      <td>-8.09亿</td>
+      <td class="hl-green">-0.38亿</td>
+      <td class="hl-red">+0.50亿</td>
+      <td style="font-size:12px;">主动买入为主，进攻意图明显</td>
+    </tr>
+    
+    <tr>
+      <td><strong>中单</strong></td>
+      <td>+9.81亿</td>
+      <td>-9.51亿</td>
+      <td class="hl-red">+0.29亿</td>
+      <td>+11.27亿</td>
+      <td>-12.54亿</td>
+      <td class="hl-green">-1.27亿</td>
+      <td class="hl-green">-0.97亿</td>
+      <td style="font-size:12px;">被动派发为主，挂单卖出</td>
+    </tr>
+    
+    <tr>
+      <td><strong>小单</strong></td>
+      <td>+7.83亿</td>
+      <td>-8.03亿</td>
+      <td class="hl-green">-0.21亿</td>
+      <td>+9.08亿</td>
+      <td>-11.79亿</td>
+      <td class="hl-green">-2.70亿</td>
+      <td class="hl-green">-2.91亿</td>
+      <td style="font-size:12px;">被动派发为主，挂单卖出</td>
+    </tr>
+    
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px;">主动净合计: <strong><span class="hl-red">6.72亿</span></strong> | 被动净合计: <strong><span class="hl-green">-6.72亿</span></strong> | 主动买入+被动卖出对冲，有资金主动做多</p>
+
+  <div class="section-title"><span class="icon">🧩</span> 筹码分布</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th></tr>
+    
+    <tr><td>主力控盘比例</td><td><strong>54.69%</strong>（高度控盘）</td></tr>
+    
+    <tr><td>平均成本</td><td>41.11元</td></tr>
+    
+    <tr><td>集中度90</td><td>19.6（相对分散）</td></tr>
+    
+    <tr><td>70%成本区间</td><td>37.43~43.89（现价37.50位于区间下缘）</td></tr>
+    
+    <tr><td>获利比例</td><td>15.6%（套牢84.4%）</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">💳</span> 融资融券</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指标</th><th>数据</th><th>态度</th></tr>
+    
+    <tr><td>融资余额</td><td>88.78亿</td><td>高</td></tr>
+    
+    <tr><td>融资余额/流通市值</td><td><span class="hl-red"><strong>5.26%</strong></span></td><td>偏高（>5%）</td></tr>
+    
+    <tr><td>融资净买入</td><td><span class="hl-green">-2.39亿</span></td><td>偿还</td></tr>
+    
+    <tr><td>融券余额</td><td>0.20亿</td><td>低</td></tr>
+    
+  </table>
+  </div>
+
+  <div class="section-title"><span class="icon">🏢</span> 机构吸筹判断</div>
+  <ul class="checklist">
+    
+    <li>📈 <strong>+1.60%反弹</strong>，振幅4.39%，探36.38冲38.00收37.50（仍处全部均线下方）</li>
+    
+    <li>✅ 主力资金流向口径+6.63亿大幅净流入+主力增仓+7.91%</li>
+    
+    <li>✅ 特大+3.38/大单+3.88亿净买入额口径大幅净流入</li>
+    
+    <li>📉 散户-68.40流出（离场）</li>
+    
+    <li>💰 杠杆5.26%偏高，融资-2.39亿偿还</li>
+    
+    <li>🏢 股东794,770户(较上期-77.01%集中) | 公告2026-10-31</li>
+    
+    <li>🏦 无北向数据</li>
+    
+    <li><strong>解读：</strong>今日+1.60%反弹，探36.38冲38.00收37.50，仍收于全部均线下方，超跌反弹。主力资金流向口径+6.63亿大幅净流入+主力增仓+7.91%，特大+3.38/大单+3.88亿大幅净流入，散户-68.40流出（离场）。高度控盘54.69%。杠杆5.26%偏高但融资-2.39亿偿还。获利盘15.6%套牢84.4%。平量反弹（量比0.75），观察MA5(37.78)/MA10(39.28)压力，超跌反弹但趋势未转强，回踩不破36.38(今低)可关注。</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">📐</span> 动态估值</div>
+  <ul class="checklist">
+    
+    <li><strong>PE（TTM）：</strong>18.29倍</li>
+    
+    <li><strong>动态PE：</strong>14.46倍</li>
+    
+    <li><strong>机构控盘：</strong>54.69%</li>
+    
+    <li><strong>流通市值：</strong>1688.64亿</li>
+    
+  </ul>
+
+  <div class="section-title"><span class="icon">🔮</span> 走势研判</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong>中长线：</strong>DRAM存储芯片龙头，国产DRAM唯一量产厂商。</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;"><strong>短线：</strong><span class="hl-red"><strong>超跌反弹（+1.60%反弹，主力+6.63亿大幅净流入+增仓+7.91%+特大+3.38/大单+3.88亿净流入，散户-68.40流出，仍收于全部均线下方）</strong></span> +1.60%（收涨），平量(量比0.75)，收37.50探36.38冲38.00，仍处全部均线下方。主力资金流向口径+6.63亿大幅净流入+增仓+7.91%，特大+3.38/大单+3.88亿大幅净流入，散户-68.40流出。高度控盘54.69%。杠杆5.26%偏高，融资-2.39亿偿还。观察MA5(37.78)/MA10(39.28)压力，超跌反弹但趋势未转强，回踩不破36.38(今低)可关注。</p>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>方向</th><th>价位</th><th>依据</th></tr>
+    
+    <tr><td ><span class="hl-red">支撑位</span></td><td><strong>36.38</strong></td><td>今日低点</td></tr>
+    
+    <tr><td ><span class="hl-red">中支撑</span></td><td>36.30</td><td>整数</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">压力位</span></td><td><strong>37.78</strong></td><td>MA5</td></tr>
+    
+    <tr><td class="hl-red"><span class="hl-green">关键压力</span></td><td>39.28</td><td>MA10</td></tr>
+    
+  </table>
+  </div>
+  <div class="judge-box">
+    <p><strong>核心判断：</strong>📈 <strong>超跌反弹（+1.60%反弹，主力+6.63亿大幅净流入+增仓+7.91%+特大+3.38/大单+3.88亿净流入，散户-68.40流出，仍收于全部均线下方）。</strong>+1.60%收37.50探36.38冲38.00平量。主力资金流向口径+6.63亿大幅净流入+增仓+7.91%，特大/大单大幅净流入，散户-68.40流出。杠杆5.26%偏高。观察MA5(37.78)/MA10(39.28)压力，超跌反弹但趋势未转强，回踩不破36.38可关注。</p>
+  </div>
+</div>
+
+
+
+<!-- ════════════ 汇总表 ════════════ -->
+<div class="card" data-direction="summary" id="summary" style="margin-bottom:6px;">
+  <div class="card-header">
+    <span class="stock-name">📋 走势研判汇总表</span>
+  </div>
+  <div class="table-wrap">
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>股票</th>
+        <th>预期方向</th>
+        <th>支撑位</th>
+        <th>压力位</th>
+        <th>关键量能信号</th>
+        <th>核心逻辑</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td class="tl"><strong>中微公司</strong></td>
+        <td><span class="hl-red">📈 放量大涨强势（+5.05%站上MA5/MA10/MA20但低于MA30/MA60，主力+8.22亿大幅净流入+增仓+12.13%+特大+2.87/大单+7.55亿净流入+散户-570大幅离场，杠杆1.46%最安全）</span></td>
+        <td>支撑 241.50(今低) / 241.10(MA20)</td>
+        <td>压力 257.79(MA30) / 301.42(MA60)</td>
+        <td>量比1.23 放量·换手2.86%</td>
+        <td>+5.05%大涨，开246.00探241.50冲259.98收256.50（量比1.23放量、成交67.74亿），站上MA5(243.65)/MA10(246.85)/MA20(241.10)但仍低于MA30(257.79)/MA60(301.42)。主力资金流向口径+8.22亿大幅净流入+主力增仓+12.13%（特大+2.87/大单+7.55亿大幅净流入）+散户-570.16大幅离场。杠杆1.46%最安全。获利盘39.1%。观察MA30(257.79)/MA60(301.42)压力，站稳看反抽MA30，放量大涨强势，回踩241.50(今低)不破可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl"><strong>大为股份</strong></td>
+        <td><span class="hl-red">📈 放量反弹（+2.45%站上MA5但低于MA10/MA20，主力+0.02亿微净流入+增仓+0.76%+特大+0.04/大单+0.10亿净流入但中/小单大幅流出+散户-9.96流出，杠杆2.25%适度）</span></td>
+        <td>支撑 19.75(今低) / 19.70(整数)</td>
+        <td>压力 20.79(MA10) / 21.17(MA20)</td>
+        <td>量比1.80 放量·换手6.40%</td>
+        <td>+2.45%反弹，探19.75冲21.87收20.49（量比1.80放量、成交2.74亿），站上MA5(20.20)但仍低于MA10(20.79)/MA20(21.17)。主力资金流向口径+0.02亿净流入+主力增仓+0.76%（特大+0.04/大单+0.10亿净流入但中/小单大幅净流出）+散户-9.96流出。杠杆2.25%适度。高估值779倍。观察MA10(20.79)/MA20(21.17)压力，放量反弹但冲高回落注意追高风险，回踩不破19.75(今低)可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl"><strong>鼎龙股份</strong></td>
+        <td><span class="hl-red">📈 反弹转强（+2.29%站上MA5/MA20/MA30但低于MA10/MA60，主力+0.52亿净流入+增仓+3.62%+特大+0.11/大单+0.32亿净流入+散户-36.50流出，杠杆3.66%适度）</span></td>
+        <td>支撑 57.72(今低) / 57.50(整数)</td>
+        <td>压力 59.68(MA10) / 64.40(MA60)</td>
+        <td>量比1.03 平量·换手3.23%</td>
+        <td>+2.29%上涨，探57.72冲61.23收59.52（量比1.03平量、成交14.31亿），站上MA5(58.03)/MA20(58.69)/MA30(58.90)但仍低于MA10(59.68)/MA60(64.40)。主力资金流向口径+0.52亿净流入+主力增仓+3.62%（特大+0.11/大单+0.32亿净流入）+散户-36.50流出。杠杆3.66%适度但融资-0.32亿偿还。获利盘36.0%。观察MA10(59.68)/MA60(64.40)压力，站稳看反抽MA10，反弹转强，回踩不破57.72(今低)可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl"><strong>长鑫科技</strong></td>
+        <td><span class="hl-red">📈 超跌反弹（+1.60%仍处均线下方，主力+6.63亿大幅净流入+增仓+7.91%+特大+3.38/大单+3.88亿净流入+散户-68.40流出，杠杆5.26%偏高）</span></td>
+        <td>支撑 36.38(今低) / 36.30(整数)</td>
+        <td>压力 37.78(MA5) / 39.28(MA10)</td>
+        <td>量比0.75 平量·换手5.00%</td>
+        <td>+1.60%反弹，探36.38冲38.00收37.50（量比0.75平量、成交83.83亿），仍收于全部均线下方。主力资金流向口径+6.63亿大幅净流入+主力增仓+7.91%（特大+3.38/大单+3.88亿大幅净流入）+散户-68.40流出。高度控盘54.69%。杠杆5.26%偏高但融资-2.39亿偿还。获利盘15.6%。观察MA5(37.78)/MA10(39.28)压力，超跌反弹但趋势未转强，回踩不破36.38(今低)可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl"><strong>惠科股份</strong></td>
+        <td><span class="hl-red">📈 低位小幅企稳（+0.26%仍处均线下方，主力+0.02亿微净流入+增仓+0.66%但特大-0.02/大单-0.06亿净流出+散户+21.01流入，杠杆8.44%极高危）</span></td>
+        <td>支撑 15.24(今低) / 15.20(整数)</td>
+        <td>压力 15.51(MA5) / 15.99(MA10)</td>
+        <td>量比0.72 平量·换手3.53%</td>
+        <td>+0.26%微涨，探15.24冲15.66收15.39（量比0.72平量、成交2.35亿），仍收于全部均线下方。主力资金流向口径+0.02亿微净流入+主力增仓+0.66%（但特大-0.02/大单-0.06亿净流出）+散户+21.01流入。杠杆8.44%极高危且融资+0.01亿加仓。获利盘6.5%。观察MA5(15.51)/MA10(15.99)压力，杠杆极高危注意波动，低位企稳待确认，反弹看收复MA5(15.51)。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl"><strong>澜起科技</strong></td>
+        <td><span class="hl-green">📉 冲高回落整理（-0.14%微跌仍处均线下方，主力+2.65亿净流入+增仓+6.34%但特大-0.64亿净流出+散户-296.11大幅离场，杠杆5.53%偏高）</span></td>
+        <td>支撑 131.50(今低) / 131(整数)</td>
+        <td>压力 139.35(MA5) / 147.71(MA10)</td>
+        <td>量比0.82 平量·换手2.70%</td>
+        <td>-0.14%微跌（昨+5.51%大涨后回落），探131.50冲138.66收137.60（量比0.82平量、成交41.74亿），仍收于全部均线下方。主力资金流向口径+2.65亿净流入+主力增仓+6.34%（但特大-0.64亿净流出、大单+2.24亿净流入）+散户-296.11大幅离场。杠杆5.53%偏高且融资-1.96亿偿还。获利盘9.7%。观察MA5(139.35)/MA10(147.71)压力，站稳看反抽MA10，冲高回落整理，回踩不破131.50可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl"><strong>兆易创新</strong></td>
+        <td><span class="hl-green">📉 反弹遇阻回落（-0.34%仍处均线下方，主力-0.71亿净流出+减仓-1.49%+特大-0.23/大单-1.77亿净流出+散户+86.95流入，杠杆8.72%极高危）</span></td>
+        <td>支撑 212.59(今低) / 212.50(整数)</td>
+        <td>压力 224.43(MA5) / 236.31(MA10)</td>
+        <td>量比0.61 缩量·换手3.30%</td>
+        <td>-0.34%回落，开215.01探212.59冲220.88收218.81（量比0.61缩量、成交47.85亿），仍收于全部均线下方。主力资金流向口径-0.71亿净流出+主力增仓-1.49%（特大-0.23/大单-1.77亿净流出）+散户+86.95流入。杠杆8.72%极高危但融资-0.22亿偿还。获利盘9.6%。观察MA5(224.43)/MA10(236.31)压力，反弹遇阻回落，回踩212.59(今低)不破可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl"><strong>兆易H股</strong></td>
+        <td><span class="hl-green">📉 参考A股反弹遇阻回落（-0.34%仍处均线下方，参考A股主力-0.71亿净流出+减仓-1.49%+特大-0.23/大单-1.77亿净流出+散户+86.95流入，杠杆8.72%极高危）</span></td>
+        <td>支撑 212.59(参考A股今低) / 212.50(整数)</td>
+        <td>压力 224.43(参考A股MA5) / 236.31(MA10)</td>
+        <td>未取到独立H股行情·参考A股换手3.30%</td>
+        <td>今日问财返回H股行情与A股一致（218.81 -0.34%），未取到独立港股快照。参考A股主力资金流向口径-0.71亿净流出+主力减仓-1.49%，特大-0.23/大单-1.77亿净流出，散户+86.95流入。杠杆8.72%极高危但融资-0.22亿偿还。参考A股反弹遇阻回落仍处均线下方，观察212.59(今低)支撑，反弹看收复MA5(224.43)。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl"><strong>珂玛科技</strong></td>
+        <td><span class="hl-green">📉 冲高回落走弱（-2.33%跌破MA5/MA20，主力-0.02亿净流出+减仓-0.45%+特大-0.05/大单-0.06亿净流出+散户-2.80流出，杠杆3.91%适度）</span></td>
+        <td>支撑 64.50(今低) / 64.00(整数)</td>
+        <td>压力 65.46(MA5) / 66.42(MA10)</td>
+        <td>量比0.81 平量·换手5.17%</td>
+        <td>-2.33%回吐，探64.50冲68.16收64.86（量比0.81平量、成交4.98亿），跌破MA5(65.46)/MA20(65.07)仍低于MA10(66.42)/MA30(67.28)。主力资金流向口径-0.02亿净流出+主力减仓-0.45%（特大-0.05/大单-0.06亿净流出）+散户-2.80流出。杠杆3.91%适度。高估值144倍。观察MA5(65.46)/MA10(66.42)压力，短线走弱，回踩64.50不破可关注，站稳MA20(65.07)企稳。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl"><strong>华阳国际</strong></td>
+        <td><span class="hl-green">📉 弱势大跌（-4.07%仍处均线下方，主力+0.01亿微净流入+增仓+1.20%但特大/大单净流出+散户+18.17流入，无两融）</span></td>
+        <td>支撑 10.38(今低) / 10.30(整数)</td>
+        <td>压力 11.68(MA5) / 12.41(MA10)</td>
+        <td>量比0.65 平量·换手4.88%</td>
+        <td>-4.07%大跌，开10.85探10.38冲11.00收10.61（量比0.65平量、成交0.79亿），仍收于全部均线下方。主力资金流向口径+0.01亿微幅净流入+主力增仓+1.20%（但特大-0.01/大单-0.02亿净流出）+散户+18.17流入。无两融。获利盘1.8%。观察10.38(今低)支撑，反弹看收复MA5(11.68)，弱势股防继续杀跌，反弹不追待企稳。</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+
+  <div class="judge-box" style="margin-top:14px;">
+    <div class="cmp-body" style="margin:0;font-size:13px!important;line-height:1.7!important;font-family:'HarmonyOS Sans SC','PingFang SC','Microsoft YaHei',sans-serif;">
+    <strong>横向对比</strong><br>
+    <strong>今日（11/19）涨跌幅排序（大→小）：</strong>
+中微<span class="hl-red">+5.05%</span> → 大为<span class="hl-red">+2.45%</span> → 鼎龙<span class="hl-red">+2.29%</span> → 长鑫<span class="hl-red">+1.60%</span> → 惠科<span class="hl-red">+0.26%</span> → 澜起<span class="hl-green">-0.14%</span> → 兆易<span class="hl-green">-0.34%</span> → 兆易H<span class="hl-green">-0.34%</span> → 珂玛<span class="hl-green">-2.33%</span> → 华阳<span class="hl-green">-4.07%</span>
+<hr><strong>📈 分化上涨（5涨5跌，科创50逆势领涨）：</strong>中微(+5.05%放量大涨站上MA5/MA10/MA20但仍低于MA30/MA60，主力+8.22亿大幅净流入+增仓+12.13%+特大+2.87/大单+7.55亿大幅净流入+散户-570大幅离场，资金面最强)、大为(+2.45%放量反弹站上MA5，主力+0.02亿微净流入但冲高回落，高估值779倍)、鼎龙(+2.29%站上MA5/MA20/MA30但仍低于MA10/MA60，主力+0.52亿净流入+增仓+3.62%，反弹转强)、长鑫(+1.60%放量高位震荡，主力+6.63亿大幅净流入+增仓+7.91%，高度控盘54.69%)、惠科(+0.26%微涨企稳但主力净流入微薄，杠杆8.44%极高危)。
+<strong>📉 分化回落（资金流出或独立走弱）：</strong>澜起(-0.14%冲高回落，主力+2.65亿净流入但特大-0.64亿净流出+散户-296大幅离场，杠杆5.53%偏高)、兆易(-0.34%反弹遇阻回落，主力-0.71亿净流出+减仓-1.49%，杠杆8.72%极高危)、珂玛(-2.33%跌破MA5/MA20，主力-0.02亿净流出+散户-2.80流出，高估值144倍)、华阳(-4.07%大跌，主力+0.01亿微流入但特大/大单净流出，无两融，仍处全部均线下方)。
+<strong>💡 关键观察：</strong>① 大盘整体调整但对科创权重股影响有限——上证3577.62 -0.28%、深证10583.20 -0.71%、创业板2293.34 -0.79%、科创50 1270.78 +1.83%逆势领涨，两市约1.31万亿（量小幅回落）；② 本组5涨5跌——分化明显，中微/长鑫大涨、鼎龙/大为反弹vs珂玛/华阳走弱；③ 主力资金分化——中微+8.22/长鑫+6.63/澜起+2.65亿净流入，兆易-0.71亿净流出、珂玛-0.02亿；散户多数流出（中微-570/澜起-296/长鑫-68大幅离场）筹码趋健康，而兆易+87/华阳+18流入（承接）；④ 中微散户-570大幅离场+杠杆1.46%最安全+放量大涨，资金面最强；⑤ 高杠杆品种——兆易8.72%/惠科8.44%极高危（今日兆易融资偿还、惠科小幅加仓）、澜起5.53%/长鑫5.26%偏高，多呈偿还；⑥ 明日关注反弹能否延续（中微能否突破MA30(257.79)、长鑫能否站稳MA5(37.78)）、鼎龙/大为能否站稳均线及大盘量能能否放大。
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- ════════════ 每日总结 ════════════ -->
+<div class="card" data-direction="daily-summary" id="daily-summary">
+  <div class="card-header">
+    <span class="stock-name">📄 每日总结报告</span>
+    <span style="font-size:12px;color:var(--muted);"></span>
+  </div>
+
+  <!-- 大盘概览 -->
+  <div class="section-title"><span class="icon">🏛️</span> 大盘概览</div>
+  <div class="table-wrap">
+  <table class="detail-table">
+    <tr><th>指数</th><th>收盘</th><th>涨跌</th><th>成交额</th></tr>
+    
+    <tr><td>上证指数</td><td>3577.62</td><td class="down"><span class="hl-green">-0.28%</span></td><td>6369亿</td></tr>
+    
+    <tr><td>深证成指</td><td>10583.20</td><td class="down"><span class="hl-green">-0.71%</span></td><td>6682亿</td></tr>
+    
+    <tr><td>创业板指</td><td>2293.34</td><td class="down"><span class="hl-green">-0.79%</span></td><td>3144亿</td></tr>
+    
+    <tr><td>科创50</td><td>1270.78</td><td class="up"><span class="hl-red">+1.83%</span></td><td>1101亿</td></tr>
+    
+  </table>
+  </div>
+
+  <!-- 今日关键词卡片 -->
+  <div style="background:#f8f9fb;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:13px;line-height:1.8;">
+    <strong style="font-size:14px;">🔑 今日关键词</strong>
+    <div style="margin-top:6px;">
+    
+    <div>• 📉 <strong>大盘整体调整</strong>：上证3577.62 -0.28%，深证10583.20 -0.71%、创业板2293.34 -0.79%、科创50 1270.78 +1.83%逆势领涨，两市约1.31万亿（量小幅回落）</div>
+    
+    <div>• 📊 <strong>本组5涨5跌</strong>：中微+5.05%/大为+2.45%/鼎龙+2.29%/长鑫+1.60%/惠科+0.26%；澜起-0.14%/兆易-0.34%/兆易H-0.34%/珂玛-2.33%/华阳-4.07%</div>
+    
+    <div>• 📈 <strong>分化上涨（科创50逆势领涨）</strong>：中微/长鑫大涨、鼎龙/大为反弹；澜起/兆易冲高回落、珂玛/华阳走弱</div>
+    
+    <div>• 💸 <strong>主力资金分化</strong>：中微+8.22/长鑫+6.63/澜起+2.65亿净流入；兆易-0.71亿净流出、珂玛-0.02亿</div>
+    
+    <div>• 📉 <strong>散户多呈流出</strong>：中微(-570)/澜起(-296)/长鑫(-68)大幅离场，筹码趋健康；兆易+87/华阳+18流入（承接）</div>
+    
+    <div>• 🔴 <strong>高杠杆品种</strong>：兆易8.72%/惠科8.44%极高危、澜起5.53%/长鑫5.26%偏高，今日多呈融资偿还（长鑫-2.39/澜起-1.96亿），仅惠科小幅+0.01亿加仓</div>
+    
+    </div>
+  </div>
+
+  <!-- 总排名表 -->
+  <div class="section-title"><span class="icon">📈</span> 股票表现总排名（按跌幅↑排序）</div>
+  <div class="table-wrap">
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>排名</th><th>股票</th><th>收盘</th><th>涨跌幅</th><th>主力净额</th><th>散户指数</th><th>换手率</th><th>资金评价</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>①</strong></td>
+        <td class="tl">中微公司</td>
+        <td>256.50</td>
+        <td class="up"><span class="hl-red">+5.05%</span></td>
+        <td class="up"><span class="hl-red">+8.22亿 ✅</span></td>
+        <td><span class="hl-green">-570.16 ✅(大幅离场)</span></td>
+        <td>2.86%</td>
+        <td>📈 +5.05%大涨，开246.00探241.50冲259.98收256.50（量比1.23放量、成交67.74亿），站上MA5/MA10/MA20但仍低于MA30(257.79)/MA60(301.42)。主力+8.22亿大幅净流入+增仓+12.13%（特大+2.87/大单+7.55亿大幅净流入）+散户-570.16大幅离场。杠杆1.46%最安全。观察MA30(257.79)/MA60(301.42)压力，站稳看反抽MA30，放量大涨强势，回踩241.50不破可关注。</td>
+      </tr>
+      
+      <tr>
+        <td><strong>②</strong></td>
+        <td class="tl">大为股份</td>
+        <td>20.49</td>
+        <td class="up"><span class="hl-red">+2.45%</span></td>
+        <td class="up"><span class="hl-red">+0.02亿 ✅</span></td>
+        <td><span class="hl-green">-9.96 ✅(流出)</span></td>
+        <td>6.40%</td>
+        <td>📈 +2.45%反弹，探19.75冲21.87收20.49（量比1.80放量、成交2.74亿），站上MA5(20.20)但仍低于MA10(20.79)/MA20(21.17)。主力+0.02亿微净流入+增仓+0.76%（特大+0.04/大单+0.10亿净流入但中/小单大幅流出）+散户-9.96流出。杠杆2.25%适度。高估值779倍。观察MA10(20.79)/MA20(21.17)压力，放量反弹但冲高回落注意追高风险，回踩不破19.75可关注。</td>
+      </tr>
+      
+      <tr>
+        <td><strong>③</strong></td>
+        <td class="tl">鼎龙股份</td>
+        <td>59.52</td>
+        <td class="up"><span class="hl-red">+2.29%</span></td>
+        <td class="up"><span class="hl-red">+0.52亿 ✅</span></td>
+        <td><span class="hl-green">-36.50 ✅(流出)</span></td>
+        <td>3.23%</td>
+        <td>📈 +2.29%上涨，探57.72冲61.23收59.52（量比1.03平量、成交14.31亿），站上MA5(58.03)/MA20(58.69)/MA30(58.90)但仍低于MA10(59.68)/MA60(64.40)。主力+0.52亿净流入+增仓+3.62%（特大+0.11/大单+0.32亿净流入）+散户-36.50流出。杠杆3.66%适度但融资-0.32亿偿还。观察MA10(59.68)/MA60(64.40)压力，站稳看反抽MA10，反弹转强，回踩不破57.72可关注。</td>
+      </tr>
+      
+      <tr>
+        <td><strong>④</strong></td>
+        <td class="tl">长鑫科技</td>
+        <td>37.50</td>
+        <td class="up"><span class="hl-red">+1.60%</span></td>
+        <td class="up"><span class="hl-red">+6.63亿 ✅</span></td>
+        <td><span class="hl-green">-68.40 ✅(流出)</span></td>
+        <td>5.00%</td>
+        <td>📈 +1.60%反弹，探36.38冲38.00收37.50（量比0.75平量、成交83.83亿），仍收于全部均线下方。主力+6.63亿大幅净流入+增仓+7.91%（特大+3.38/大单+3.88亿大幅净流入）+散户-68.40流出。高度控盘54.69%。杠杆5.26%偏高但融资-2.39亿偿还。观察MA5(37.78)/MA10(39.28)压力，超跌反弹但趋势未转强，回踩不破36.38可关注。</td>
+      </tr>
+      
+      <tr>
+        <td><strong>⑤</strong></td>
+        <td class="tl">惠科股份</td>
+        <td>15.39</td>
+        <td class="up"><span class="hl-red">+0.26%</span></td>
+        <td class="up"><span class="hl-yellow">+0.02亿微净流入</span></td>
+        <td><span class="hl-red">+21.01 ⚠️(流入)</span></td>
+        <td>3.53%</td>
+        <td>📈 +0.26%微涨，探15.24冲15.66收15.39（量比0.72平量、成交2.35亿），仍收于全部均线下方。主力+0.02亿微净流入+增仓+0.66%（但特大-0.02/大单-0.06亿净流出）+散户+21.01流入。杠杆8.44%极高危且融资+0.01亿加仓。观察MA5(15.51)/MA10(15.99)压力，杠杆极高危注意波动，低位企稳待确认，反弹看收复MA5(15.51)。</td>
+      </tr>
+      
+      <tr>
+        <td><strong>⑥</strong></td>
+        <td class="tl">澜起科技</td>
+        <td>137.60</td>
+        <td class="down"><span class="hl-green">-0.14%</span></td>
+        <td class="up"><span class="hl-red">+2.65亿 ✅</span></td>
+        <td><span class="hl-green">-296.11 ✅(大幅离场)</span></td>
+        <td>2.70%</td>
+        <td>📉 -0.14%微跌（昨+5.51%大涨后回落），探131.50冲138.66收137.60（量比0.82平量、成交41.74亿），仍收于全部均线下方。主力+2.65亿净流入+增仓+6.34%（但特大-0.64亿净流出、大单+2.24亿净流入）+散户-296.11大幅离场。杠杆5.53%偏高且融资-1.96亿偿还。观察MA5(139.35)/MA10(147.71)压力，站稳看反抽MA10，冲高回落整理，回踩不破131.50可关注。</td>
+      </tr>
+      
+      <tr>
+        <td><strong>⑦</strong></td>
+        <td class="tl">兆易创新</td>
+        <td>218.81</td>
+        <td class="down"><span class="hl-green">-0.34%</span></td>
+        <td class="down"><span class="hl-green">-0.71亿 ❌</span></td>
+        <td><span class="hl-red">+86.95 ⚠️(流入)</span></td>
+        <td>3.30%</td>
+        <td>📉 -0.34%回落，开215.01探212.59冲220.88收218.81（量比0.61缩量、成交47.85亿），仍收于全部均线下方。主力-0.71亿净流出+减仓-1.49%（特大-0.23/大单-1.77亿净流出）+散户+86.95流入。杠杆8.72%极高危但融资-0.22亿偿还。观察MA5(224.43)/MA10(236.31)压力，反弹遇阻回落，回踩212.59不破可关注。</td>
+      </tr>
+      
+      <tr>
+        <td><strong>⑧</strong></td>
+        <td class="tl">兆易H股</td>
+        <td>218.81</td>
+        <td class="down"><span class="hl-green">-0.34%</span></td>
+        <td class="down"><span class="hl-green">参考A股-0.71亿</span></td>
+        <td><span class="hl-red">参考A股+86.95(流入)</span></td>
+        <td>未取到独立H股行情</td>
+        <td>📉 -0.34%（参考A股）今日问财返回H股行情与A股一致，未取到独立港股快照。参考A股主力-0.71亿净流出+减仓-1.49%+特大-0.23/大单-1.77亿净流出+散户+86.95流入。杠杆8.72%极高危。观察212.59(今低)支撑，反弹看收复MA5(224.43)，反弹遇阻回落，回踩212.59不破可关注。</td>
+      </tr>
+      
+      <tr>
+        <td><strong>⑨</strong></td>
+        <td class="tl">珂玛科技</td>
+        <td>64.86</td>
+        <td class="down"><span class="hl-green">-2.33%</span></td>
+        <td class="down"><span class="hl-green">-0.02亿 ❌</span></td>
+        <td><span class="hl-green">-2.80 ✅(流出)</span></td>
+        <td>5.17%</td>
+        <td>📉 -2.33%回吐，探64.50冲68.16收64.86（量比0.81平量、成交4.98亿），跌破MA5(65.46)/MA20(65.07)仍低于MA10/MA30。主力-0.02亿净流出+减仓-0.45%（特大-0.05/大单-0.06亿净流出）+散户-2.80流出。杠杆3.91%适度。高估值144倍。观察MA5(65.46)/MA10(66.42)压力，短线走弱，回踩64.50不破可关注，站稳MA20(65.07)企稳。</td>
+      </tr>
+      
+      <tr>
+        <td><strong>⑩</strong></td>
+        <td class="tl">华阳国际</td>
+        <td>10.61</td>
+        <td class="down"><span class="hl-green">-4.07%</span></td>
+        <td class="up"><span class="hl-red">+0.01亿 ✅(微)</span></td>
+        <td><span class="hl-red">+18.17 ⚠️(流入)</span></td>
+        <td>4.88%</td>
+        <td>📉 -4.07%大跌，开10.85探10.38冲11.00收10.61（量比0.65平量、成交0.79亿），仍收于全部均线下方。主力资金流向口径+0.01亿微幅净流入+增仓+1.20%（但特大-0.01/大单-0.02亿净流出）+散户+18.17流入。无两融。获利盘1.8%。观察10.38(今低)支撑，反弹看收复MA5(11.68)，弱势股防继续杀跌，反弹不追待企稳。</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 逐只总结 -->
+  <div class="section-title"><span class="icon">📋</span> 逐只深度总结</div>
+
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>📈</strong> <span style="font-weight:600;font-size:14px;">中微公司</span>
+      <span style="font-size:12px;color:var(--muted);">688012</span>
+      <span class="dir dir-up" style="margin-left:8px;font-size:11px;">放量大涨强势(站上MA5/MA10/MA20)</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">涨跌幅</div>
+      <div class="value "><span class="hl-red">+5.05%</span></div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value ">+8.22亿🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">增仓</div>
+      <div class="value ">+12.13%🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户</div>
+      <div class="value ">-570.16🟢</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    📈 +5.05%大涨，开246.00探241.50冲259.98收256.50（量比1.23放量），站上MA5/MA10/MA20但仍低于MA30(257.79)/MA60。主力+8.22亿大幅净流入+增仓+12.13%+特大+2.87/大单+7.55亿大幅净流入+散户-570大幅离场，资金面最强。杠杆1.46%最安全。观察MA30(257.79)/MA60(301.42)压力，站稳看反抽MA30，回踩241.50不破可关注。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>📈</strong> <span style="font-weight:600;font-size:14px;">大为股份</span>
+      <span style="font-size:12px;color:var(--muted);">002213</span>
+      <span class="dir dir-up" style="margin-left:8px;font-size:11px;">放量反弹(站上MA5)</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">涨跌幅</div>
+      <div class="value "><span class="hl-red">+2.45%</span></div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value ">+0.02亿🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">增仓</div>
+      <div class="value ">+0.76%🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户</div>
+      <div class="value ">-9.96🟢</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    📈 +2.45%反弹，探19.75冲21.87收20.49（量比1.80放量），站上MA5(20.20)但仍低于MA10/MA20。主力+0.02亿微净流入+增仓+0.76%+特大+0.04/大单+0.10亿净流入但中/小单大幅流出+散户-9.96流出。杠杆2.25%适度。高估值779倍。观察MA10(20.79)/MA20(21.17)压力，放量反弹但冲高回落注意追高风险，回踩不破19.75可关注。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>📈</strong> <span style="font-weight:600;font-size:14px;">鼎龙股份</span>
+      <span style="font-size:12px;color:var(--muted);">300054</span>
+      <span class="dir dir-up" style="margin-left:8px;font-size:11px;">反弹转强(站上MA5/MA20/MA30)</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">涨跌幅</div>
+      <div class="value "><span class="hl-red">+2.29%</span></div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value ">+0.52亿🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">增仓</div>
+      <div class="value ">+3.62%🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户</div>
+      <div class="value ">-36.50🟢</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    📈 +2.29%上涨，探57.72冲61.23收59.52（量比1.03平量、成交14.31亿），站上MA5/MA20/MA30但仍低于MA10(59.68)/MA60(64.40)。主力+0.52亿净流入+增仓+3.62%+特大+0.11/大单+0.32亿净流入+散户-36.50流出。杠杆3.66%适度但融资-0.32亿偿还。观察MA10(59.68)/MA60(64.40)压力，站稳看反抽MA10，反弹转强，回踩不破57.72可关注。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>📈</strong> <span style="font-weight:600;font-size:14px;">长鑫科技</span>
+      <span style="font-size:12px;color:var(--muted);">688825</span>
+      <span class="dir dir-up" style="margin-left:8px;font-size:11px;">超跌反弹</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">涨跌幅</div>
+      <div class="value "><span class="hl-red">+1.60%</span></div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value ">+6.63亿🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">增仓</div>
+      <div class="value ">+7.91%🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户</div>
+      <div class="value ">-68.40🟢</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    📈 +1.60%反弹，探36.38冲38.00收37.50（量比0.75平量、成交83.83亿），仍收于全部均线下方。主力+6.63亿大幅净流入+增仓+7.91%+特大+3.38/大单+3.88亿大幅净流入+散户-68.40流出。高度控盘54.69%。杠杆5.26%偏高但融资-2.39亿偿还。观察MA5(37.78)/MA10(39.28)压力，超跌反弹但趋势未转强，回踩不破36.38可关注。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>📈</strong> <span style="font-weight:600;font-size:14px;">惠科股份</span>
+      <span style="font-size:12px;color:var(--muted);">001399</span>
+      <span class="dir dir-up" style="margin-left:8px;font-size:11px;">低位小幅企稳</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">涨跌幅</div>
+      <div class="value "><span class="hl-red">+0.26%</span></div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value ">+0.02亿🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">增仓</div>
+      <div class="value ">+0.66%🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户</div>
+      <div class="value ">+21.01⚠️</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    📈 +0.26%微涨，探15.24冲15.66收15.39（量比0.72平量），仍收于全部均线下方。主力+0.02亿微净流入+增仓+0.66%但特大-0.02/大单-0.06亿净流出+散户+21.01流入。杠杆8.44%极高危且融资+0.01亿加仓。观察MA5(15.51)/MA10(15.99)压力，杠杆极高危注意波动，低位企稳待确认，反弹看收复MA5(15.51)。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>📉</strong> <span style="font-weight:600;font-size:14px;">澜起科技</span>
+      <span style="font-size:12px;color:var(--muted);">688008</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">冲高回落整理</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">涨跌幅</div>
+      <div class="value "><span class="hl-green">-0.14%</span></div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value ">+2.65亿🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">增仓</div>
+      <div class="value ">+6.34%🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户</div>
+      <div class="value ">-296.11🟢</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    📉 -0.14%微跌（昨+5.51%大涨后回落），探131.50冲138.66收137.60（量比0.82平量），仍收于全部均线下方。主力+2.65亿净流入+增仓+6.34%但特大-0.64亿净流出+散户-296.11大幅离场。杠杆5.53%偏高且融资-1.96亿偿还。观察MA5(139.35)/MA10(147.71)压力，站稳看反抽MA10，冲高回落整理，回踩不破131.50可关注。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>📉</strong> <span style="font-weight:600;font-size:14px;">兆易创新</span>
+      <span style="font-size:12px;color:var(--muted);">603986</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">反弹遇阻回落</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">涨跌幅</div>
+      <div class="value "><span class="hl-green">-0.34%</span></div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value ">-0.71亿🟢</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">减仓</div>
+      <div class="value ">-1.49%🟢</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户</div>
+      <div class="value ">+86.95⚠️</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    📉 -0.34%回落，开215.01探212.59冲220.88收218.81（量比0.61缩量），仍收于全部均线下方。主力-0.71亿净流出+减仓-1.49%+特大-0.23/大单-1.77亿净流出+散户+86.95流入。杠杆8.72%极高危但融资-0.22亿偿还。观察MA5(224.43)/MA10(236.31)压力，反弹遇阻回落，回踩212.59不破可关注。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>📉</strong> <span style="font-weight:600;font-size:14px;">兆易H股</span>
+      <span style="font-size:12px;color:var(--muted);">3986.HK</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">参考A股反弹遇阻回落</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">涨跌幅</div>
+      <div class="value "><span class="hl-green">-0.34%</span></div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">参考主力</div>
+      <div class="value ">参考A股-0.71亿</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">减仓</div>
+      <div class="value ">-1.49%🟢</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户</div>
+      <div class="value ">+86.95⚠️</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    📉 -0.34%（参考A股）今日问财返回H股行情与A股一致，未取到独立港股快照。参考A股主力-0.71亿净流出+减仓-1.49%+特大-0.23/大单-1.77亿净流出+散户+86.95流入。杠杆8.72%极高危。观察212.59(今低)支撑，反弹看收复MA5(224.43)，反弹遇阻回落，回踩212.59不破可关注。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>📉</strong> <span style="font-weight:600;font-size:14px;">珂玛科技</span>
+      <span style="font-size:12px;color:var(--muted);">301611</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">冲高回落走弱(跌破MA5/MA20)</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">涨跌幅</div>
+      <div class="value "><span class="hl-green">-2.33%</span></div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value ">-0.02亿🟢</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">减仓</div>
+      <div class="value ">-0.45%🟢</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户</div>
+      <div class="value ">-2.80🟢</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    📉 -2.33%回吐，探64.50冲68.16收64.86（量比0.81平量），跌破MA5(65.46)/MA20(65.07)仍低于MA10/MA30。主力-0.02亿净流出+减仓-0.45%+特大-0.05/大单-0.06亿净流出+散户-2.80流出。杠杆3.91%适度。高估值144倍。观察MA5(65.46)/MA10(66.42)压力，短线走弱，回踩64.50不破可关注，站稳MA20(65.07)企稳。
+  </div>
+  
+  <div class="data-grid" style="margin-bottom:4px;">
+    <div class="data-item" style="grid-column:1/-1;background:#f0f4ff;padding:8px 14px;">
+      <strong>📉</strong> <span style="font-weight:600;font-size:14px;">华阳国际</span>
+      <span style="font-size:12px;color:var(--muted);">002949</span>
+      <span class="dir dir-down" style="margin-left:8px;font-size:11px;">弱势大跌</span>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">涨跌幅</div>
+      <div class="value "><span class="hl-green">-4.07%</span></div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">主力净额</div>
+      <div class="value ">+0.01亿🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">增仓</div>
+      <div class="value ">+1.20%🔴</div>
+    </div>
+    
+    <div class="data-item">
+      <div class="label">散户</div>
+      <div class="value ">+18.17⚠️</div>
+    </div>
+    
+  </div>
+  <div class="judge-box " style="margin-bottom:12px;font-size:13px;">
+    📉 -4.07%大跌，开10.85探10.38冲11.00收10.61（量比0.65平量），仍收于全部均线下方。主力资金流向口径+0.01亿微幅净流入+增仓+1.20%但特大-0.01/大单-0.02亿净流出+散户+18.17流入。无两融。获利盘1.8%。观察10.38(今低)支撑，反弹看收复MA5(11.68)，弱势股防继续杀跌，反弹不追待企稳。
+  </div>
+  
+
+  <!-- 关键位置表 -->
+  <div class="section-title"><span class="icon">🎯</span> 关键位置一览 · 下周二（7/14）关注</div>
+  <div class="table-wrap">
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>股票</th><th>支撑位</th><th>压力位</th><th>关键均线</th><th>若破位</th><th>若守位</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td class="tl">中微公司</td>
+        <td class="hl-red">241.50(今低) / 241.10(MA20)</td>
+        <td>257.79(MA30) / 301.42(MA60)</td>
+        <td>MA5 243.65 / MA10 246.85 / MA20 241.10 / MA30 257.79 / MA60 301.42</td>
+        <td>破241.50(今低)看241/240</td>
+        <td>📈 +5.05%大涨，开246.00探241.50冲259.98收256.50，站上MA5/MA10/MA20但仍低于MA30(257.79)/MA60。主力+8.22亿大幅净流入+增仓+12.13%+特大+2.87/大单+7.55亿大幅净流入+散户-570大幅离场，资金面最强。杠杆1.46%最安全。站稳看反抽MA30(257.79)，放量大涨强势，回踩241.50不破可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">大为股份</td>
+        <td class="hl-red">19.75(今低) / 19.70(整数)</td>
+        <td>20.79(MA10) / 21.17(MA20)</td>
+        <td>MA5 20.20 / MA10 20.79 / MA20 21.17 / MA30 22.21 / MA60 25.59</td>
+        <td>破19.75(今低)看19.7/19.5</td>
+        <td>📈 +2.45%反弹，探19.75冲21.87收20.49，站上MA5(20.20)但仍低于MA10(20.79)/MA20(21.17)。主力+0.02亿微净流入+增仓+0.76%+特大+0.04/大单+0.10亿净流入但中/小单大幅流出+散户-9.96流出。杠杆2.25%适度。高估值779倍。放量反弹但冲高回落注意追高风险，回踩不破19.75可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">鼎龙股份</td>
+        <td class="hl-red">57.72(今低) / 57.50(整数)</td>
+        <td>59.68(MA10) / 64.40(MA60)</td>
+        <td>MA5 58.03 / MA10 59.68 / MA20 58.69 / MA30 58.90 / MA60 64.40</td>
+        <td>破57.72(今低)看57.5/57</td>
+        <td>📈 +2.29%上涨，探57.72冲61.23收59.52，站上MA5/MA20/MA30但仍低于MA10(59.68)/MA60(64.40)。主力+0.52亿净流入+增仓+3.62%+特大+0.11/大单+0.32亿净流入+散户-36.50流出。杠杆3.66%适度但融资-0.32亿偿还。站稳看反抽MA10(59.68)，反弹转强，回踩不破57.72可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">长鑫科技</td>
+        <td class="hl-red">36.38(今低) / 36.30(整数)</td>
+        <td>37.78(MA5) / 39.28(MA10)</td>
+        <td>MA5 37.78 / MA10 39.28 / MA20 40.88 / MA30 42.03 / MA60 49.12</td>
+        <td>破36.38(今低)看36.3/36</td>
+        <td>📈 +1.60%反弹，探36.38冲38.00收37.50，仍收于全部均线下方。主力+6.63亿大幅净流入+增仓+7.91%+特大+3.38/大单+3.88亿大幅净流入+散户-68.40流出。高度控盘54.69%。杠杆5.26%偏高但融资-2.39亿偿还。反弹看站稳MA5(37.78)，超跌反弹但趋势未转强，回踩不破36.38可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">惠科股份</td>
+        <td class="hl-green">15.24(今低) / 15.20(整数)</td>
+        <td>15.51(MA5) / 15.99(MA10)</td>
+        <td>MA5 15.51 / MA10 15.99 / MA20 16.31 / MA30 16.83 / MA60 19.41</td>
+        <td>破15.24(今低)看15.2/15</td>
+        <td>📈 +0.26%微涨，探15.24冲15.66收15.39，仍收于全部均线下方。主力+0.02亿微净流入+增仓+0.66%但特大-0.02/大单-0.06亿净流出+散户+21.01流入。杠杆8.44%极高危且融资+0.01亿加仓。杠杆极高危注意波动，低位企稳待确认，反弹看收复MA5(15.51)。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">澜起科技</td>
+        <td class="hl-red">131.50(今低) / 131(整数)</td>
+        <td>139.35(MA5) / 147.71(MA10)</td>
+        <td>MA5 139.35 / MA10 147.71 / MA20 156.75 / MA30 163.38 / MA60 182.11</td>
+        <td>破131.50(今低)看131/130</td>
+        <td>📉 -0.14%微跌（昨+5.51%大涨后回落），探131.50冲138.66收137.60，仍收于全部均线下方。主力+2.65亿净流入+增仓+6.34%但特大-0.64亿净流出+散户-296.11大幅离场。杠杆5.53%偏高且融资-1.96亿偿还。站稳看反抽MA10(147.71)，冲高回落整理，回踩不破131.50可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">兆易创新</td>
+        <td class="hl-red">212.59(今低) / 212.50(整数)</td>
+        <td>224.43(MA5) / 236.31(MA10)</td>
+        <td>MA5 224.43 / MA10 236.31 / MA20 253.73 / MA30 266.68 / MA60 324.68</td>
+        <td>破212.59(今低)看212.5/212</td>
+        <td>📉 -0.34%回落，开215.01探212.59冲220.88收218.81，仍收于全部均线下方。主力-0.71亿净流出+减仓-1.49%+特大-0.23/大单-1.77亿净流出+散户+86.95流入。杠杆8.72%极高危但融资-0.22亿偿还。反弹看收复MA5(224.43)，反弹遇阻回落，回踩212.59不破可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">兆易H股</td>
+        <td class="hl-red">212.59(参考A股今低) / 212.50(整数)</td>
+        <td>224.43(参考A股MA5) / 236.31(MA10)</td>
+        <td>参考A股：MA5 224.43 / MA10 236.31 / MA20 253.73 / MA30 266.68 / MA60 324.68</td>
+        <td>破212.59(参考A股今低)看212.5/212</td>
+        <td>📉 -0.34%（参考A股）今日问财返回H股行情与A股一致，未取到独立港股快照。参考A股主力-0.71亿净流出+减仓-1.49%+特大-0.23/大单-1.77亿净流出+散户+86.95流入。杠杆8.72%极高危。反弹看收复MA5(224.43)，反弹遇阻回落，回踩212.59不破可关注。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">珂玛科技</td>
+        <td class="hl-green">64.50(今低) / 64.00(整数)</td>
+        <td>65.46(MA5) / 66.42(MA10)</td>
+        <td>MA5 65.46 / MA10 66.42 / MA20 65.07 / MA30 67.28 / MA60 80.36</td>
+        <td>破64.50(今低)看64/63.5</td>
+        <td>📉 -2.33%回吐，探64.50冲68.16收64.86，跌破MA5(65.46)/MA20(65.07)仍低于MA10(66.42)/MA30(67.28)。主力-0.02亿净流出+减仓-0.45%+特大-0.05/大单-0.06亿净流出+散户-2.80流出。杠杆3.91%适度。高估值144倍。短线走弱，回踩64.50不破可关注，站稳MA20(65.07)企稳。</td>
+      </tr>
+      
+      <tr>
+        <td class="tl">华阳国际</td>
+        <td class="hl-green">10.38(今低) / 10.30(整数)</td>
+        <td>11.68(MA5) / 12.41(MA10)</td>
+        <td>MA5 11.68 / MA10 12.41 / MA20 12.75 / MA30 12.92 / MA60 12.88</td>
+        <td>破10.38(今低)看10.3/10.1</td>
+        <td>📉 -4.07%大跌，开10.85探10.38冲11.00收10.61，仍收于全部均线下方。主力资金流向口径+0.01亿微幅净流入+增仓+1.20%但特大-0.01/大单-0.02亿净流出+散户+18.17流入。无两融。获利盘1.8%。反弹看收复MA5(11.68)，弱势股防继续杀跌，反弹不追待企稳。</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 综合策略 -->
+  <div class="section-title"><span class="icon">💡</span> 综合策略建议</div>
+  <div style="font-size:13px;line-height:1.9;padding:8px 12px;">
+    <strong>11/19（周四）操作建议：大盘整体调整（上证3577.62 -0.28%、深证10583.20 -0.71%、创业板2293.34 -0.79%、科创50 1270.78 +1.83%逆势领涨，两市约1.31万亿），本组5涨5跌——分化明显：中微/长鑫大涨、鼎龙/大为反弹vs澜起/兆易冲高回落、珂玛/华阳走弱。操作纪律：多数仍处均线下方（澜起/兆易/长鑫/惠科/华阳），仓位宜轻、反弹不追高，待站稳均线再加；中微已站上MA5/MA10/MA20且资金面最强（主力+8.22亿大幅净流入+散户-570大幅离场）可持续关注；科创50逆势领涨提示科技结构性机会仍存。</strong><br><br><strong>◼ 全局判断：大盘调整但科创50逆势领涨，本组5涨5跌。主力资金分化：中微+8.22/长鑫+6.63/澜起+2.65亿净流入，兆易-0.71亿净流出、珂玛-0.02亿。散户多数流出：中微(-570)/澜起(-296)/长鑫(-68)大幅离场筹码趋健康，而兆易+87/华阳+18涌入（承接）。高杠杆品种（兆易8.72%/惠科8.44%极高危、澜起5.53%/长鑫5.26%偏高）今日多呈融资偿还（长鑫-2.39/澜起-1.96/兆易-0.22亿），仅惠科小幅+0.01亿加仓、为大幅去杠杆。</strong><br><br><strong>1. 📈 强势/资金面最积极（可关注）：</strong>中微（+5.05%放量大涨站上MA5/MA10/MA20但仍低于MA30/MA60，主力+8.22亿大幅净流入+主力增仓+12.13%+特大+2.87/大单+7.55亿大幅净流入+散户-570大幅离场，杠杆1.46%最安全，资金面最强，站稳看反抽MA30(257.79)，回踩241.50不破可关注）；长鑫（+1.60%主力+6.63亿大幅净流入+增仓+7.91%+特大+3.38/大单+3.88亿大幅净流入，高度控盘54.69%，超跌反弹，反弹看站稳MA5(37.78)）；鼎龙（+2.29%站上MA5/MA20/MA30，主力+0.52亿净流入+增仓+3.62%，反弹转强，站稳看反抽MA10(59.68)）。<br><br><strong>2. 🟡 分化/待确认：</strong>澜起（-0.14%冲高回落，主力+2.65亿净流入+增仓+6.34%但特大-0.64亿净流出+散户-296大幅离场，杠杆5.53%偏高但融资偿还，冲高回落整理，站稳看反抽MA10(147.71)，回踩131.50不破可关注）；大为（+2.45%放量反弹站上MA5，主力+0.02亿微净流入但中小单大幅流出+冲高回落，高估值779倍，追高风险还需谨慎）；惠科（+0.26%微涨企稳，主力+0.02亿微净流入但特大/大单净流出+散户+21流入，杠杆8.44%极高危且小幅加仓，低位企稳待确认）。<br><br><strong>3. 🔴 谨慎/回避（资金流出/独立走弱）：</strong>兆易（-0.34%反弹遇阻回落，主力-0.71亿净流出+减仓-1.49%+特大-0.23/大单-1.77亿净流出+散户+87流入，杠杆8.72%极高危但融资偿还，仍处均线下方，反弹看收复MA5(224.43)，回踩212.59不破可关注）；珂玛（-2.33%跌破MA5/MA20，主力-0.02亿净流出+减仓-0.45%，高估值144倍，短线走弱，站稳MA20(65.07)企稳）；华阳（-4.07%大跌，主力微净流入但特大/大单净流出+散户+18流入，无两融，仍处全部均线下方，观察10.38(今低)支撑，弱势股防继续杀跌，反弹不追待企稳）。<br><br><strong>💡 重点关注：</strong>1. 强势能否延续——中微能否突破MA30(257.79)、长鑫能否站稳MA5(37.78)；2. 反弹股（鼎龙/大为）能否站稳均线支撑；3. 独立走弱股（珂玛/华阳）能否止跌——关注能否守住64.50/10.38（今低）；4. 高杠杆去化——兆易8.72%/惠科8.44%极高危、澜起5.53%/长鑫5.26%偏高，今日多呈融资偿还，关注能否持续去杠杆；5. 大盘量能（两市约1.31万亿）能否企稳放大以确认科创结构性行情延续。
+  </div>
+
+  <div style="font-size:11px;color:var(--muted);margin-top:16px;padding-top:12px;border-top:1px solid var(--border);text-align:center;">
+    免责声明：本总结基于公开行情数据生成，不构成投资建议 · 数据来源：同花顺问财 Level-2
+  </div>
+</div>
+
+<div class="footer">
+  <p>📊 本报告由 小艺 Claw 自动生成 · 数据来源：同花顺问财 · 仅供参考，不构成投资建议</p>
+  <p style="margin-top:4px;">分析框架：9模块（行情含均线系统/技术指标-MA5偏离+BOLL/主力资金/两融含融资态度/机构吸筹含股东人数+机构日期/动态估值/走势研判双视角+事件日历）</p>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    this.classList.add('active');
+    var filter = this.dataset.filter;
+    // 方向筛选映射到卡片 data-direction 实际值
+    var dirMap = {
+      'up': ['up'],
+      'warn': ['warn'],
+      'down': ['down']
+    };
+    var targetDirs = dirMap[filter] || [filter];
+    document.querySelectorAll('.card[data-direction]').forEach(function(card) {
+      if (filter === 'all') {
+        card.classList.remove('hidden');
+      } else if (filter === 'summary') {
+        card.classList.toggle('hidden', card.dataset.direction !== 'summary');
+      } else if (filter === 'daily-summary') {
+        card.classList.toggle('hidden', card.dataset.direction !== 'daily-summary');
+      } else {
+        card.classList.toggle('hidden', targetDirs.indexOf(card.dataset.direction) === -1);
+      }
+    });
+    document.querySelectorAll('.hr-sep').forEach(function(hr) {
+      var prev = hr.previousElementSibling;
+      while (prev && prev.classList && prev.classList.contains('hr-sep')) {
+        prev = prev.previousElementSibling;
+      }
+      if (filter === 'all') {
+        hr.classList.remove('hidden');
+      } else if (prev && prev.classList) {
+        hr.classList.toggle('hidden', prev.classList.contains('hidden'));
+      } else {
+        hr.classList.add('hidden');
+      }
+    });
+    // 点击方向筛选时，清空股票名称筛选状态
+    document.querySelectorAll('.filter-btn-sm').forEach(function(b) { b.classList.remove('active'); });
+  });
+});
+</script>
+
+<script>
+document.querySelectorAll('.filter-btn-sm').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn-sm').forEach(function(b) { b.classList.remove('active'); });
+    this.classList.add('active');
+    var stock = this.dataset.stock;
+    document.querySelectorAll('.card[data-direction]').forEach(function(card) {
+      card.classList.toggle('hidden', card.id !== stock);
+    });
+    document.querySelectorAll('.hr-sep').forEach(function(hr) {
+      var prev = hr.previousElementSibling;
+      while (prev && prev.classList && prev.classList.contains('hr-sep')) {
+        prev = prev.previousElementSibling;
+      }
+      if (prev && prev.classList) {
+        hr.classList.toggle('hidden', prev.classList.contains('hidden'));
+      } else {
+        hr.classList.add('hidden');
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
